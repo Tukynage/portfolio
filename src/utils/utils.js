@@ -1,7 +1,7 @@
 let tagColors = {
     "Anglais" : ["bg-red-200", "text-red-800"],
     "Marketing" : ["bg-fuchsia-200","text-fuchsia-800"],
-    "Comm" : ["bg-pink-200", "text-pink-800"],
+    "Communication" : ["bg-pink-200", "text-pink-800"],
     "Écriture multimédia" : ["bg-orange-200", "text-orange-800"],
     "Réseaux sociaux" : ["bg-orange-300", "text-orange-800"],
     "3D" : ["bg-amber-200", "text-amber-800"],

@@ -1,66 +1,67 @@
 {
-    "title" : "Portfolio de Élie Copter",
-    "lastname": "Copter",
-    "firstname": "Élie",
+    "title" : "Portfolio de Ruben URBAN",
+    "lastname": "URBAN",
+    "firstname": "Ruben",
     "portrait" : "avatar.jpg",
-    "intro": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    "biography": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis mattis ante in orci auctor pharetra. Duis interdum erat semper nunc faucibus maximus. Proin dapibus auctor sollicitudin. Nulla mattis volutpat enim, ac ultrices odio dignissim id. Morbi nisl nisi, consequat ut finibus non, convallis interdum velit. Maecenas congue diam dolor, non elementum ipsum tincidunt vel. Sed dui ipsum, finibus rhoncus sollicitudin sit amet, varius non nulla. Duis vestibulum facilisis ligula, vel bibendum mauris aliquam in. Etiam urna ligula, pharetra a dictum et, blandit nec leo. Donec consequat tincidunt nisi at consectetur.",
-    "cv" : "CV.pdf",
+    "intro": "Étudiant en recherche d'un stage en communication",
+    "biography": "Étudiant en 2è année de BUT MMI, assidu, curieux et passionné par la création multimédia, je suis à la recherche d'un stage en communication / création audiovisuelle. Durant ma formation, j'ai pu découvrir et approfondir des compétences en communication, audiovisuel, graphisme, etc... Je suis à la recherche d'un stage de 11 semaines à partir du mois d'avril sur Rennes et sa périphérie.",
+    "cv" : "URBAN_Ruben-CV.pdf",
     "trainings": [
         {
-            "name" : "BUT Métiers du Multimédia et de l'Internet",
+            "name" : "BUT Métiers du Multimédia et de l'Internet, spécialité stratégie de communication numérique et design d'expérience",
             "school" : "IUT de Lannion, Université de Rennes",
             "start" : 2023,
             "end" : 2026
         },
         {
-            "name" : "Bac S, option Maths et Arts Plastiques",
-            "school" : "Lycée Félix Le Dantec( 22)",
-            "start" : 2023
+            "name" : "Bac STI2D, spécialité Systèmes d'Information et Numérique (SIN)",
+            "school" : "Lycée La Providence (Montauban de Bretagne, 35 360)",
+            "start" : 2020,
+            "end" : 2022
         }
     ],
     "interests": [
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+        "L'automobile à travers les sports mécaniques, les rassemblements, le sim-racing, la mécanique automobile, etc.",
+        "Le monde de l'audiovisuel en passant par la photographie (argentique et numérique), la vidéo et le montage.",
+        "Passioné de nouvelles technologies, je suis toujours à l'affût des dernières nouveautés et des dernières tendances."
     ],
     "projects": [
         {
-            "title": "Project 1 : Lorem ipsum dolor sit amet consecitur",
-            "context": "Lorem ipsum dolor sit amet consecitur",
-            "missions" : ["Lorem ipsum dolor", "Lorem ipsum dolor"],
-            "outputs" :  ["Lorem ipsum dolor", "Lorem ipsum dolor"],
+            "title": "Création d'un court-métrage en anglais",
+            "context": "Parodie de la série télévisée 'Pawn Stars', la publicité dans l'émission a remporté le prix du public lors du festival étudiant MMI 'À l'West Fest' de 2024.",
+            "missions" : ["Écriture d'un script en anglais", "Tournage de la vidéo", "Montage sur Adobe Premiere Pro"],
+            "outputs" :  ["La vidéo finale", "La publicité", "Le script"],
             "skills": [
-                "3D",
-                "Dev Web"
+                "Anglais",
+                "Audiovisuel",
+                "Écriture multimédia"
             ],
-            "link" : "https://youtube.com",
-            "picture": "projet.jpg"
+            "link" : "https://www.youtube.com/watch?v=kRBdGePdo5M",
+            "picture": "poor_stars.png"
         },
         {
-            "title": "Project 2 : Lorem ipsum dolor sit amet consecitur",
-            "context": "Lorem ipsum dolor sit amet consecitur",
-            "missions" : ["Lorem ipsum dolor", "Lorem ipsum dolor"],
-            "outputs" :  ["Lorem ipsum dolor", "Lorem ipsum dolor"],
+            "title": "Interview d'un président d'association",
+            "context": "Dans le cadre d'un projet avec l'assocation 'Les Amis de Ruth', nous devions réaliser une interview de son président afin d'obtenir une vidéo qui présente l'association à des mécènes sponsors.",
+            "missions" : ["Analyser l'association", "Préparer un tournage"],
+            "outputs" :  ["Vidéo de l'interview montée"],
             "skills": [
-                "Marketing",
-                "Comm"
+                "Communication",
+                "Audiovisuel"
             ],
-            "link" : "https://youtube.com",
-            "picture": "projet.jpg"
+            "link" : "https://www.youtube.com/watch?v=XheeDIgE44s",
+            "picture": "itw_ruth.png"
         },
         {
-            "title": "Project 3 : Lorem ipsum dolor sit amet consecitur",
-            "context": "Lorem ipsum dolor sit amet consecitur",
-            "missions" : ["Lorem ipsum dolor", "Lorem ipsum dolor"],
-            "outputs" :  ["Lorem ipsum dolor", "Lorem ipsum dolor"],
+            "title": "Interview sur la photographie argentique",
+            "context": "Réalisation d'une interview sur la photographie argentique en présence de 3 profils de photographes argentiques différents.",
+            "missions" : ["Recherches sur le sujet", "Recherche de personnes à interviewer", "Écriture de questions adaptées"],
+            "outputs" :  ["Interview finale montée (5min)", "Dossier de production"],
             "skills": [
-                "Réseaux sociaux",
-                "UI/UX",
-                "Entrepreneuriat"
+                "Audiovisuel",
+                "Écriture multimédia"
             ],
-            "link" : "https://youtube.com",
-            "picture": "projet.jpg"
+            "link" : "https://www.youtube.com/watch?v=5mk3QZIak64",
+            "picture": "itw_pa.png"
         },
         {
             "title": "Project 4 : Lorem ipsum dolor sit amet consecitur",
@@ -79,31 +80,30 @@
     
     "skills": [
         {
-            "title": "Lorem ipsum dolor sit amet consecitur",
-            "description": "Lorem ipsum dolor sit amet consecitur",
+            "title": "Montage audiovisuel",
+            "description": "Logiciels de montage vidéo profesionnels",
             "tools": [
-                "Lorem",
-                "Ipsum"
-            ],
-            "level": 3
-        },
-        {
-            "title": "Lorem ipsum dolor sit amet consecitur",
-            "description": "Lorem ipsum dolor sit amet consecitur",
-            "tools": [
-                "Lorem",
-                "Ipsum"
+                "DaVinci Resolve",
+                "Adobre Premiere Pro"
             ],
             "level": 4
         },
         {
-            "title": "Lorem ipsum dolor sit amet consecitur",
-            "description": "Lorem ipsum dolor sit amet consecitur",
+            "title": "Édition graphique",
+            "description": "Logiciels d'édition graphique matriciels et vectoriels",
             "tools": [
-                "Lorem",
-                "Ipsum"
+                "Adobe Illustrator, Photoshop",
+                "Affinity Designer, Photo"
             ],
-            "level": 5
+            "level": 4
+        },
+        {
+            "title": "Maquettage d'interface utilisateur",
+            "description": "Logiciels de conception et maquettage d'interfaces utilisateur",
+            "tools": [
+                "Figma"
+            ],
+            "level": 3
         }
     ],
     "contacts": [
@@ -111,10 +111,10 @@
         "url" : "https://instagram.com",
         "icon" : "insta.svg"},
         {"name" : "LinkedIn", 
-        "url" : "https://linkedin.com",
+        "url" : "https://www.linkedin.com/in/ruben-urban/",
         "icon" : "linkedin.svg"},
         {"name" : "Mail", 
-        "url" : "mailto:elie.copter.titi@etudiant.univ-rennes.fr",
+        "url" : "mailto:ruben.urban@etudiant.univ-rennes.fr",
         "icon" : "mail.svg"}
     ]
 }
