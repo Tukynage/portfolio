@@ -1,0 +1,34 @@
+name: Deploy to server
+
+on:
+  push:
+    branches:
+      - main 
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '20.17.0' 
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Build project
+      run: npm run build
+
+    - name: Deploy to Infomaniak
+      uses: SamKirkland/FTP-Deploy-Action@4.0.0
+      with:
+        server: fm9vc2.ftp.infomaniak.com  # Remplacez par votre serveur FTP
+        username: fm9vc2_git  # Remplacez par votre nom d'utilisateur FTP
+        password: ${{ secrets.FTP_PASSWORD }}  # Utilisez un secret GitHub pour stocker votre mot de passe
+        local-dir: ./dist/  # Répertoire local à déployer
+        server-dir: /  # Répertoire distant sur le serveur

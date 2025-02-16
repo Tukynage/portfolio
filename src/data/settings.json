@@ -107,14 +107,14 @@
         }
     ],
     "contacts": [
-        {"name" : "Instagram", 
-        "url" : "https://instagram.com",
-        "icon" : "insta.svg"},
         {"name" : "LinkedIn", 
         "url" : "https://www.linkedin.com/in/ruben-urban/",
         "icon" : "linkedin.svg"},
-        {"name" : "Mail", 
+        {"name" : "Mail : ruben.urban@etudiant.univ-rennes.fr", 
         "url" : "mailto:ruben.urban@etudiant.univ-rennes.fr",
-        "icon" : "mail.svg"}
+        "icon" : "mail.svg"},
+        {"name" : "Téléphone : +33 6 66 09 87 76", 
+        "url" : "tel:+33666098776",
+        "icon" : "phone.svg"}
     ]
 }
