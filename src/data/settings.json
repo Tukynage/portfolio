@@ -64,17 +64,15 @@
             "picture": "itw_pa.webp"
         },
         {
-            "title": "Project 4 : Lorem ipsum dolor sit amet consecitur",
-            "context": "Lorem ipsum dolor sit amet consecitur",
-            "missions" : ["Lorem ipsum dolor", "Lorem ipsum dolor"],
-            "outputs" :  ["Lorem ipsum dolor", "Lorem ipsum dolor"],
+            "title": "Maquettage d'une application",
+            "context": "Analyse UX/UI et maquettage d'une application mobile d'agrégateur de spectacles dans le Trégor.",
+            "missions" : ["Analyse de la demande", "Maquettage", "Prototypage"],
+            "outputs" :  ["Dossier d'instruction", "Prototype Figma"],
             "skills": [
-                "Anglais",
-                "Graphisme",
-                "Écriture multimédia"
+                "UI/UX"
             ],
-            "link" : "https://youtube.com",
-            "picture": "projet.webp"
+            "link" : "https://www.figma.com/design/r4RS1kZR4DTNrWnw1Ff8Oe/R3.09?node-id=1-5&t=YuMlwNR3Ii0SQe8I-1",
+            "picture": "app_tregor.webp"
         }
     ],
     
