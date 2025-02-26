@@ -20,6 +20,26 @@ export default function Menu({ ulClasses, liClasses, includeCV, cvPath, underlin
     console.log("Menu / " + cvPath)
     return (
         <ul tabIndex={0} className={ulClasses}>
+                        <li className={liClasses}>
+                <Link activeClass="active"
+                    to="skills"
+                    spy={true}
+                    smooth={true}
+                    duration={300}
+                    className={underline ? "hover:cursor-pointer hover:underline" : ""}>
+                    Compétences
+                </Link>
+            </li>
+            <li className={liClasses}> 
+                <Link activeClass="active"
+                    to="projects"
+                    spy={true}
+                    smooth={true}
+                    duration={300}
+                    className={underline ? "hover:cursor-pointer hover:underline" : ""}>
+                    Projets
+                </Link>
+            </li>
             <li className={liClasses}>
                 <Link activeClass="active"
                     to="bio"
@@ -48,26 +68,6 @@ export default function Menu({ ulClasses, liClasses, includeCV, cvPath, underlin
                     duration={300}
                     className={underline ? "hover:cursor-pointer hover:underline" : ""}>
                     Centres d'intérêts
-                </Link>
-            </li>
-            <li className={liClasses}> 
-                <Link activeClass="active"
-                    to="projects"
-                    spy={true}
-                    smooth={true}
-                    duration={300}
-                    className={underline ? "hover:cursor-pointer hover:underline" : ""}>
-                    Projets
-                </Link>
-            </li>
-            <li className={liClasses}>
-                <Link activeClass="active"
-                    to="skills"
-                    spy={true}
-                    smooth={true}
-                    duration={300}
-                    className={underline ? "hover:cursor-pointer hover:underline" : ""}>
-                    Compétences
                 </Link>
             </li>
             <li className={liClasses}>
