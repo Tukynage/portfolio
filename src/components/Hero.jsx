@@ -2,7 +2,7 @@ import { Link } from "react-scroll"
 import settings from "../data/settings.json"
 
 
-export default function Hero({firstname, lastname, intro}) {
+export default function Hero({firstname, lastname, intro, intro_competences}) {
   return (
     <div className="hero min-h-screen prose-xl">
       <div className="hero-content text-left w-full">
@@ -12,6 +12,7 @@ export default function Hero({firstname, lastname, intro}) {
             {"je suis " + firstname + " " + lastname}</h1>
 
             <p className="!my-2 text-left">{intro}</p>
+            <p className="!my-1 text-left">{intro_competences}</p>
           </div>
           <Link activeClass="active" 
                   to="bio" 

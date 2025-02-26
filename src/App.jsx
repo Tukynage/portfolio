@@ -25,12 +25,12 @@ export default function App() {
     <>
       <Nav cv={settings.cv}/>
       <main className="prose prose-stone !max-w-none w-10/12 mx-auto">
-        <Hero firstname={settings.firstname} lastname={settings.lastname} intro={settings.intro}/>
+      <Hero firstname={settings.firstname} lastname={settings.lastname} intro={settings.intro} intro_competences={settings.intro_competences}/>
+        <Skills skills={settings.skills}/>
+        <Projects projects={settings.projects} />
         <Bio bio={settings.biography} portrait={getAssetURL("media", settings.portrait)}/>
         <Trainings trainings={settings.trainings}/>
         <Interests interests={settings.interests}/>
-        <Projects projects={settings.projects} />
-        <Skills skills={settings.skills}/>
         <Contacts contacts={settings.contacts}/>
       </main >
       <Footer />
