@@ -15,7 +15,7 @@ export default function Hero({firstname, lastname, intro, intro_competences}) {
             <p className="!my-1 text-left">{intro_competences}</p>
           </div>
           <Link activeClass="active" 
-                  to="bio" 
+                  to="skills" 
                   spy={true} 
                   smooth={true} 
                   duration={300} 

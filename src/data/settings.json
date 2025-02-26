@@ -10,13 +10,13 @@
     "trainings": [
         {
             "name" : "BUT Métiers du Multimédia et de l'Internet, spécialité stratégie de communication numérique et design d'expérience",
-            "school" : "IUT de Lannion, Université de Rennes",
+            "school" : "à l'IUT de Lannion, Université de Rennes",
             "start" : 2023,
             "end" : 2026
         },
         {
             "name" : "Bac STI2D, spécialité Systèmes d'Information et Numérique (SIN)",
-            "school" : "Lycée La Providence (Montauban de Bretagne, 35 360)",
+            "school" : "au Lycée La Providence (Montauban de Bretagne, 35 360)",
             "start" : 2020,
             "end" : 2022
         }

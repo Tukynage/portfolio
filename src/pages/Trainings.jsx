@@ -13,7 +13,7 @@ export default function Trainings({trainings}) {
                                     </span>
                                 <p className="font-semibold flex flex-col">
                                     <span className="font-semibold">{training.name}</span>
-                                    <span className="font-normal italic"> {"à " + training.school}</span>
+                                    <span className="font-normal italic"> {training.school}</span>
                                 </p>
                                 
                             </div>
