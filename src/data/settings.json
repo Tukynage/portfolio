@@ -24,7 +24,8 @@
     "interests": [
         "L'automobile à travers les sports mécaniques, les rassemblements, le sim-racing, la mécanique automobile, etc.",
         "Le monde de l'audiovisuel en passant par la photographie (argentique et numérique), la vidéo et le montage.",
-        "Passioné de nouvelles technologies, je suis toujours à l'affût des dernières nouveautés et des dernières tendances."
+        "Passioné de nouvelles technologies, je suis toujours à l'affût des dernières nouveautés et des dernières tendances.",
+        "La musique à travers le monde la Hi-Fi."
     ],
     "projects": [
         {
@@ -74,6 +75,18 @@
             ],
             "link" : "https://www.figma.com/design/r4RS1kZR4DTNrWnw1Ff8Oe/R3.09?node-id=1-5&t=YuMlwNR3Ii0SQe8I-1",
             "picture": "app_tregor.webp"
+        },
+        {
+            "title": "Analyser des données et les représenter",
+            "context": "Choisir une donnée, la représenter de manière graphique et développer un site web pour la présenter de façon  interactive.",
+            "missions" : ["Analyser des données", "Photographier", "Développer un site web"],
+            "outputs" :  ["Poster", "Maquettage", "Site web"],
+            "skills": [
+                "Graphisme",
+                "Dev Web"
+            ],
+            "link" : "src/assets/media/web/datalogy_redirect.html",
+            "picture": "datalogy.webp"
         }
     ],
     

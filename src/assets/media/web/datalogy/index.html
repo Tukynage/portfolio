@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taux de décès liés à l'obésité</title>
+    <link rel="stylesheet" href="./style/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Julius+Sans+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="header-content">
+            <img class="sauce-img sauce-left" src="./style/img/mayo.svg" alt="Mayo">
+            <div class="title-container">
+                <h1>TAUX DE DÉCÈS<br>LIÉS À L'OBÉSITÉ</h1>
+                <h5>Source : IHME, Global Burden of Disease (2024)</h5>
+            </div>
+            <img class="sauce-img sauce-right" src="./style/img/ketchup.svg" alt="Ketchup">
+        </div>
+        <div class="fries-container">
+            <img class="fries-img" src="./style/img/bolDeFrite.png" alt="Frites">
+        </div>
+    </header>
+
+    <section class="flags-section">
+        <img class="flag" src="./style/img/flag/USA.svg" alt="USA">
+        <img class="flag" src="./style/img/flag/FRA.svg" alt="France">
+        <img class="flag" src="./style/img/flag/FIJI.svg" alt="Fiji">
+        <img class="flag" src="./style/img/flag/JAP.svg" alt="Japan">
+        <img class="flag" src="./style/img/flag/UK.svg" alt="UK">
+    </section>
+
+    <div class="chart-container">
+        <h2 id="countryName">Sélectionnez un pays</h2>
+        <canvas id="obesityChart"></canvas>
+        <p>Source données : <a href="https://www.healthdata.org/research-analysis/gbd">IHME, Global Burden of Disease
+                (2024)</a> - avec un léger traitement par Our World in Data</p>
+        <a
+            href="https://ourworldindata.org/grapher/obesity-prevalence-adults-who-gho?tab=chart&time=1985..2015&country=~USA">Taux
+            de prévalence de l'obésité chez les adultes</a>
+    </div>
+    <div>
+        <h1 id="titleposter">Taux de décès liés à l'obésité en 2019</h1>
+    </div>
+    <section class="datalogy">
+
+        <img class="poster" src="./style/img/datalogy_URBAN.webp"
+            alt="">
+
+        <div class="texte">
+            <h2>Quoi ?</h2>
+            <p style="margin-top: 10px;">Un graphique visuel utilisant des frites et du ketchup pour illustrer les
+                données statistiques. Cette image
+                est conçue pour surprendre et marquer les esprits, tout en étant accessible et compréhensible.</p>
+            <h2> Comment ?</h2> <br>
+            <p> Données : Issues de la plateforme "Our World in Data" Sources de Our World in Data : IHME, Global Burden
+                of
+                Disease (2024), mettant en évidence les décès liés à un IMC supérieur ou égal à 30.</p>
+            <h2>Représentation</h2> <br>
+            <p> Utilisation de la nourriture comme métaphore visuelle.
+            <h2> Message </h2><br> Faire le lien entre les habitudes alimentaires (ex. : consommation d'aliments
+            ultra-transformés)
+            et les impacts sur la santé globale.</p>
+        </div>
+        </div>
+    </section>
+    <h1 id="titleposter">Quizz</h1>
+    <section class="Quizz">
+        <div class="quiz-container">
+            <div class="question-container">
+                <h2 id="current-question"></h2>
+            </div>
+            <div class="burger-section" id="burger-options"></div>
+            <div class="feedback" id="feedback"></div>
+            <button class="validate-button" id="validate-button">Valider la réponse</button>
+            <button class="next-button" id="next-button">Question suivante</button>
+            <button class="next-button" id="next-button">Question suivante</button>
+            <div class="score-container" id="score-container">
+                <div class="score-text">Votre score : <span id="final-score"></span>/5</div>
+                <div class="result-message" id="result-message"></div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-logos">
+            <img class="footer-logo" src="./style/img/logos/iut.svg" alt="IUT Lannion">
+            <img class="footer-logo" src="./style/img/logos/univ_rennes.svg" alt="Université de Rennes">
+            <img class="footer-logo" src="./style/img/logos/mmi.svg" alt="MMI">
+        </div>
+        <div class="footer-text">
+            <p>Réalisé par : COSSEC Hugo - EL HADEDI Karim - LE BRETON Tom - URBAN Ruben</p>
+            <p>Étudiants en 2ème année de BUT MMI à l'IUT de Lannion, Université de Rennes</p>
+            <p>Source données : <a href="https://www.healthdata.org/research-analysis/gbd">IHME, Global Burden of
+                    Disease (2024)</a> - avec un léger traitement par <a href="https://ourworldindata.org/obesity">Our
+                    World in Data</a></p>
+        </div>
+    </footer>
+</body>
+
+<script>
+    let currentChart = null;
+
+    function generateRandomData(min, max) {
+        return Array.from({ length: 6 }, () =>
+            Math.floor(Math.random() * (max - min + 1)) + min
+        );
+    }
+
+    const countryData = {
+        USA: {
+            label: `Taux de prévalence de l'obésité chez les adultes aux États-Unis`,
+            data: {
+                labels: ['1985', '2000', '2015'],
+                datasets: [{
+                    label: 'Taux de prévalence de l\'obésité (%)',
+                    data: [11.9, 25.5, 36.2],
+                    backgroundColor: '#0074D9'
+                }]
+            }
+        },
+        France: {
+            label: `Taux de prévalence de l'obésité chez les adultes en France`,
+            data: {
+                labels: ['1985', '2000', '2015'],
+                datasets: [{
+                    label: 'Taux de prévalence de l\'obésité (%)',
+                    data: [8.8, 15.8, 21.6],
+                    backgroundColor: '#FF4136'
+                }]
+            }
+        },
+        Fiji: {
+            label: `Taux de prévalence de l'obésité chez les adultes au Fidji`,
+            data: {
+                labels: ['1985', '2000', '2015'],
+                datasets: [{
+                    label: 'Taux de prévalence de l\'obésité (%)',
+                    data: [9.5, 21, 30.2],
+                    backgroundColor: '#2ECC40'
+                }]
+            }
+        },
+        Japan: {
+            label: `Taux de prévalence de l'obésité chez les adultes au Japon`,
+            data: {
+                labels: ['1985', '2000', '2015'],
+                datasets: [{
+                    label: 'Taux de prévalence de l\'obésité (%)',
+                    data: [1, 2.1, 4.3],
+                    backgroundColor: '#FF851B'
+                }]
+            }
+        },
+        UK: {
+            label: `Taux de prévalence de l'obésité chez les adultes au Royaume-Uni`,
+            data: {
+                labels: ['1985', '2000', '2015'],
+                datasets: [{
+                    label: 'Taux de prévalence de l\'obésité (%)',
+                    data: [9.4, 18.6, 27.8],
+                    backgroundColor: '#B10DC9'
+                }]
+            }
+        }
+    };
+
+
+    const baseConfig = {
+        type: 'bar',
+        options: {
+            responsive: true,
+            animation: {
+                duration: 1000,
+                easing: 'easeInOutQuart'
+            },
+            scales: {
+                y: {
+                    min: 0,
+                    max: 50,
+                    title: {
+                        display: true,
+                        text: 'Taux de prévalence de l\'obésité (%)'
+                    }
+                },
+                x: {
+                    grid: {
+                        display: false
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    display: false
+                }
+            }
+        }
+    };
+
+    function updateChart(country) {
+        const countryInfo = countryData[country];
+
+
+        document.getElementById('countryName').textContent = countryInfo.label;
+        document.getElementById('countryName').style.animation = 'none';
+        document.getElementById('countryName').offsetHeight;
+        document.getElementById('countryName').style.animation = 'fadeInUp 0.8s forwards';
+
+
+        if (currentChart) {
+            currentChart.destroy();
+        }
+
+
+        const ctx = document.getElementById('obesityChart').getContext('2d');
+        currentChart = new Chart(ctx, {
+            ...baseConfig,
+            data: countryInfo.data
+        });
+
+
+        document.querySelectorAll('.flag').forEach(flag => {
+            flag.classList.remove('active');
+            if (flag.alt === country) {
+                flag.classList.add('active');
+            }
+        });
+    }
+
+
+    document.querySelectorAll('.flag').forEach((flag, index) => {
+        flag.style.animation = `flagAppear 0.5s forwards ${index * 0.2}s`;
+        flag.addEventListener('click', () => updateChart(flag.alt));
+    });
+
+
+    setTimeout(() => {
+        updateChart('USA');
+    }, 1000);
+
+
+    const questions = [
+        {
+            question: "Quel était le taux de mortalité attribué à l'obésité en Angleterre en 2019 (par 100 000 habitants) ?",
+            answers: [
+                { text: "45,6", correct: false },
+                { text: "57,8", correct: true },
+                { text: "68,9", correct: false },
+                { text: "79,4", correct: false }
+            ]
+        },
+        {
+            question: "Parmi les catégories de pays suivantes, laquelle avait le taux de mortalité le plus élevé dû à l'obésité en 2019 ?",
+            answers: [
+                { text: "Pays à revenu faible", correct: false },
+                { text: "Pays à revenu intermédiaire inférieur", correct: false },
+                { text: "Pays à revenu intermédiaire supérieur", correct: false },
+                { text: "Pays à revenu élevé", correct: true }
+            ]
+        },
+        {
+            question: "Quel était le taux de mortalité dû à l'obésité dans les pays à revenu élevé en 2019 (par 100 000 habitants) ?",
+            answers: [
+                { text: "27,5", correct: false },
+                { text: "35,2", correct: false },
+                { text: "46,3", correct: true },
+                { text: "52,1", correct: false }
+            ]
+        },
+        {
+            question: "Dans quelle catégorie de revenus observe-t-on le plus grand écart entre le taux de mortalité dû à l'obésité et la moyenne mondiale ?",
+            answers: [
+                { text: "Pays à revenu faible", correct: false },
+                { text: "Pays à revenu intermédiaire inférieur", correct: false },
+                { text: "Pays à revenu intermédiaire supérieur", correct: false },
+                { text: "Pays à revenu élevé", correct: true }
+            ]
+        },
+        {
+            question: "Quel était le taux de mortalité mondial attribué à l'obésité en 2019 (par 100 000 habitants) ?",
+            answers: [
+                { text: "21,5", correct: false },
+                { text: "28,9", correct: true },
+                { text: "35,4", correct: false },
+                { text: "42,7", correct: false }
+            ]
+        }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+    let answerSelected = false;
+    let selectedBurgerIndex = null;
+
+    function displayQuestion(questionIndex) {
+        const question = questions[questionIndex];
+        document.getElementById('current-question').textContent = question.question;
+
+        const burgerSection = document.getElementById('burger-options');
+        burgerSection.innerHTML = '';
+
+        question.answers.forEach((answer, index) => {
+            const burgerHtml = `
+            <div class="burger-container" data-index="${index}">
+                <img class="burger-top" src="./style/img/painHaut.svg" alt="Top bun">
+                <div class="burger-answer">${answer.text}</div>
+                <img class="burger-bottom" src="./style/img/painBas.svg" alt="Bottom bun">
+            </div>
+        `;
+            burgerSection.innerHTML += burgerHtml;
+        });
+
+        document.querySelectorAll('.burger-container').forEach(burger => {
+            burger.addEventListener('click', selectAnswer);
+        });
+
+        document.getElementById('feedback').textContent = '';
+        document.getElementById('next-button').style.display = 'none';
+        document.getElementById('validate-button').style.display = 'none';
+        answerSelected = false;
+        selectedBurgerIndex = null;
+    }
+
+    function selectAnswer(event) {
+        if (answerSelected) return;
+
+        // Remove selection from other burgers
+        document.querySelectorAll('.burger-container').forEach(burger => {
+            burger.classList.remove('selected');
+        });
+
+        const selectedBurger = event.currentTarget;
+        selectedBurger.classList.add('selected');
+        selectedBurgerIndex = parseInt(selectedBurger.dataset.index);
+
+        // Show validate button
+        document.getElementById('validate-button').style.display = 'block';
+    }
+
+    function validateAnswer() {
+        if (selectedBurgerIndex === null) return;
+
+        answerSelected = true;
+        const selectedBurger = document.querySelector(`.burger-container[data-index="${selectedBurgerIndex}"]`);
+        const correct = questions[currentQuestion].answers[selectedBurgerIndex].correct;
+
+        selectedBurger.classList.add(correct ? 'correct' : 'incorrect');
+
+        const feedback = document.getElementById('feedback');
+        if (correct) {
+            feedback.textContent = "Correct ! 🎉";
+            score++;
+        } else {
+            const correctAnswer = questions[currentQuestion].answers.find(answer => answer.correct).text;
+            feedback.textContent = `Incorrect. La bonne réponse était : ${correctAnswer}`;
+        }
+
+        document.getElementById('validate-button').style.display = 'none';
+        document.getElementById('next-button').style.display = 'block';
+    }
+
+    function showFinalScore() {
+        document.querySelector('.question-container').style.display = 'none';
+        document.querySelector('.burger-section').style.display = 'none';
+        document.querySelector('.feedback').style.display = 'none';
+        document.querySelector('.next-button').style.display = 'none';
+        document.querySelector('.validate-button').style.display = 'none';
+
+        const scoreContainer = document.getElementById('score-container');
+        const finalScore = document.getElementById('final-score');
+        const resultMessage = document.getElementById('result-message');
+
+        scoreContainer.style.display = 'block';
+        finalScore.textContent = score;
+
+        if (score >= 4) {
+            resultMessage.textContent = "Félicitations ! Vous êtes un expert dans le domaine ! 🏆";
+        } else if (score >= 3) {
+            resultMessage.textContent = "Pas mal !";
+        } else {
+            resultMessage.textContent = "Vous avez perdu !";
+        }
+    }
+
+    document.getElementById('validate-button').addEventListener('click', validateAnswer);
+    document.getElementById('next-button').addEventListener('click', () => {
+        currentQuestion++;
+        if (currentQuestion < questions.length) {
+            displayQuestion(currentQuestion);
+        } else {
+            showFinalScore();
+        }
+    });
+
+    //Commmence le quizz
+    displayQuestion(0);
+
+
+</script>
+
+
+</html>
