@@ -17,7 +17,8 @@ export default function Projects({projects}) {
                                     outputs = {project.outputs}
                                     missions = {project.missions}
                                     link = {project.link}
-                                    picture = {getAssetURL("media", project.picture)}/>
+                                    picture = {getAssetURL("media", project.picture)}
+                                    gallery={project.gallery}/>
                     )
                     }
                 </div>
