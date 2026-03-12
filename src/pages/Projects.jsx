@@ -18,9 +18,9 @@ export default function Projects({projects}) {
                                     missions = {project.missions}
                                     link = {project.link}
                                     picture = {getAssetURL("media", project.picture)}
-                                    gallery={project.gallery}/>
-                    )
-                    }
+                                    gallery = {project.gallery ? project.gallery.map(img => getAssetURL("media", img)) : []}
+                                    imageDescriptions = {project.imageDescriptions || []}/>
+                    )}
                 </div>
             </div>
         </>

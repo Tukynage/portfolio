@@ -3,28 +3,28 @@
     "lastname": "URBAN",
     "firstname": "Ruben",
     "portrait" : "avatar.webp",
-    "intro": "Étudiant",
+    "intro": "Jeune créatif passioné par la création multimédia en 3ème année de BUT MMI, je suis à la recherche d'une formation en alternance pour la rentrée 2025.",
     "intro_competences": "Montage vidéo, édition graphique, maquettage d'interface utilisateur",
-    "biography": "Actuellement en 3ème et dernière année de BUT MMI et en alternance chez maPlatine.com. Ce portfolio regroupe les projets techniques et graphiques réalisés au cours de ma formation et de mes expériences professionnelles.",
+    "biography": "Étudiant en 3ème année de BUT MMI, assidu, curieux et passionné par la création multimédia et audiovisuelle, je suis à la recherche d'une formation en alternance pour la rentrée 2025.",
     "cv" : "URBAN_Ruben-CV.pdf",
     "trainings": [
         {
-            "name" : "BUT Métiers du Multimédia et de l'Internet, spécialité stratégie de communication numérique et design d'expérience, en alternance à partir de la 3ème année chez maPlatine.com",
+            "name" : "BUT Métiers du Multimédia et de l'Internet, spécialité stratégie de communication numérique et design d'expérience. Stage de 2ème année et alternance en 3ème année chez maPlatine.com",
             "school" : "à l'IUT de Lannion, Université de Rennes",
             "start" : 2023,
             "end" : 2026
         },
         {
             "name" : "Bac STI2D, spécialité Systèmes d'Information et Numérique (SIN)",
-            "school" : "au Lycée La Providence (Montauban de Bretagne, 35360)",
+            "school" : "au Lycée La Providence (Montauban de Bretagne, 35 360)",
             "start" : 2020,
             "end" : 2022
         }
     ],
     "interests": [
-        "Passioné d'automobile à travers les sports mécaniques, la mécanique automobile, le sim-racing, etc.",
-        "La photographie (argentique et numérique) ainsi que la production de vidéos.",
-        "Les nouvelles technologies, je suis toujours à l'affût des dernières nouveautés et des dernières tendances.",
+        "L'automobile à travers les sports mécaniques, les rassemblements, le sim-racing, la mécanique automobile, etc.",
+        "Le monde de l'audiovisuel en passant par la photographie (argentique et numérique), la vidéo et le montage.",
+        "Passioné de nouvelles technologies, je suis toujours à l'affût des dernières nouveautés et des dernières tendances.",
         "La musique à travers le monde la Hi-Fi."
     ],
     "projects": [
@@ -42,23 +42,10 @@
             "picture": "poor_stars.webp"
         },
         {
-            "title": "Interview pour une d'association",
-            "context": "Dans le cadre d'un projet avec l'assocation 'Les Amis de Ruth', nous avons réalisé une interview d'un membre de l'association, le but était de convaincre des mécènes sponsors avec une vidéo qui présente l'association.",
-            "missions" : ["Analyser l'association", "Préparer un tournage"],
-            "outputs" :  ["Vidéo de l'interview montée", "Dossier de production"],
-            "skills": [
-                "Communication",
-                "Audiovisuel"
-            ],
-            "link" : "https://www.youtube.com/watch?v=XheeDIgE44s",
-            "picture": "itw_ruth.webp"
-        },
-
-        {
             "title": "Interview d'un président d'association",
-            "context": "Dans le cadre d'un projet avec une association, nous avons réalisé une interview d'un membre de l'association, le but était de convaincre des mécènes sponsors avec une vidéo qui présente le projet.",
+            "context": "Dans le cadre d'un projet avec l'assocation 'Les Amis de Ruth', nous devions réaliser une interview de son président afin d'obtenir une vidéo qui présente l'association à des mécènes sponsors.",
             "missions" : ["Analyser l'association", "Préparer un tournage"],
-            "outputs" :  ["Vidéo de l'interview montée", "Dossier de production"],
+            "outputs" :  ["Vidéo de l'interview montée"],
             "skills": [
                 "Communication",
                 "Audiovisuel"
@@ -66,11 +53,10 @@
             "link" : "https://www.youtube.com/watch?v=XheeDIgE44s",
             "picture": "itw_ruth.webp"
         },
-
         {
             "title": "Interview sur la photographie argentique",
-            "context": "Réalisation d'interviews sur la photographie argentique, échange avec 3 photographes.",
-            "missions" : ["Recherches sur le sujet", "Recherche de personnes à interviewer", "Écriture de questions adaptées", "Préparer un tournage", "Réaliser les interviews", "Monter les vidéos"],
+            "context": "Réalisation d'une interview sur la photographie argentique en présence de 3 profils de photographes argentiques différents.",
+            "missions" : ["Recherches sur le sujet", "Recherche de personnes à interviewer", "Écriture de questions adaptées"],
             "outputs" :  ["Interview finale montée (5min)", "Dossier de production"],
             "skills": [
                 "Audiovisuel",
@@ -103,21 +89,24 @@
             "picture": "datalogy.webp"
         },
                 {
-            "title": "Prendre des produits en photo pour les représenter",
-            "context": "Réalisation de photographies de produits pour maPlatine.com, spécialisé dans la vente de platines vinyles.",
-            "missions" : ["Photographier", "Traiter des photos", "Graphisme"],
-            "outputs" :  ["Photos", "Photos", "Miniatures"],
+            "title": "Réaliser et traiter des photographies de produits",
+            "context": "Réalisation de photographies de produits Hi-Fi, suivi du traitement des images pour une utilisation sur la fiche produit de la boutique en ligne et les réseaux sociaux.",
+            "missions" : ["Analyser des données", "Photographier", "Développer un site web"],
+            "outputs" :  ["Poster", "Maquettage", "Site web"],
             "skills": [
                 "Graphisme",
-                "Audiovisuel"
+                "Dev Web"
             ],
-            "gallery": [
-                "datalogy_photo1.webp",
-                "datalogy_photo2.webp",
-                "datalogy_photo3.webp"
-            ],
-            "link" : "assets/datalogy_redirect-B0x0SWjn.html",
-            "picture": "datalogy.webp"
+            "picture": "datalogy.webp",
+            "gallery": ["app_tregor.webp", "datalogy.webp", "itw_pa.webp", "itw_ruth.webp", "poor_stars.webp"],
+            "imageDescriptions": [
+                "Poster de visualisation des données sur l'obésité avec un design créatif utilisant des frites",
+                "Maquette de l'application Trégor pour agrégateur de spectacles",
+                "Capture du site web interactif avec graphiques dynamiques",
+                "Photo de l'interview avec les photographes argentiques",
+                "Capture de l'interview avec l'association Ruth",
+                "Image du court-métrage Pawn Stars parodie"
+            ]
         }
     ],
     
@@ -153,8 +142,8 @@
         {"name" : "LinkedIn", 
         "url" : "https://www.linkedin.com/in/ruben-urban/",
         "icon" : "linkedin.svg"},
-        {"name" : "Mail : ruben.urban@protonmail.com", 
-        "url" : "mailto:ruben.urban@protonmail.com",
+        {"name" : "Mail : ruben.urban@etudiant.univ-rennes.fr", 
+        "url" : "mailto:ruben.urban@etudiant.univ-rennes.fr",
         "icon" : "mail.svg"},
         {"name" : "Téléphone : +33 6 66 09 87 76", 
         "url" : "tel:+33666098776",
