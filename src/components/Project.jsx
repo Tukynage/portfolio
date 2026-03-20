@@ -5,6 +5,110 @@ import { useState, useEffect, useRef } from 'react'
 import { PhotoIcon, ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline'
 import { ChevronLeftIcon, ChevronRightIcon, XMarkIcon } from '@heroicons/react/24/solid'
 
+const YOUTUBE_HOSTS = ['youtube.com', 'www.youtube.com', 'youtu.be', 'www.youtu.be']
+const INSTAGRAM_HOSTS = ['instagram.com', 'www.instagram.com']
+
+function isExternalUrl(url = '') {
+    return /^https?:\/\//i.test(url)
+}
+
+function getYouTubeEmbedUrl(url = '') {
+    try {
+        const parsed = new URL(url)
+        if (!YOUTUBE_HOSTS.includes(parsed.hostname)) return null
+
+        if (parsed.hostname.includes('youtu.be')) {
+            const id = parsed.pathname.split('/').filter(Boolean)[0]
+            return id ? `https://www.youtube.com/embed/${id}` : null
+        }
+
+        const videoIdFromWatch = parsed.searchParams.get('v')
+        if (videoIdFromWatch) return `https://www.youtube.com/embed/${videoIdFromWatch}`
+
+        const parts = parsed.pathname.split('/').filter(Boolean)
+        const shortsIndex = parts.indexOf('shorts')
+        if (shortsIndex !== -1 && parts[shortsIndex + 1]) {
+            return `https://www.youtube.com/embed/${parts[shortsIndex + 1]}`
+        }
+
+        const embedIndex = parts.indexOf('embed')
+        if (embedIndex !== -1 && parts[embedIndex + 1]) {
+            return `https://www.youtube.com/embed/${parts[embedIndex + 1]}`
+        }
+
+        return null
+    } catch {
+        return null
+    }
+}
+
+function getInstagramEmbedUrl(url = '') {
+    try {
+        const parsed = new URL(url)
+        if (!INSTAGRAM_HOSTS.includes(parsed.hostname)) return null
+
+        const parts = parsed.pathname.split('/').filter(Boolean)
+        const reelIndex = parts.indexOf('reel')
+        if (reelIndex !== -1 && parts[reelIndex + 1]) {
+            return `https://www.instagram.com/reel/${parts[reelIndex + 1]}/embed`
+        }
+
+        const pIndex = parts.indexOf('p')
+        if (pIndex !== -1 && parts[pIndex + 1]) {
+            return `https://www.instagram.com/p/${parts[pIndex + 1]}/embed`
+        }
+
+        return null
+    } catch {
+        return null
+    }
+}
+
+function detectMediaType(src = '') {
+    const cleaned = src.toLowerCase().split('?')[0]
+    if (/\.(jpg|jpeg|png|webp|gif|avif|svg)$/i.test(cleaned)) return 'image'
+    if (/\.(mp4|webm|ogg|mov|m4v)$/i.test(cleaned)) return 'video'
+    if (isExternalUrl(src) && getYouTubeEmbedUrl(src)) return 'youtube'
+    if (isExternalUrl(src) && getInstagramEmbedUrl(src)) return 'instagram'
+    if (isExternalUrl(src)) return 'embed'
+    return 'image'
+}
+
+function normalizeMediaItem(item, fallbackDescription = '', fallbackAlt = '') {
+    const raw = typeof item === 'string' ? { src: item } : (item || {})
+    const src = raw.src || raw.url || ''
+    const explicitType = raw.type
+    const type = explicitType || detectMediaType(src)
+
+    const normalized = {
+        type,
+        src,
+        alt: raw.alt || fallbackAlt || fallbackDescription || 'Média du projet',
+        description: raw.description || fallbackDescription || '',
+        thumbnail: raw.thumbnail || raw.poster || '',
+        poster: raw.poster || raw.thumbnail || '',
+        aspectRatio: raw.aspectRatio || ''
+    }
+
+    if (type === 'youtube') {
+        normalized.embedSrc = raw.embedSrc || getYouTubeEmbedUrl(src)
+    } else if (type === 'instagram') {
+        normalized.embedSrc = raw.embedSrc || getInstagramEmbedUrl(src)
+    } else if (type === 'embed') {
+        normalized.embedSrc = raw.embedSrc || src
+    }
+
+    return normalized
+}
+
+function getThumbnailSource(item) {
+    if (!item) return ''
+    if (item.type === 'image') return item.src || ''
+    if (item.type === 'video') return item.thumbnail || item.poster || ''
+    if (item.type === 'youtube' || item.type === 'instagram' || item.type === 'embed') return item.thumbnail || ''
+    return ''
+}
+
 export default function Project({ title, picture, context, outputs, missions, skills, link, gallery = [], imageDescriptions = [] }) {
     const [isGalleryOpen, setIsGalleryOpen] = useState(false)
     const [currentImageIndex, setCurrentImageIndex] = useState(0)
@@ -17,13 +121,34 @@ export default function Project({ title, picture, context, outputs, missions, sk
     const imageRef = useRef(null)
     const containerRef = useRef(null)
 
-    // Combine picture principale avec gallery pour avoir toutes les images
-    const allImages = picture ? [picture, ...gallery] : gallery
-    const hasMultipleImages = allImages.length > 1
-    
-    // Descriptions d'images (première = picture, puis gallery)
-    const allDescriptions = picture ? [imageDescriptions[0] || '', ...imageDescriptions.slice(1)] : imageDescriptions
-    const currentDescription = allDescriptions[currentImageIndex] || ''
+    const hasDedicatedCover = Boolean(picture)
+    const galleryDescriptionOffset = hasDedicatedCover && imageDescriptions.length === gallery.length + 1 ? 1 : 0
+
+    const normalizedGallery = gallery.map((item, index) =>
+        normalizeMediaItem(
+            item,
+            imageDescriptions[index + galleryDescriptionOffset] || '',
+            `${title} - média ${index + 1}`
+        )
+    )
+
+    const coverMedia = picture
+        ? normalizeMediaItem(
+            { src: picture },
+            galleryDescriptionOffset === 1 ? imageDescriptions[0] || '' : '',
+            `${title} - miniature`
+        )
+        : (normalizedGallery[0] || null)
+
+    const mediaItems = normalizedGallery
+    const hasGallery = mediaItems.length > 0
+    const hasMultipleImages = mediaItems.length > 1
+    const currentMedia = mediaItems[currentImageIndex] || null
+    const currentDescription = currentMedia?.description || ''
+    const isCurrentImage = currentMedia?.type === 'image'
+    const isCurrentEmbedded = currentMedia?.type === 'youtube' || currentMedia?.type === 'instagram' || currentMedia?.type === 'embed'
+    const currentEmbedAspectRatio = currentMedia?.aspectRatio
+        || (currentMedia?.type === 'youtube' ? '16 / 9' : (currentMedia?.type === 'instagram' ? '9 / 16' : '16 / 9'))
 
     const resetImageState = () => {
         setScale(1)
@@ -33,20 +158,22 @@ export default function Project({ title, picture, context, outputs, missions, sk
     }
 
     const nextImage = () => {
+        if (!mediaItems.length) return
         if (isTransitioning) return
         setIsTransitioning(true)
         resetImageState()
         setTimeout(() => {
-            setCurrentImageIndex((prev) => (prev + 1) % allImages.length)
+            setCurrentImageIndex((prev) => (prev + 1) % mediaItems.length)
         }, 100)
     }
 
     const prevImage = () => {
+        if (!mediaItems.length) return
         if (isTransitioning) return
         setIsTransitioning(true)
         resetImageState()
         setTimeout(() => {
-            setCurrentImageIndex((prev) => (prev - 1 + allImages.length) % allImages.length)
+            setCurrentImageIndex((prev) => (prev - 1 + mediaItems.length) % mediaItems.length)
         }, 100)
     }
 
@@ -60,6 +187,7 @@ export default function Project({ title, picture, context, outputs, missions, sk
     }
 
     const openGallery = () => {
+        if (!hasGallery) return
         setIsGalleryOpen(true)
         setCurrentImageIndex(0)
         resetImageState()
@@ -224,14 +352,33 @@ export default function Project({ title, picture, context, outputs, missions, sk
 
     return (
         <div className="card bg-base-100 shadow-lg border border-slate-200 h-full">
-            <figure className="!my-0 relative group cursor-pointer" onClick={hasMultipleImages ? openGallery : undefined}>
-                <img src={picture || allImages[0]} alt={title} />
-                {hasMultipleImages && (
+            <figure className="!my-0 relative group cursor-pointer" onClick={hasGallery ? openGallery : undefined}>
+                {coverMedia?.type === 'video' ? (
+                    <video
+                        src={coverMedia.src}
+                        className="w-full h-full object-cover"
+                        muted
+                        playsInline
+                        loop
+                        autoPlay
+                    />
+                ) : coverMedia?.type === 'youtube' || coverMedia?.type === 'instagram' || coverMedia?.type === 'embed' ? (
+                    <iframe
+                        src={coverMedia.embedSrc}
+                        title={coverMedia.alt}
+                        className="w-full aspect-video"
+                        allow="autoplay; encrypted-media; picture-in-picture; web-share"
+                        allowFullScreen
+                    />
+                ) : (
+                    <img src={coverMedia?.src} alt={coverMedia?.alt || title} />
+                )}
+                {hasGallery && (
                     <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300 flex items-center justify-center">
                         <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white text-center">
                             <div className="bg-black/50 rounded-lg p-3 backdrop-blur-sm">
                                 <span className="text-2xl">📷</span>
-                                <div className="text-sm mt-1 font-medium">{allImages.length} photos</div>
+                                <div className="text-sm mt-1 font-medium">{mediaItems.length} médias</div>
                                 <div className="text-xs mt-1 opacity-75">Cliquer pour voir la galerie</div>
                             </div>
                         </div>
@@ -274,12 +421,12 @@ export default function Project({ title, picture, context, outputs, missions, sk
                     )}
                 </ul>
                 <div>
-                    {hasMultipleImages ? (
+                    {hasGallery ? (
                         <button 
                             onClick={openGallery}
                             className="text-white no-underline btn btn-xs btn-secondary btn-outline grow-0 mt-2"
                         >
-                            📷 Voir la galerie ({allImages.length})
+                            📷 Voir la galerie ({mediaItems.length})
                         </button>
                     ) : (
                         <Link to={link} target="_blank" className="text-white no-underline btn btn-xs btn-primary btn-outline grow-0 mt-2">
@@ -313,9 +460,9 @@ export default function Project({ title, picture, context, outputs, missions, sk
                                 <div className="bg-black/50 backdrop-blur-sm rounded-lg px-3 py-2 pointer-events-auto">
                                     <div className="flex items-center gap-2">
                                         <span className="text-white/80 text-sm">
-                                            {currentImageIndex + 1} / {allImages.length}
+                                            {currentImageIndex + 1} / {mediaItems.length}
                                         </span>
-                                        {scale > 1 && (
+                                        {isCurrentImage && scale > 1 && (
                                             <span className="bg-blue-500 text-white text-xs px-2 py-1 rounded">
                                                 {Math.round(scale * 100)}%
                                             </span>
@@ -337,6 +484,7 @@ export default function Project({ title, picture, context, outputs, missions, sk
                         </div>
 
                         {/* Contrôles latéraux - Zoom à droite (masqué sur mobile) */}
+                        {isCurrentImage && (
                         <div className="absolute right-6 top-1/2 -translate-y-1/2 z-30 pointer-events-auto hidden md:block">
                             <div className="bg-black/80 backdrop-blur-sm rounded-xl p-3 flex flex-col gap-2">
                                 <button 
@@ -381,12 +529,13 @@ export default function Project({ title, picture, context, outputs, missions, sk
                                 </div>
                             </div>
                         </div>
+                        )}
 
                         {/* Conteneur principal de l'image avec zoom */}
                         <div 
                             ref={containerRef}
                             className="h-full w-full flex items-center justify-center overflow-hidden cursor-move"
-                            style={{ cursor: scale > 1 ? (isDragging ? 'grabbing' : 'grab') : 'default' }}
+                            style={{ cursor: isCurrentImage && scale > 1 ? (isDragging ? 'grabbing' : 'grab') : 'default' }}
                             onClick={(e) => {
                                 // Si le clic est en dehors de l'image, fermer la galerie
                                 if (e.target === e.currentTarget) {
@@ -396,13 +545,13 @@ export default function Project({ title, picture, context, outputs, missions, sk
                         >
                             {/* Image principale avec zoom et drag */}
                             <div 
-                                className="relative flex items-center justify-center h-full w-full"
-                                onMouseDown={handleMouseDown}
-                                onTouchStart={handleTouchStart}
-                                onTouchMove={handleTouchMove}
-                                onTouchEnd={handleTouchEnd}
-                                onDoubleClick={handleDoubleClick}
-                                style={{ touchAction: 'none' }}
+                                className={`relative flex items-center justify-center h-full w-full ${isCurrentEmbedded ? 'pb-40 md:pb-52 pt-10 md:pt-14' : ''}`}
+                                onMouseDown={isCurrentImage ? handleMouseDown : undefined}
+                                onTouchStart={isCurrentImage ? handleTouchStart : undefined}
+                                onTouchMove={isCurrentImage ? handleTouchMove : undefined}
+                                onTouchEnd={isCurrentImage ? handleTouchEnd : undefined}
+                                onDoubleClick={isCurrentImage ? handleDoubleClick : undefined}
+                                style={{ touchAction: isCurrentImage ? 'none' : 'auto' }}
                                 onClick={(e) => {
                                     // Si le clic est en dehors de l'image elle-même, fermer la galerie
                                     if (e.target === e.currentTarget) {
@@ -410,35 +559,66 @@ export default function Project({ title, picture, context, outputs, missions, sk
                                     }
                                 }}
                             >
-                                {!imageLoaded && (
+                                {!imageLoaded && currentMedia?.type !== 'instagram' && (
                                     <div className="absolute inset-0 flex items-center justify-center z-10">
                                         <div className="w-12 h-12 border-3 border-white border-t-transparent rounded-full animate-spin"></div>
                                     </div>
                                 )}
-                                
-                                <img 
-                                    ref={imageRef}
-                                    src={allImages[currentImageIndex]} 
-                                    alt={`${title} - Image ${currentImageIndex + 1}${currentDescription ? ` - ${currentDescription}` : ''}`}
-                                    className={`max-w-full max-h-full object-contain select-none transition-all duration-200 ease-out ${
-                                        imageLoaded ? 'opacity-100' : 'opacity-0'
-                                    }`}
-                                    style={{
-                                        transform: `scale(${scale}) translate(${position.x / scale}px, ${position.y / scale}px)`,
-                                        transformOrigin: 'center center'
-                                    }}
-                                    onLoad={() => setImageLoaded(true)}
-                                    onError={(e) => {
-                                        console.error('Error loading image:', allImages[currentImageIndex])
-                                        e.target.style.display = 'none'
-                                    }}
-                                    draggable={false}
-                                />
+
+                                {currentMedia?.type === 'image' && (
+                                    <img 
+                                        ref={imageRef}
+                                        src={currentMedia.src}
+                                        alt={currentMedia.alt || `${title} - Média ${currentImageIndex + 1}`}
+                                        className={`max-w-full max-h-full object-contain select-none transition-all duration-200 ease-out ${
+                                            imageLoaded ? 'opacity-100' : 'opacity-0'
+                                        }`}
+                                        style={{
+                                            transform: `scale(${scale}) translate(${position.x / scale}px, ${position.y / scale}px)`,
+                                            transformOrigin: 'center center'
+                                        }}
+                                        onLoad={() => setImageLoaded(true)}
+                                        onError={(e) => {
+                                            console.error('Error loading image:', currentMedia.src)
+                                            e.target.style.display = 'none'
+                                        }}
+                                        draggable={false}
+                                    />
+                                )}
+
+                                {currentMedia?.type === 'video' && (
+                                    <video
+                                        src={currentMedia.src}
+                                        poster={currentMedia.poster || undefined}
+                                        controls
+                                        className={`max-w-full max-h-full object-contain transition-all duration-200 ease-out ${
+                                            imageLoaded ? 'opacity-100' : 'opacity-0'
+                                        }`}
+                                        onLoadedData={() => setImageLoaded(true)}
+                                    />
+                                )}
+
+                                {(currentMedia?.type === 'youtube' || currentMedia?.type === 'instagram' || currentMedia?.type === 'embed') && (
+                                    <iframe
+                                        src={currentMedia.embedSrc}
+                                        title={currentMedia.alt || `${title} - Média ${currentImageIndex + 1}`}
+                                        className={`w-[min(92vw,1100px)] rounded-lg bg-black transition-all duration-200 ease-out ${
+                                            imageLoaded ? 'opacity-100' : 'opacity-0'
+                                        }`}
+                                        style={{
+                                            aspectRatio: currentEmbedAspectRatio,
+                                            maxHeight: 'calc(100vh - 320px)'
+                                        }}
+                                        allow="autoplay; encrypted-media; picture-in-picture; web-share"
+                                        allowFullScreen
+                                        onLoad={() => setImageLoaded(true)}
+                                    />
+                                )}
                             </div>
                         </div>
 
                         {/* Boutons navigation latéraux - Repositionnés */}
-                        {allImages.length > 1 && scale <= 1.2 && (
+                        {mediaItems.length > 1 && (!isCurrentImage || scale <= 1.2) && (
                             <>
                                 <button 
                                     onClick={(e) => {
@@ -476,12 +656,19 @@ export default function Project({ title, picture, context, outputs, missions, sk
                             <div className="bg-gradient-to-t from-black/90 via-black/50 to-transparent p-4 md:p-6">
                                 
                                 {/* Miniatures en bas - Petites et discrètes */}
-                                {allImages.length > 1 && scale <= 1.5 && (
+                                {mediaItems.length > 1 && (!isCurrentImage || scale <= 1.5) && (
                                     <div className="flex justify-center mb-4 pointer-events-auto">
                                         <div className="bg-black/40 backdrop-blur-sm rounded-lg px-3 py-2">
                                             {/* Container fixe pour éviter les coupures */}
                                             <div className="flex gap-2 items-center justify-center" style={{ minHeight: '54px' }}>
-                                                {allImages.map((image, index) => (
+                                                {mediaItems.map((item, index) => (
+                                                    (() => {
+                                                        const thumbSrc = getThumbnailSource(item)
+                                                        const fallbackLabel = item.type === 'video'
+                                                            ? 'Vidéo'
+                                                            : (item.type === 'youtube' ? 'YouTube' : (item.type === 'instagram' ? 'Reel' : 'Média'))
+
+                                                        return (
                                                     <button
                                                         key={`thumb-${index}`}
                                                         onClick={(e) => {
@@ -489,24 +676,32 @@ export default function Project({ title, picture, context, outputs, missions, sk
                                                             if (!isTransitioning) goToImage(index)
                                                         }}
                                                         disabled={isTransitioning}
-                                                        className={`flex-shrink-0 rounded overflow-hidden transition-all duration-200 border ${
+                                                        className={`flex-shrink-0 rounded overflow-hidden transition-all duration-200 ${
                                                             currentImageIndex === index 
-                                                                ? 'ring-1 ring-white/80 opacity-100 border-white/30' 
-                                                                : 'opacity-50 hover:opacity-80 border-white/10'
-                                                        } ${isTransitioning ? 'cursor-wait opacity-20' : 'cursor-pointer'}`}
+                                                                ? 'opacity-100 shadow-[0_0_0_2px_rgba(255,255,255,0.75)]' 
+                                                                : 'opacity-50 hover:opacity-80 shadow-[0_0_0_1px_rgba(255,255,255,0.18)]'
+                                                        } ${isTransitioning ? 'cursor-wait' : 'cursor-pointer'} p-0 m-0 leading-none appearance-none`}
                                                         style={{ 
                                                             width: '50px', 
                                                             height: '50px',
                                                             transform: currentImageIndex === index ? 'scale(1.05)' : 'scale(1)',
-                                                            backgroundImage: `url(${image})`,
+                                                            backgroundImage: thumbSrc ? `url(${thumbSrc})` : 'none',
                                                             backgroundSize: 'cover',
                                                             backgroundPosition: 'center',
-                                                            backgroundRepeat: 'no-repeat'
+                                                            backgroundRepeat: 'no-repeat',
+                                                            backgroundColor: thumbSrc ? 'transparent' : 'rgba(0,0,0,0.65)',
+                                                            backgroundClip: 'border-box'
                                                         }}
                                                     >
-                                                        {/* Image cachée pour l'accessibilité */}
-                                                        <span className="sr-only">Miniature {index + 1}</span>
+                                                        {!thumbSrc && (
+                                                            <span className="w-full h-full flex items-center justify-center text-white text-[10px]">
+                                                                {fallbackLabel}
+                                                            </span>
+                                                        )}
+                                                        <span className="sr-only">Miniature {index + 1} - {item.alt || fallbackLabel}</span>
                                                     </button>
+                                                        )
+                                                    })()
                                                 ))}
                                             </div>
                                             
@@ -525,7 +720,7 @@ export default function Project({ title, picture, context, outputs, missions, sk
                                 <div className="flex flex-col gap-4 pointer-events-auto">
                                     
                                     {/* Navigation mobile seulement */}
-                                    {allImages.length > 1 && scale <= 1.2 && (
+                                    {mediaItems.length > 1 && (!isCurrentImage || scale <= 1.2) && (
                                         <div className="flex items-center justify-center gap-3 md:hidden">
                                             <div className="bg-black/90 backdrop-blur-sm rounded-xl p-3 flex gap-3">
                                                 <button 
@@ -587,7 +782,7 @@ export default function Project({ title, picture, context, outputs, missions, sk
                         </div>
 
                         {/* Zones de clic pour navigation mobile - cachées en mode zoom */}
-                        {allImages.length > 1 && scale <= 1.2 && (
+                        {mediaItems.length > 1 && (!isCurrentImage || scale <= 1.2) && (
                             <>
                                 <div 
                                     className="absolute left-0 top-20 bottom-20 w-1/4 md:hidden z-20"

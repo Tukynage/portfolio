@@ -1,6 +1,30 @@
 import Project from "../components/Project.jsx"
 import {getAssetURL} from "../utils/utils.js"
 
+function resolveMediaPath(mediaPath) {
+    if (!mediaPath) return mediaPath
+    if (/^https?:\/\//i.test(mediaPath)) return mediaPath
+    return getAssetURL("media", mediaPath)
+}
+
+function normalizeGalleryItem(item) {
+    if (typeof item === 'string') {
+        return resolveMediaPath(item)
+    }
+
+    if (!item || typeof item !== 'object') {
+        return item
+    }
+
+    return {
+        ...item,
+        src: item.src ? resolveMediaPath(item.src) : item.src,
+        url: item.url ? resolveMediaPath(item.url) : item.url,
+        thumbnail: item.thumbnail ? resolveMediaPath(item.thumbnail) : item.thumbnail,
+        poster: item.poster ? resolveMediaPath(item.poster) : item.poster
+    }
+}
+
 export default function Projects({projects}) {
     console.log(projects)
     return (
@@ -17,8 +41,8 @@ export default function Projects({projects}) {
                                     outputs = {project.outputs}
                                     missions = {project.missions}
                                     link = {project.link}
-                                    picture = {getAssetURL("media", project.picture)}
-                                    gallery = {project.gallery ? project.gallery.map(img => getAssetURL("media", img)) : []}
+                                    picture = {resolveMediaPath(project.picture)}
+                                    gallery = {project.gallery ? project.gallery.map(normalizeGalleryItem) : []}
                                     imageDescriptions = {project.imageDescriptions || []}/>
                     )}
                 </div>

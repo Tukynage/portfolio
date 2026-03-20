@@ -97,7 +97,7 @@
                 "Graphisme",
                 "Dev Web"
             ],
-            "picture": "pp/dmpa6_white.webp",
+            "picture": "pp/Clearaudio-Compass-silver-10.webp",
             "gallery": [
                 "pp/Clearaudio-Compass-silver-10.webp",
                 "pp/Clearaudio-Compass-silver-32.webp",
@@ -110,10 +110,10 @@
                 "pp/pro-ject-debut_reference_10-23.webp",
                 "pp/pro-ject-debut_reference_10-28.webp",
                 "pp/pro-ject-debut_reference_10-37.webp",
-                "pp/pro-ject-pick_it_mm_evo-stylus-11.webp"
+                "pp/pro-ject-pick_it_mm_evo-stylus-11.webp",
+                "pp/dmpa6_white.webp"
             ],
             "imageDescriptions": [
-                "Photo produit DMP-A6 blanche",
                 "Photo produit Clearaudio Compass angle 1",
                 "Photo produit Clearaudio Compass angle 2",
                 "Photo produit EAT E-Glo Petit 2 angle 1",
@@ -121,11 +121,12 @@
                 "Photo produit AudioQuest Blizzard XTRM",
                 "Photo produit Audio Research D80",
                 "Photo produit Aurorasound HFSA-02",
-                "Photo produit Pro-Ject Debut Reference angle 1",
-                "Photo produit Pro-Ject Debut Reference angle 2",
-                "Photo produit Pro-Ject Debut Reference angle 3",
-                "Photo produit Pro-Ject Debut Reference angle 4",
-                "Photo produit Pro-Ject Pick It MM EVO Stylus"
+                "Photo produit Pro-Ject Debut Reference 10",
+                "Photo produit Pro-Ject Debut Reference 10",
+                "Photo produit Pro-Ject Debut Reference 10",
+                "Photo produit Pro-Ject Debut Reference 10",
+                "Photo produit Stylus Pro-Ject Pick It MM EVO",
+                "Photo produit Eversolo DMP-A6 Master Edition Gen 2"
             ]
         },
         {
@@ -159,7 +160,35 @@
                 "Visuel de visionneuse Sprint 3",
                 "Visuel de visionneuse Sprint 4"
             ]
-        }
+        },
+            {
+                "title": "Réaliser une vidéo de présentation d'un produit",
+                "context": "Création d'une vidéo de présentation pour un nouveau produit Hi-Fi, mettant en avant ses caractéristiques et son design à travers un montage dynamique et professionnel.",
+                "missions" : [
+                    "Planifier le tournage en définissant les angles de prise de vue et les éléments à mettre en avant",
+                    "Réaliser le tournage en utilisant des techniques d'éclairage adaptées pour valoriser le produit",
+                    "Monter la vidéo en intégrant des éléments graphiques et des transitions fluides pour une présentation attrayante"
+                ],
+                "outputs" : [
+                    "Vidéo de présentation finale montée et prête à être diffusée",
+                    "Version optimisée pour les réseaux sociaux",
+                    "Version longue pour une utilisation sur le site web"
+                ],
+                "skills": [
+                    "Montage audiovisuel",
+                    "Graphisme"
+                ],
+                "picture": "minia_yt.webp",
+                "gallery": [
+                    "https://www.youtube.com/watch?v=C_z8VrOvIvE",
+                    "https://www.youtube.com/watch?v=Nv8yY2qkd48"
+                ],
+                "imageDescriptions": [
+                    "Vidéo de présentation du Pro-Ject Flatten It",
+                    "Vidéo de présentation de la REGA Planar 3 RS"
+                ]
+            }
+
         
     ],
     
