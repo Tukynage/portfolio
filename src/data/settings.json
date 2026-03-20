@@ -97,17 +97,70 @@
                 "Graphisme",
                 "Dev Web"
             ],
-            "picture": "datalogy.webp",
-            "gallery": ["app_tregor.webp", "datalogy.webp", "itw_pa.webp", "itw_ruth.webp", "poor_stars.webp"],
+            "picture": "pp/dmpa6_white.webp",
+            "gallery": [
+                "pp/Clearaudio-Compass-silver-10.webp",
+                "pp/Clearaudio-Compass-silver-32.webp",
+                "pp/EAT-E-Glo_Petit_2-silver-13.webp",
+                "pp/EAT-E-Glo_Petit_2-silver-27.webp",
+                "pp/audioquest-blizzard-xtrm-schuko-c19-00.webp",
+                "pp/audioreasearch-d80-05-large.webp",
+                "pp/aurorasound_hfsa-02-02.webp",
+                "pp/pro-ject-debut_reference_10-09.webp",
+                "pp/pro-ject-debut_reference_10-23.webp",
+                "pp/pro-ject-debut_reference_10-28.webp",
+                "pp/pro-ject-debut_reference_10-37.webp",
+                "pp/pro-ject-pick_it_mm_evo-stylus-11.webp"
+            ],
             "imageDescriptions": [
-                "Poster de visualisation des données sur l'obésité avec un design créatif utilisant des frites",
-                "Maquette de l'application Trégor pour agrégateur de spectacles",
-                "Capture du site web interactif avec graphiques dynamiques",
-                "Photo de l'interview avec les photographes argentiques",
-                "Capture de l'interview avec l'association Ruth",
-                "Image du court-métrage Pawn Stars parodie"
+                "Photo produit DMP-A6 blanche",
+                "Photo produit Clearaudio Compass angle 1",
+                "Photo produit Clearaudio Compass angle 2",
+                "Photo produit EAT E-Glo Petit 2 angle 1",
+                "Photo produit EAT E-Glo Petit 2 angle 2",
+                "Photo produit AudioQuest Blizzard XTRM",
+                "Photo produit Audio Research D80",
+                "Photo produit Aurorasound HFSA-02",
+                "Photo produit Pro-Ject Debut Reference angle 1",
+                "Photo produit Pro-Ject Debut Reference angle 2",
+                "Photo produit Pro-Ject Debut Reference angle 3",
+                "Photo produit Pro-Ject Debut Reference angle 4",
+                "Photo produit Pro-Ject Pick It MM EVO Stylus"
+            ]
+        },
+        {
+            "title": "Concevoir des visuels de visionneuse pour la page d'accueil",
+            "context": "Dans le cadre de l'amélioration de l'expérience utilisateur du site maPlatine.com, création d'une série de visuels produits destinés à une visionneuse de la page d'accueil pour mettre en avant les nouveautés Hi-Fi.",
+            "missions" : [
+                "Définir une direction visuelle cohérente avec l'identité de la boutique",
+                "Réaliser et retoucher les visuels produits pour un affichage web premium",
+                "Préparer les exports optimisés pour la visionneuse de la page d'accueil"
+            ],
+            "outputs" : [
+                "Série de visuels prêts à intégrer dans la visionneuse",
+                "Déclinaisons adaptées aux différents produits et formats",
+                "Sélection finale optimisée pour l'intégration web"
+            ],
+            "skills": [
+                "Graphisme",
+                "UI/UX"
+            ],
+            "picture": "visio/VF_DMP-A6_Master_Edition_Gen_2.webp",
+            "gallery": [
+                "visio/VF-E-Glo_Petit_2.webp",
+                "visio/VF-Eversolo_T8.webp",
+                "visio/VF-Sprint3.webp",
+                "visio/VF-Sprint4.webp"
+            ],
+            "imageDescriptions": [
+                "Visuel de visionneuse DMP-A6 Master Edition Gen 2",
+                "Visuel de visionneuse E-Glo Petit 2",
+                "Visuel de visionneuse Eversolo T8",
+                "Visuel de visionneuse Sprint 3",
+                "Visuel de visionneuse Sprint 4"
             ]
         }
+        
     ],
     
     "skills": [
