@@ -3,9 +3,9 @@
     "lastname": "URBAN",
     "firstname": "Ruben",
     "portrait" : "avatar.webp",
-    "intro": "Jeune créatif passioné par la création multimédia en 3ème année de BUT MMI, je suis à la recherche d'une formation en alternance pour la rentrée 2025.",
+    "intro": "Jeune créatif passionné par la création multimédia en 3ème année de BUT MMI, je suis à la recherche d'une formation en alternance pour la rentrée 2026.",
     "intro_competences": "Montage vidéo, édition graphique, maquettage d'interface utilisateur",
-    "biography": "Étudiant en 3ème année de BUT MMI, assidu, curieux et passionné par la création multimédia et audiovisuelle, je suis à la recherche d'une formation en alternance pour la rentrée 2025.",
+    "biography": "Étudiant en 3ème année de BUT MMI, assidu, curieux et passionné par la création multimédia et audiovisuelle, je suis à la recherche d'une formation en alternance pour la rentrée 2026.",
     "cv" : "URBAN_Ruben-CV.pdf",
     "trainings": [
         {
@@ -77,10 +77,10 @@
             "picture": "app_tregor.webp"
         },
         {
-            "title": "Analyser des données et les représenter",
+           "title": "Datalogy — représenter des données graphiquement",
             "context": "Choisir une donnée, la représenter de manière graphique et développer un site web pour la présenter de façon  interactive.",
-            "missions" : ["Analyser des données", "Photographier", "Développer un site web"],
-            "outputs" :  ["Poster", "Maquettage", "Site web"],
+            "missions" : ["Choisir et analyser une donnée", "Représenter la donnée graphiquement sous forme de poster", "Développer un site web interactif pour la présenter"],
+            "outputs" : ["Poster de datavisualisation", "Maquette du site web", "Site web interactif"],
             "skills": [
                 "Graphisme",
                 "Dev Web"
@@ -89,14 +89,22 @@
             "picture": "datalogy.webp"
         },
                 {
-            "title": "Réaliser et traiter des photographies de produits",
-            "context": "Réalisation de photographies de produits Hi-Fi, suivi du traitement des images pour une utilisation sur la fiche produit de la boutique en ligne et les réseaux sociaux.",
-            "missions" : ["Analyser des données", "Photographier", "Développer un site web"],
-            "outputs" :  ["Poster", "Maquettage", "Site web"],
-            "skills": [
-                "Graphisme",
-                "Dev Web"
-            ],
+                "title": "Photographie produit Hi-Fi",
+    "context": "Réalisation et traitement des photographies produits pour maPlatine.com. Les photos sont utilisées sur les fiches produit du site, les réseaux sociaux, les newsletters et les articles de blog.",
+    "missions": [
+        "Mise en place du produit et du studio de prise de vue",
+        "Réalisation des prises de vue",
+        "Retouche et édition sur Lightroom Classic",
+        "Publication sur PrestaShop et intégration dans les supports de communication"
+    ],
+    "outputs": [
+        "Photos produit pour les fiches du site e-commerce",
+        "Visuels pour les réseaux sociaux, newsletters et articles de blog"
+    ],
+    "skills": [
+        "Photographie",
+        "Édition graphique"
+    ],
             "picture": "pp/Clearaudio-Compass-silver-10.webp",
             "gallery": [
                 "pp/Clearaudio-Compass-silver-10.webp",
@@ -114,10 +122,10 @@
                 "pp/dmpa6_white.webp"
             ],
             "imageDescriptions": [
-                "Photo produit Clearaudio Compass angle 1",
-                "Photo produit Clearaudio Compass angle 2",
-                "Photo produit EAT E-Glo Petit 2 angle 1",
-                "Photo produit EAT E-Glo Petit 2 angle 2",
+                "Photo produit Clearaudio Compass",
+                "Photo produit Clearaudio Compass",
+                "Photo produit EAT E-Glo Petit 2",
+                "Photo produit EAT E-Glo Petit 2",
                 "Photo produit AudioQuest Blizzard XTRM",
                 "Photo produit Audio Research D80",
                 "Photo produit Aurorasound HFSA-02",
@@ -130,62 +138,92 @@
             ]
         },
         {
-            "title": "Concevoir des visuels de visionneuse pour la page d'accueil",
-            "context": "Dans le cadre de l'amélioration de l'expérience utilisateur du site maPlatine.com, création d'une série de visuels produits destinés à une visionneuse de la page d'accueil pour mettre en avant les nouveautés Hi-Fi.",
-            "missions" : [
-                "Définir une direction visuelle cohérente avec l'identité de la boutique",
-                "Réaliser et retoucher les visuels produits pour un affichage web premium",
-                "Préparer les exports optimisés pour la visionneuse de la page d'accueil"
-            ],
-            "outputs" : [
-                "Série de visuels prêts à intégrer dans la visionneuse",
-                "Déclinaisons adaptées aux différents produits et formats",
-                "Sélection finale optimisée pour l'intégration web"
-            ],
-            "skills": [
-                "Graphisme",
-                "UI/UX"
-            ],
+                "title": "Conception des visuels de la page d'accueil",
+    "context": "Création des visuels produits intégrés à la visionneuse de la homepage de maPlatine.com. Un nouveau visuel est mis en ligne deux fois par semaine pour mettre en avant les nouveautés et produits phares du catalogue.",
+    "missions": [
+        "Sélection des produits à mettre en avant",
+        "Réalisation et retouche des visuels produits",
+        "Optimisation et export pour l'intégration web"
+    ],
+    "outputs": [
+        "Visuels prêts à intégrer sur la homepage",
+        "Déclinaisons adaptées aux différents produits"
+    ],
+    "skills": [
+        "Graphisme",
+        "UI/UX"
+    ],
             "picture": "visio/VF_DMP-A6_Master_Edition_Gen_2.webp",
             "gallery": [
+                "visio/VF_DMP-A6_Master_Edition_Gen_2.webp",
                 "visio/VF-E-Glo_Petit_2.webp",
                 "visio/VF-Eversolo_T8.webp",
                 "visio/VF-Sprint3.webp",
                 "visio/VF-Sprint4.webp"
             ],
             "imageDescriptions": [
-                "Visuel de visionneuse DMP-A6 Master Edition Gen 2",
-                "Visuel de visionneuse E-Glo Petit 2",
-                "Visuel de visionneuse Eversolo T8",
-                "Visuel de visionneuse Sprint 3",
-                "Visuel de visionneuse Sprint 4"
+                "Visionneuse du Eversolo DMP-A6 Master Edition Gen 2",
+                "Visionneuse du E.A.T E-Glo Petit 2",
+                "Visionneuse du Eversolo T8",
+                "Visionneuse du Revival Audio Sprint 3",
+                "Visionneuse du Revival Audio Sprint 4"
             ]
         },
             {
-                "title": "Réaliser une vidéo de présentation d'un produit",
-                "context": "Création d'une vidéo de présentation pour un nouveau produit Hi-Fi, mettant en avant ses caractéristiques et son design à travers un montage dynamique et professionnel.",
-                "missions" : [
-                    "Planifier le tournage en définissant les angles de prise de vue et les éléments à mettre en avant",
-                    "Réaliser le tournage en utilisant des techniques d'éclairage adaptées pour valoriser le produit",
-                    "Monter la vidéo en intégrant des éléments graphiques et des transitions fluides pour une présentation attrayante"
-                ],
-                "outputs" : [
-                    "Vidéo de présentation finale montée et prête à être diffusée",
-                    "Version optimisée pour les réseaux sociaux",
-                    "Version longue pour une utilisation sur le site web"
-                ],
-                "skills": [
-                    "Montage audiovisuel",
-                    "Graphisme"
-                ],
+                "title": "Réalisation de vidéos de présentation produit",
+    "context": "Création de vidéos YouTube présentant des produits Hi-Fi majeurs du catalogue, sélectionnés pour leur qualité technique, leur rapport qualité-prix ou leur caractère innovant. Deux vidéos réalisées à ce jour sur la REGA Planar 3 RS et la Pro-Ject Flatten It, une troisième sur le EAT E-Glo Petit 2 en cours de montage.",
+    "missions": [
+        "Sélection et analyse du produit à présenter",
+        "Planification et réalisation du tournage",
+        "Montage, étalonnage et export de la vidéo finale"
+    ],
+    "outputs": [
+        "Vidéo YouTube de 4 à 6 minutes",
+        "Version courte optimisée pour les réseaux sociaux"
+    ],
+    "skills": [
+        "Audiovisuel"
+    ],
                 "picture": "minia_yt.webp",
                 "gallery": [
                     "https://www.youtube.com/watch?v=C_z8VrOvIvE",
                     "https://www.youtube.com/watch?v=Nv8yY2qkd48"
                 ],
+"imageDescriptions": [
+    "Vidéo de présentation de l'aplanisseur de vinyles Pro-Ject Flatten It",
+    "Vidéo de présentation de la platine vinyle REGA Planar 3 RS"
+]
+            },
+            {
+                "title": "Réalisation de vidéos courtes pour les réseaux sociaux",
+"context": "Création de vidéos au format vertical destinées à être diffusées sur les réseaux sociaux de maPlatine.com, principalement des unboxings de produits Hi-Fi pour mettre en avant les nouveautés du catalogue.",
+"missions": [
+    "Planification et préparation du tournage",
+    "Réalisation du tournage en format vertical",
+    "Montage et export optimisé pour les réseaux sociaux"
+],
+"outputs": [
+    "Vidéo courte prête à être diffusée sur les réseaux sociaux"
+],
+"skills": [
+    "Audiovisuel"
+],
+                "picture": "video_unbox.webp",
+                "gallery": [
+                    "https://www.instagram.com/reel/DLSorzXseW6/",
+                    "https://www.instagram.com/reel/DMItQdRhSyl/",
+                    "https://www.instagram.com/reel/DPzFCwkDKBF/",
+                    "https://www.instagram.com/reel/DQYuvzpgjHm/",
+                    "https://www.instagram.com/reel/DQuR42ZAjoZ/",
+                    "https://www.instagram.com/reel/DTveUSOivnc/"
+                ],
                 "imageDescriptions": [
-                    "Vidéo de présentation du Pro-Ject Flatten It",
-                    "Vidéo de présentation de la REGA Planar 3 RS"
+                    "Vidéo unboxing des enceintes bibliothèques Revival Audio Sprint 3",
+                    "Vidéo unboxing des enceintes bibliothèques Indiana Line TESI 3",
+                    "Vidéo de mise en avant de la nouvelle génération du préamplificateur Quad 33 et de l'amplificateur de puissance Quad 303",
+                    "Vidéo unboxing de l'amplificateur intégré Mission 778X",
+                    "Vidéo unboxing de l'amplificateur intégré REGA Brio MKVII",
+                    "Vidéo unboxing de la platine vinyle REGA Planar 3 RS"
                 ]
             }
 
@@ -198,7 +236,7 @@
             "description": "Logiciels de montage vidéo profesionnels",
             "tools": [
                 "DaVinci Resolve",
-                "Adobre Premiere Pro"
+                "Adobe Premiere Pro"
             ],
             "level": 4
         },
