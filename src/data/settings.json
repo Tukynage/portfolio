@@ -186,8 +186,16 @@
     ],
                 "picture": "minia_yt.webp",
                 "gallery": [
-                    "https://www.youtube.com/watch?v=C_z8VrOvIvE",
-                    "https://www.youtube.com/watch?v=Nv8yY2qkd48"
+                    {
+                        "src": "https://www.youtube.com/watch?v=C_z8VrOvIvE",
+                        "thumbnail": "minia/yt_pj_flatten_it.webp",
+                        "alt": "Miniature YouTube Pro-Ject Flatten It"
+                    },
+                    {
+                        "src": "https://www.youtube.com/watch?v=Nv8yY2qkd48",
+                        "thumbnail": "minia/yt_p3rs.webp",
+                        "alt": "Miniature YouTube REGA Planar 3 RS"
+                    }
                 ],
 "imageDescriptions": [
     "Vidéo de présentation de l'aplanisseur de vinyles Pro-Ject Flatten It",
@@ -210,12 +218,36 @@
 ],
                 "picture": "video_unbox.webp",
                 "gallery": [
-                    "https://www.instagram.com/reel/DLSorzXseW6/",
-                    "https://www.instagram.com/reel/DMItQdRhSyl/",
-                    "https://www.instagram.com/reel/DPzFCwkDKBF/",
-                    "https://www.instagram.com/reel/DQYuvzpgjHm/",
-                    "https://www.instagram.com/reel/DQuR42ZAjoZ/",
-                    "https://www.instagram.com/reel/DTveUSOivnc/"
+                    {
+                        "src": "https://www.instagram.com/reel/DLSorzXseW6/",
+                        "thumbnail": "minia/atalante_3.webp",
+                        "alt": "Miniature Reel unboxing Revival Audio Atalante 3"
+                    },
+                    {
+                        "src": "https://www.instagram.com/reel/DMItQdRhSyl/",
+                        "thumbnail": "minia/tesi_3.webp",
+                        "alt": "Miniature Reel unboxing Indiana Line TESI 3"
+                    },
+                    {
+                        "src": "https://www.instagram.com/reel/DPzFCwkDKBF/",
+                        "thumbnail": "minia/33_303.webp",
+                        "alt": "Miniature Reel présentation Quad 33 et Quad 303"
+                    },
+                    {
+                        "src": "https://www.instagram.com/reel/DQYuvzpgjHm/",
+                        "thumbnail": "minia/mission_778x.webp",
+                        "alt": "Miniature Reel unboxing Mission 778X"
+                    },
+                    {
+                        "src": "https://www.instagram.com/reel/DQuR42ZAjoZ/",
+                        "thumbnail": "minia/brio_mkvii.webp",
+                        "alt": "Miniature Reel unboxing REGA Brio MKVII"
+                    },
+                    {
+                        "src": "https://www.instagram.com/reel/DTveUSOivnc/",
+                        "thumbnail": "minia/p3rs.webp",
+                        "alt": "Miniature Reel unboxing REGA Planar 3 RS"
+                    }
                 ],
                 "imageDescriptions": [
                     "Vidéo unboxing des enceintes bibliothèques Revival Audio Sprint 3",

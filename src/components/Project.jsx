@@ -146,6 +146,7 @@ export default function Project({ title, picture, context, outputs, missions, sk
     const currentMedia = mediaItems[currentImageIndex] || null
     const currentDescription = currentMedia?.description || ''
     const isCurrentImage = currentMedia?.type === 'image'
+    const isCurrentInstagram = currentMedia?.type === 'instagram'
     const isCurrentEmbedded = currentMedia?.type === 'youtube' || currentMedia?.type === 'instagram' || currentMedia?.type === 'embed'
     const currentEmbedAspectRatio = currentMedia?.aspectRatio
         || (currentMedia?.type === 'youtube' ? '16 / 9' : (currentMedia?.type === 'instagram' ? '9 / 16' : '16 / 9'))
@@ -545,7 +546,7 @@ export default function Project({ title, picture, context, outputs, missions, sk
                         >
                             {/* Image principale avec zoom et drag */}
                             <div 
-                                className={`relative flex items-center justify-center h-full w-full ${isCurrentEmbedded ? 'pb-40 md:pb-52 pt-10 md:pt-14' : ''}`}
+                                className={`relative flex items-center justify-center h-full w-full ${isCurrentEmbedded ? (isCurrentInstagram ? 'pb-28 md:pb-36 pt-6 md:pt-10' : 'pb-40 md:pb-52 pt-10 md:pt-14') : ''}`}
                                 onMouseDown={isCurrentImage ? handleMouseDown : undefined}
                                 onTouchStart={isCurrentImage ? handleTouchStart : undefined}
                                 onTouchMove={isCurrentImage ? handleTouchMove : undefined}
@@ -602,13 +603,17 @@ export default function Project({ title, picture, context, outputs, missions, sk
                                     <iframe
                                         src={currentMedia.embedSrc}
                                         title={currentMedia.alt || `${title} - Média ${currentImageIndex + 1}`}
-                                        className={`w-[min(92vw,1100px)] rounded-lg bg-black transition-all duration-200 ease-out ${
+                                        className={`${isCurrentInstagram ? 'w-[min(92vw,500px)] h-[min(78vh,780px)]' : 'w-[min(92vw,1100px)]'} rounded-lg bg-black transition-all duration-200 ease-out ${
                                             imageLoaded ? 'opacity-100' : 'opacity-0'
                                         }`}
-                                        style={{
-                                            aspectRatio: currentEmbedAspectRatio,
-                                            maxHeight: 'calc(100vh - 320px)'
-                                        }}
+                                        style={isCurrentInstagram
+                                            ? { maxHeight: 'calc(100vh - 11rem)' }
+                                            : {
+                                                aspectRatio: currentEmbedAspectRatio,
+                                                maxHeight: 'calc(100vh - 320px)'
+                                            }
+                                        }
+                                        scrolling={isCurrentInstagram ? 'yes' : 'no'}
                                         allow="autoplay; encrypted-media; picture-in-picture; web-share"
                                         allowFullScreen
                                         onLoad={() => setImageLoaded(true)}
@@ -686,7 +691,7 @@ export default function Project({ title, picture, context, outputs, missions, sk
                                                             height: '50px',
                                                             transform: currentImageIndex === index ? 'scale(1.05)' : 'scale(1)',
                                                             backgroundImage: thumbSrc ? `url(${thumbSrc})` : 'none',
-                                                            backgroundSize: 'cover',
+                                                            backgroundSize: 'contain',
                                                             backgroundPosition: 'center',
                                                             backgroundRepeat: 'no-repeat',
                                                             backgroundColor: thumbSrc ? 'transparent' : 'rgba(0,0,0,0.65)',
