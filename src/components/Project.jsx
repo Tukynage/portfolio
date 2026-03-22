@@ -1,5 +1,4 @@
 import * as utils from "../utils/utils"
-import { Link } from "react-router-dom"
 import Badge from './Badge.jsx'
 import { useState, useEffect, useRef } from 'react'
 import { PhotoIcon, ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline'
@@ -430,12 +429,12 @@ export default function Project({ title, picture, context, outputs, missions, sk
                             📷 Voir la galerie ({mediaItems.length})
                         </button>
                     ) : (
-                        <Link to={link} target="_blank" className="text-white no-underline btn btn-xs btn-primary btn-outline grow-0 mt-2">
+                        <a href={link} target="_blank" rel="noopener noreferrer" className="text-white no-underline btn btn-xs btn-primary btn-outline grow-0 mt-2">
                             Voir le projet
                             <svg className="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                                 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
                             </svg>
-                        </Link>
+                        </a>
                     )}
                 </div>
 
@@ -761,9 +760,10 @@ export default function Project({ title, picture, context, outputs, missions, sk
                                     {/* Lien projet si disponible */}
                                     {link && (
                                         <div className="flex justify-center">
-                                            <Link 
-                                                to={link} 
+                                            <a 
+                                                href={link} 
                                                 target="_blank" 
+                                                rel="noopener noreferrer"
                                                 className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-medium transition-all duration-200 inline-flex items-center gap-2 shadow-lg"
                                                 onClick={closeGallery}
                                             >
@@ -772,7 +772,7 @@ export default function Project({ title, picture, context, outputs, missions, sk
                                                 </svg>
                                                 <span className="hidden sm:inline">Voir le projet complet</span>
                                                 <span className="sm:hidden">Voir le projet</span>
-                                            </Link>
+                                            </a>
                                         </div>
                                     )}
 
