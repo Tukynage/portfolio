@@ -16,7 +16,6 @@ let tagColors = {
 
 
 function getAssetURL(prefix, asset){
-    console.log(new URL(`../assets/${prefix}/${asset}`, import.meta.url).href)
     return new URL(`../assets/${prefix}/${asset}`, import.meta.url).href
 }
 

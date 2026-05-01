@@ -1,19 +1,27 @@
 import Skill from "../components/Skill.jsx"
+import { getAssetURL } from "../utils/utils.js"
 
 export default function Skills({skills}) {
+    function resolveIcon(iconPath) {
+        if (!iconPath) return null
+        if (/^https?:\/\//i.test(iconPath)) return iconPath
+        return getAssetURL("media", iconPath)
+    }
+
     return (
         <>
             <h2 id="skills" className="mb-11">Compétences</h2>
 
-            <div className="flex justify-center">
-                <div className="sm:w-full grid justify-items-center grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 place-items-center">
+            <div className="w-full">
+                <div className="skills-auto-layout">
                     {
                         skills.map(skill =>
                             <Skill key={skill.title}
                                 title={skill.title}
                                 description={skill.description}
                                 tools={skill.tools}
-                                level={skill.level} />
+                                level={skill.level}
+                                icon={resolveIcon(skill.icon)} />
                         )
                     }
                 </div>

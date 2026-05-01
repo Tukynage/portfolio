@@ -4,9 +4,9 @@ import Menu from "./Menu.jsx"
 export default function Footer() {
     return (
         <>
-            <hr class="my-1 w-3/4 mx-auto h-0.5 border-t-0 bg-neutral-100" />
+            <hr className="border-base-200" />
 
-            <footer className="w-10/12 py-10 mx-auto flex flex-col-reverse items-center lg:flex-row justify-between ">
+            <footer className="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-10 lg:px-14 xl:px-16 py-10 flex flex-col-reverse items-center lg:flex-row justify-between">
 
                 <aside className="my-4">
                     <p className="italic">BUT MMI - IUT de Lannion - 2025</p>

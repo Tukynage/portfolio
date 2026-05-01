@@ -1,8 +1,7 @@
 import * as utils from "../utils/utils"
 import Badge from './Badge.jsx'
-import { useState, useEffect, useRef } from 'react'
-import { PhotoIcon, ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline'
-import { ChevronLeftIcon, ChevronRightIcon, XMarkIcon } from '@heroicons/react/24/solid'
+import { useState, useEffect, useRef, useId } from 'react'
+import { createPortal } from 'react-dom'
 
 const YOUTUBE_HOSTS = ['youtube.com', 'www.youtube.com', 'youtu.be', 'www.youtu.be']
 const INSTAGRAM_HOSTS = ['instagram.com', 'www.instagram.com']
@@ -15,52 +14,32 @@ function getYouTubeEmbedUrl(url = '') {
     try {
         const parsed = new URL(url)
         if (!YOUTUBE_HOSTS.includes(parsed.hostname)) return null
-
         if (parsed.hostname.includes('youtu.be')) {
             const id = parsed.pathname.split('/').filter(Boolean)[0]
             return id ? `https://www.youtube.com/embed/${id}` : null
         }
-
-        const videoIdFromWatch = parsed.searchParams.get('v')
-        if (videoIdFromWatch) return `https://www.youtube.com/embed/${videoIdFromWatch}`
-
+        const v = parsed.searchParams.get('v')
+        if (v) return `https://www.youtube.com/embed/${v}`
         const parts = parsed.pathname.split('/').filter(Boolean)
-        const shortsIndex = parts.indexOf('shorts')
-        if (shortsIndex !== -1 && parts[shortsIndex + 1]) {
-            return `https://www.youtube.com/embed/${parts[shortsIndex + 1]}`
-        }
-
-        const embedIndex = parts.indexOf('embed')
-        if (embedIndex !== -1 && parts[embedIndex + 1]) {
-            return `https://www.youtube.com/embed/${parts[embedIndex + 1]}`
-        }
-
+        const si = parts.indexOf('shorts')
+        if (si !== -1 && parts[si + 1]) return `https://www.youtube.com/embed/${parts[si + 1]}`
+        const ei = parts.indexOf('embed')
+        if (ei !== -1 && parts[ei + 1]) return `https://www.youtube.com/embed/${parts[ei + 1]}`
         return null
-    } catch {
-        return null
-    }
+    } catch { return null }
 }
 
 function getInstagramEmbedUrl(url = '') {
     try {
         const parsed = new URL(url)
         if (!INSTAGRAM_HOSTS.includes(parsed.hostname)) return null
-
         const parts = parsed.pathname.split('/').filter(Boolean)
-        const reelIndex = parts.indexOf('reel')
-        if (reelIndex !== -1 && parts[reelIndex + 1]) {
-            return `https://www.instagram.com/reel/${parts[reelIndex + 1]}/embed`
-        }
-
-        const pIndex = parts.indexOf('p')
-        if (pIndex !== -1 && parts[pIndex + 1]) {
-            return `https://www.instagram.com/p/${parts[pIndex + 1]}/embed`
-        }
-
+        const ri = parts.indexOf('reel')
+        if (ri !== -1 && parts[ri + 1]) return `https://www.instagram.com/reel/${parts[ri + 1]}/embed`
+        const pi = parts.indexOf('p')
+        if (pi !== -1 && parts[pi + 1]) return `https://www.instagram.com/p/${parts[pi + 1]}/embed`
         return null
-    } catch {
-        return null
-    }
+    } catch { return null }
 }
 
 function detectMediaType(src = '') {
@@ -76,27 +55,18 @@ function detectMediaType(src = '') {
 function normalizeMediaItem(item, fallbackDescription = '', fallbackAlt = '') {
     const raw = typeof item === 'string' ? { src: item } : (item || {})
     const src = raw.src || raw.url || ''
-    const explicitType = raw.type
-    const type = explicitType || detectMediaType(src)
-
+    const type = raw.type || detectMediaType(src)
     const normalized = {
-        type,
-        src,
+        type, src,
         alt: raw.alt || fallbackAlt || fallbackDescription || 'Média du projet',
         description: raw.description || fallbackDescription || '',
         thumbnail: raw.thumbnail || raw.poster || '',
         poster: raw.poster || raw.thumbnail || '',
         aspectRatio: raw.aspectRatio || ''
     }
-
-    if (type === 'youtube') {
-        normalized.embedSrc = raw.embedSrc || getYouTubeEmbedUrl(src)
-    } else if (type === 'instagram') {
-        normalized.embedSrc = raw.embedSrc || getInstagramEmbedUrl(src)
-    } else if (type === 'embed') {
-        normalized.embedSrc = raw.embedSrc || src
-    }
-
+    if (type === 'youtube') normalized.embedSrc = raw.embedSrc || getYouTubeEmbedUrl(src)
+    else if (type === 'instagram') normalized.embedSrc = raw.embedSrc || getInstagramEmbedUrl(src)
+    else if (type === 'embed') normalized.embedSrc = raw.embedSrc || src
     return normalized
 }
 
@@ -104,12 +74,16 @@ function getThumbnailSource(item) {
     if (!item) return ''
     if (item.type === 'image') return item.src || ''
     if (item.type === 'video') return item.thumbnail || item.poster || ''
-    if (item.type === 'youtube' || item.type === 'instagram' || item.type === 'embed') return item.thumbnail || ''
+    if (['youtube', 'instagram', 'embed'].includes(item.type)) return item.thumbnail || ''
     return ''
 }
 
-export default function Project({ title, picture, context, outputs, missions, skills, link, gallery = [], imageDescriptions = [] }) {
-    const [isGalleryOpen, setIsGalleryOpen] = useState(false)
+export default function Project({ title, picture, context, outputs, missions, skills, link, bilan = '', gallery = [], imageDescriptions = [] }) {
+    const uid = useId()
+    const modalTitleId = `${uid}-title`
+
+    const [isModalOpen, setIsModalOpen] = useState(false)
+    const [isLightboxOpen, setIsLightboxOpen] = useState(false)
     const [currentImageIndex, setCurrentImageIndex] = useState(0)
     const [imageLoaded, setImageLoaded] = useState(false)
     const [isTransitioning, setIsTransitioning] = useState(false)
@@ -117,39 +91,35 @@ export default function Project({ title, picture, context, outputs, missions, sk
     const [position, setPosition] = useState({ x: 0, y: 0 })
     const [isDragging, setIsDragging] = useState(false)
     const [dragStart, setDragStart] = useState({ x: 0, y: 0 })
-    const imageRef = useRef(null)
-    const containerRef = useRef(null)
 
+    const modalRef = useRef(null)
+    const closeBtnRef = useRef(null)
+    const imageRef = useRef(null)
+    const lightboxContainerRef = useRef(null)
+    const previouslyFocused = useRef(null)
+
+    // ── Media normalization ──────────────────────────────────────────────────
     const hasDedicatedCover = Boolean(picture)
     const galleryDescriptionOffset = hasDedicatedCover && imageDescriptions.length === gallery.length + 1 ? 1 : 0
 
     const normalizedGallery = gallery.map((item, index) =>
-        normalizeMediaItem(
-            item,
-            imageDescriptions[index + galleryDescriptionOffset] || '',
-            `${title} - média ${index + 1}`
-        )
+        normalizeMediaItem(item, imageDescriptions[index + galleryDescriptionOffset] || '', `${title} - média ${index + 1}`)
     )
 
     const coverMedia = picture
-        ? normalizeMediaItem(
-            { src: picture },
-            galleryDescriptionOffset === 1 ? imageDescriptions[0] || '' : '',
-            `${title} - miniature`
-        )
+        ? normalizeMediaItem({ src: picture }, galleryDescriptionOffset === 1 ? imageDescriptions[0] || '' : '', `${title} - miniature`)
         : (normalizedGallery[0] || null)
 
     const mediaItems = normalizedGallery
-    const hasGallery = mediaItems.length > 0
-    const hasMultipleImages = mediaItems.length > 1
     const currentMedia = mediaItems[currentImageIndex] || null
     const currentDescription = currentMedia?.description || ''
     const isCurrentImage = currentMedia?.type === 'image'
     const isCurrentInstagram = currentMedia?.type === 'instagram'
-    const isCurrentEmbedded = currentMedia?.type === 'youtube' || currentMedia?.type === 'instagram' || currentMedia?.type === 'embed'
+    const isCurrentEmbedded = ['youtube', 'instagram', 'embed'].includes(currentMedia?.type)
     const currentEmbedAspectRatio = currentMedia?.aspectRatio
         || (currentMedia?.type === 'youtube' ? '16 / 9' : (currentMedia?.type === 'instagram' ? '9 / 16' : '16 / 9'))
 
+    // ── Lightbox helpers ─────────────────────────────────────────────────────
     const resetImageState = () => {
         setScale(1)
         setPosition({ x: 0, y: 0 })
@@ -158,657 +128,616 @@ export default function Project({ title, picture, context, outputs, missions, sk
     }
 
     const nextImage = () => {
-        if (!mediaItems.length) return
-        if (isTransitioning) return
+        if (!mediaItems.length || isTransitioning) return
         setIsTransitioning(true)
         resetImageState()
-        setTimeout(() => {
-            setCurrentImageIndex((prev) => (prev + 1) % mediaItems.length)
-        }, 100)
+        setTimeout(() => setCurrentImageIndex(prev => (prev + 1) % mediaItems.length), 100)
     }
 
     const prevImage = () => {
-        if (!mediaItems.length) return
-        if (isTransitioning) return
+        if (!mediaItems.length || isTransitioning) return
         setIsTransitioning(true)
         resetImageState()
-        setTimeout(() => {
-            setCurrentImageIndex((prev) => (prev - 1 + mediaItems.length) % mediaItems.length)
-        }, 100)
+        setTimeout(() => setCurrentImageIndex(prev => (prev - 1 + mediaItems.length) % mediaItems.length), 100)
     }
 
     const goToImage = (index) => {
         if (isTransitioning || index === currentImageIndex) return
         setIsTransitioning(true)
         resetImageState()
-        setTimeout(() => {
-            setCurrentImageIndex(index)
-        }, 100)
+        setTimeout(() => setCurrentImageIndex(index), 100)
     }
 
-    const openGallery = () => {
-        if (!hasGallery) return
-        setIsGalleryOpen(true)
-        setCurrentImageIndex(0)
-        resetImageState()
-        document.body.style.overflow = 'hidden' // Empêcher le scroll du body
+    // ── Open / close ─────────────────────────────────────────────────────────
+    const openModal = () => {
+        previouslyFocused.current = document.activeElement
+        setIsModalOpen(true)
+        document.body.style.overflow = 'hidden'
     }
 
-    const closeGallery = () => {
-        setIsGalleryOpen(false)
+    const closeModal = () => {
+        setIsModalOpen(false)
+        setIsLightboxOpen(false)
         resetImageState()
         setCurrentImageIndex(0)
-        document.body.style.overflow = 'unset' // Rétablir le scroll
+        document.body.style.overflow = 'unset'
+        previouslyFocused.current?.focus()
     }
 
-    // Gestion clavier
+    const openLightbox = (index = 0) => {
+        setCurrentImageIndex(index)
+        resetImageState()
+        setIsLightboxOpen(true)
+    }
+
+    const closeLightbox = () => {
+        setIsLightboxOpen(false)
+        resetImageState()
+        setCurrentImageIndex(0)
+        // Return focus to close button in the modal
+        closeBtnRef.current?.focus()
+    }
+
+    // ── Focus management: move focus into modal on open ──────────────────────
     useEffect(() => {
-        if (!isGalleryOpen) return
+        if (isModalOpen && !isLightboxOpen) {
+            // Small delay so the DOM is fully rendered
+            const t = setTimeout(() => closeBtnRef.current?.focus(), 50)
+            return () => clearTimeout(t)
+        }
+    }, [isModalOpen, isLightboxOpen])
 
-        const handleKeyDown = (e) => {
-            if (isTransitioning) return
-            
-            switch(e.key) {
-                case 'ArrowLeft':
-                    e.preventDefault()
-                    prevImage()
-                    break
-                case 'ArrowRight':
-                    e.preventDefault()
-                    nextImage()
-                    break
-                case 'Escape':
-                    e.preventDefault()
-                    closeGallery()
-                    break
-                default:
-                    break
+    // ── Focus trap ───────────────────────────────────────────────────────────
+    useEffect(() => {
+        if (!isModalOpen || isLightboxOpen) return
+        const modal = modalRef.current
+        if (!modal) return
+
+        const focusable = () => Array.from(
+            modal.querySelectorAll('a[href], button:not([disabled]), input, select, textarea, [tabindex]:not([tabindex="-1"])')
+        )
+
+        const handleTab = (e) => {
+            if (e.key !== 'Tab') return
+            const els = focusable()
+            if (!els.length) return
+            const first = els[0]
+            const last = els[els.length - 1]
+            if (e.shiftKey) {
+                if (document.activeElement === first) { last.focus(); e.preventDefault() }
+            } else {
+                if (document.activeElement === last) { first.focus(); e.preventDefault() }
             }
         }
 
-        window.addEventListener('keydown', handleKeyDown)
-        return () => window.removeEventListener('keydown', handleKeyDown)
-    }, [isGalleryOpen, isTransitioning])
+        document.addEventListener('keydown', handleTab)
+        return () => document.removeEventListener('keydown', handleTab)
+    }, [isModalOpen, isLightboxOpen])
 
-    // Gestion du zoom à la molette
+    // ── Keyboard: ESC + arrow keys ────────────────────────────────────────────
     useEffect(() => {
-        if (!isGalleryOpen || !containerRef.current) return
+        if (!isModalOpen && !isLightboxOpen) return
+        const handleKey = (e) => {
+            if (e.key === 'Escape') {
+                e.preventDefault()
+                if (isLightboxOpen) closeLightbox()
+                else closeModal()
+                return
+            }
+            if (!isLightboxOpen || isTransitioning) return
+            if (e.key === 'ArrowLeft') { e.preventDefault(); prevImage() }
+            else if (e.key === 'ArrowRight') { e.preventDefault(); nextImage() }
+        }
+        window.addEventListener('keydown', handleKey)
+        return () => window.removeEventListener('keydown', handleKey)
+    }, [isModalOpen, isLightboxOpen, isTransitioning])
 
+    // ── Wheel zoom in lightbox ────────────────────────────────────────────────
+    useEffect(() => {
+        if (!isLightboxOpen || !lightboxContainerRef.current) return
         const handleWheel = (e) => {
             e.preventDefault()
             const delta = e.deltaY > 0 ? 0.9 : 1.1
             const newScale = Math.min(Math.max(scale * delta, 0.5), 5)
             setScale(newScale)
-            
-            // Reset position si on dézoome complètement
-            if (newScale <= 1) {
-                setPosition({ x: 0, y: 0 })
-            }
+            if (newScale <= 1) setPosition({ x: 0, y: 0 })
         }
+        const el = lightboxContainerRef.current
+        el.addEventListener('wheel', handleWheel, { passive: false })
+        return () => el.removeEventListener('wheel', handleWheel)
+    }, [isLightboxOpen, scale])
 
-        const container = containerRef.current
-        container.addEventListener('wheel', handleWheel, { passive: false })
-        
-        return () => container.removeEventListener('wheel', handleWheel)
-    }, [isGalleryOpen, scale])
-
-    // Gestion du drag
+    // ── Drag (mouse) ──────────────────────────────────────────────────────────
     const handleMouseDown = (e) => {
         if (scale <= 1) return
         setIsDragging(true)
-        setDragStart({
-            x: e.clientX - position.x,
-            y: e.clientY - position.y
-        })
+        setDragStart({ x: e.clientX - position.x, y: e.clientY - position.y })
         e.preventDefault()
     }
-
     const handleMouseMove = (e) => {
         if (!isDragging || scale <= 1) return
-        setPosition({
-            x: e.clientX - dragStart.x,
-            y: e.clientY - dragStart.y
-        })
+        setPosition({ x: e.clientX - dragStart.x, y: e.clientY - dragStart.y })
     }
+    const handleMouseUp = () => setIsDragging(false)
 
-    const handleMouseUp = () => {
-        setIsDragging(false)
-    }
-
-    // Gestion du pinch-to-zoom sur mobile
+    // ── Touch (pinch + drag) ──────────────────────────────────────────────────
     const handleTouchStart = (e) => {
         if (e.touches.length === 2) {
-            const touch1 = e.touches[0]
-            const touch2 = e.touches[1]
-            const distance = Math.sqrt(
-                Math.pow(touch2.clientX - touch1.clientX, 2) + 
-                Math.pow(touch2.clientY - touch1.clientY, 2)
-            )
-            setDragStart({ ...dragStart, distance })
+            const [t1, t2] = e.touches
+            setDragStart({ ...dragStart, distance: Math.hypot(t2.clientX - t1.clientX, t2.clientY - t1.clientY) })
         } else if (e.touches.length === 1 && scale > 1) {
             setIsDragging(true)
-            const touch = e.touches[0]
-            setDragStart({
-                x: touch.clientX - position.x,
-                y: touch.clientY - position.y
-            })
+            const t = e.touches[0]
+            setDragStart({ x: t.clientX - position.x, y: t.clientY - position.y })
         }
     }
-
     const handleTouchMove = (e) => {
         e.preventDefault()
-        
         if (e.touches.length === 2) {
-            const touch1 = e.touches[0]
-            const touch2 = e.touches[1]
-            const distance = Math.sqrt(
-                Math.pow(touch2.clientX - touch1.clientX, 2) + 
-                Math.pow(touch2.clientY - touch1.clientY, 2)
-            )
-            
+            const [t1, t2] = e.touches
+            const dist = Math.hypot(t2.clientX - t1.clientX, t2.clientY - t1.clientY)
             if (dragStart.distance) {
-                const scaleChange = distance / dragStart.distance
-                const newScale = Math.min(Math.max(scale * scaleChange, 0.5), 5)
+                const newScale = Math.min(Math.max(scale * (dist / dragStart.distance), 0.5), 5)
                 setScale(newScale)
-                setDragStart({ ...dragStart, distance })
-                
-                if (newScale <= 1) {
-                    setPosition({ x: 0, y: 0 })
-                }
+                setDragStart({ ...dragStart, distance: dist })
+                if (newScale <= 1) setPosition({ x: 0, y: 0 })
             }
         } else if (e.touches.length === 1 && isDragging && scale > 1) {
-            const touch = e.touches[0]
-            setPosition({
-                x: touch.clientX - dragStart.x,
-                y: touch.clientY - dragStart.y
-            })
+            const t = e.touches[0]
+            setPosition({ x: t.clientX - dragStart.x, y: t.clientY - dragStart.y })
         }
     }
+    const handleTouchEnd = () => { setIsDragging(false); setDragStart({ x: 0, y: 0 }) }
 
-    const handleTouchEnd = () => {
-        setIsDragging(false)
-        setDragStart({ x: 0, y: 0 })
-    }
-
-    // Double tap pour zoomer
     const handleDoubleClick = (e) => {
-        e.stopPropagation() // Empêcher la fermeture du modal
-        if (scale > 1) {
-            setScale(1)
-            setPosition({ x: 0, y: 0 })
-        } else {
-            setScale(2)
-        }
+        e.stopPropagation()
+        if (scale > 1) { setScale(1); setPosition({ x: 0, y: 0 }) } else setScale(2)
     }
 
-    // Reset transition state when image loads
     useEffect(() => {
-        if (imageLoaded) {
-            setTimeout(() => {
-                setIsTransitioning(false)
-            }, 200)
-        }
+        if (imageLoaded) setTimeout(() => setIsTransitioning(false), 200)
     }, [imageLoaded])
 
+    // ── Render ────────────────────────────────────────────────────────────────
     return (
-        <div className="card bg-base-100 shadow-lg border border-slate-200 h-full">
-            <figure className="!my-0 relative group cursor-pointer" onClick={hasGallery ? openGallery : undefined}>
-                {coverMedia?.type === 'video' ? (
-                    <video
-                        src={coverMedia.src}
-                        className="w-full h-full object-cover"
-                        muted
-                        playsInline
-                        loop
-                        autoPlay
-                    />
-                ) : coverMedia?.type === 'youtube' || coverMedia?.type === 'instagram' || coverMedia?.type === 'embed' ? (
-                    <iframe
-                        src={coverMedia.embedSrc}
-                        title={coverMedia.alt}
-                        className="w-full aspect-video"
-                        allow="autoplay; encrypted-media; picture-in-picture; web-share"
-                        allowFullScreen
-                    />
-                ) : (
-                    <img src={coverMedia?.src} alt={coverMedia?.alt || title} />
-                )}
-                {hasGallery && (
-                    <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300 flex items-center justify-center">
-                        <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-white text-center">
-                            <div className="bg-black/50 rounded-lg p-3 backdrop-blur-sm">
-                                <span className="text-2xl">📷</span>
-                                <div className="text-sm mt-1 font-medium">{mediaItems.length} médias</div>
-                                <div className="text-xs mt-1 opacity-75">Cliquer pour voir la galerie</div>
-                            </div>
-                        </div>
-                    </div>
-                )}
-            </figure>
-            <div className="card-body">
-                <div className="flex flex-wrap gap-1">
-                    {
-                        skills.map(skill =>
-                            <Badge label={skill}
-                                bgColor={utils.tagColors.hasOwnProperty(skill) ? utils.tagColors[skill][0] : "bg-slate-300"}
-                                fgColor={utils.tagColors.hasOwnProperty(skill) ? utils.tagColors[skill][1] : "text-slate-950"}
+        <>
+            {/* ── CARD (minimal) ─────────────────────────────────────────── */}
+            <div
+                role="button"
+                tabIndex={0}
+                aria-haspopup="dialog"
+                className="card bg-base-100 shadow-md border border-base-200 h-full cursor-pointer group hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                onClick={openModal}
+                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal() } }}
+            >
+                <figure className="aspect-video overflow-hidden rounded-t-2xl bg-base-200">
+                    {coverMedia?.type === 'video' ? (
+                        <video src={coverMedia.src} className="w-full h-full object-cover" muted playsInline loop autoPlay />
+                    ) : (
+                        <img
+                            src={coverMedia?.src}
+                            alt=""
+                            aria-hidden="true"
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        />
+                    )}
+                </figure>
+                <div className="card-body p-3 gap-1.5">
+                    <div className="flex flex-wrap gap-1" aria-hidden="true">
+                        {skills.map(skill => (
+                            <Badge key={skill} label={skill}
+                                bgColor={utils.tagColors[skill]?.[0] ?? "bg-slate-200"}
+                                fgColor={utils.tagColors[skill]?.[1] ?? "text-slate-900"}
                                 filled={false}
                             />
-                        )
-                    }
+                        ))}
+                    </div>
+                    <h4 className="card-title !mt-0 text-base leading-snug">{title}</h4>
                 </div>
-                <h4 className="card-title !mt-1">
-                    {title}
-                </h4>
+            </div>
 
-                <hr class="my-1 h-0.5 border-t-0 bg-neutral-100" />
-
-
-                <h5 className="font-semibold italic text-sm">Contexte</h5>
-                <p className="!my-1">
-                    {context}
-                </p>
-                <h5 className="font-semibold italic text-sm">Missions</h5>
-                <ul className="!my-1">
-                    {missions.map(mission =>
-                        <li>{mission}</li>
+            {/* ── MODAL UNIQUE (projet + mode cinéma) ─────────────────────── */}
+            {isModalOpen && createPortal(
+                <>
+                    {/* Backdrop — masqué en mode cinéma (le modal est plein écran) */}
+                    {!isLightboxOpen && (
+                        <div
+                            className="fixed inset-0 bg-black/60 backdrop-blur-sm"
+                            style={{ zIndex: 9990 }}
+                            onClick={closeModal}
+                            aria-hidden="true"
+                        />
                     )}
-                </ul>
-                <h5 className="font-semibold  italic text-sm">Livrables</h5>
-                <ul className="!my-1">
-                    {outputs.map(output =>
-                        <li>{output}</li>
-                    )}
-                </ul>
-                <div>
-                    {hasGallery ? (
-                        <button 
-                            onClick={openGallery}
-                            className="text-white no-underline btn btn-xs btn-secondary btn-outline grow-0 mt-2"
-                        >
-                            📷 Voir la galerie ({mediaItems.length})
-                        </button>
-                    ) : (
-                        <a href={link} target="_blank" rel="noopener noreferrer" className="text-white no-underline btn btn-xs btn-primary btn-outline grow-0 mt-2">
-                            Voir le projet
-                            <svg className="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
-                            </svg>
-                        </a>
-                    )}
-                </div>
 
-                {/* Modal Galerie Pro avec Zoom */}
-                {isGalleryOpen && (
-                    <div 
-                        className="fixed inset-0 z-50 bg-black bg-opacity-98" 
-                        onClick={(e) => {
-                            // Fermer si on clique sur le background (norme UX)
-                            if (e.target === e.currentTarget) {
-                                closeGallery()
-                            }
-                        }}
-                        style={{ zIndex: 9999 }}
-                        onMouseMove={handleMouseMove}
-                        onMouseUp={handleMouseUp}
-                        onMouseLeave={handleMouseUp}
+                    {/* Panel — s'étend plein écran en mode cinéma */}
+                    <div
+                        ref={modalRef}
+                        role="dialog"
+                        aria-modal="true"
+                        aria-labelledby={modalTitleId}
+                        className={`fixed flex flex-col shadow-2xl overflow-hidden ${
+                            isLightboxOpen
+                                ? 'inset-0 bg-black rounded-none'
+                                : 'inset-0 md:inset-4 lg:inset-y-8 lg:inset-x-16 xl:inset-x-40 2xl:inset-x-60 bg-base-100 md:rounded-2xl'
+                        }`}
+                        style={{ zIndex: 9991 }}
+                        onMouseMove={isLightboxOpen ? handleMouseMove : undefined}
+                        onMouseUp={isLightboxOpen ? handleMouseUp : undefined}
+                        onMouseLeave={isLightboxOpen ? handleMouseUp : undefined}
                     >
-                        {/* UI moderne - Header minimal en haut */}
-                        <div className="absolute top-0 left-0 right-0 z-30 pointer-events-none">
-                            <div className="flex items-start justify-between p-6">
-                                {/* Compteur discret - Coin gauche */}
-                                <div className="bg-black/50 backdrop-blur-sm rounded-lg px-3 py-2 pointer-events-auto">
-                                    <div className="flex items-center gap-2">
-                                        <span className="text-white/80 text-sm">
-                                            {currentImageIndex + 1} / {mediaItems.length}
-                                        </span>
-                                        {isCurrentImage && scale > 1 && (
-                                            <span className="bg-blue-500 text-white text-xs px-2 py-1 rounded">
-                                                {Math.round(scale * 100)}%
-                                            </span>
+
+                        {isLightboxOpen ? (
+                            /* ══ MODE CINÉMA ══════════════════════════════════════ */
+                            <div className="relative h-full flex flex-col">
+
+                                {/* Barre supérieure */}
+                                <div className="absolute top-0 left-0 right-0 z-20 pointer-events-none">
+                                    <div className="flex items-start justify-between gap-3 p-4 md:p-5">
+                                        {/* Retour au projet */}
+                                        <button
+                                            onClick={closeLightbox}
+                                            className="pointer-events-auto flex items-center gap-2 px-3 py-2 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-lg text-white/80 hover:text-white text-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                                            aria-label="Retour au projet"
+                                        >
+                                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                                            </svg>
+                                            <span className="hidden sm:inline">Retour au projet</span>
+                                        </button>
+
+                                        {/* Compteur + zoom badge + fermer */}
+                                        <div className="pointer-events-auto flex items-center gap-2">
+                                            <div className="bg-black/50 backdrop-blur-sm rounded-lg px-3 py-2 flex items-center gap-2">
+                                                <span className="text-white/80 text-sm">{currentImageIndex + 1} / {mediaItems.length}</span>
+                                                {isCurrentImage && scale > 1 && (
+                                                    <span className="bg-blue-500 text-white text-xs px-2 py-0.5 rounded">{Math.round(scale * 100)}%</span>
+                                                )}
+                                            </div>
+                                            <button
+                                                ref={closeBtnRef}
+                                                onClick={closeModal}
+                                                className="bg-black/50 backdrop-blur-sm hover:bg-black/70 transition-all p-2.5 rounded-lg text-white/80 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                                                aria-label="Fermer"
+                                            >
+                                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Contrôles zoom — desktop */}
+                                {isCurrentImage && (
+                                    <div className="absolute right-5 top-1/2 -translate-y-1/2 z-20 pointer-events-auto hidden md:flex flex-col gap-2">
+                                        <div className="bg-black/70 backdrop-blur-sm rounded-xl p-2.5 flex flex-col gap-1.5">
+                                            <button onClick={(e) => { e.stopPropagation(); setScale(s => Math.min(s * 1.3, 5)) }} disabled={scale >= 5}
+                                                className="w-9 h-9 bg-white/15 hover:bg-white/25 disabled:opacity-30 text-white rounded-lg transition-all flex items-center justify-center font-bold text-lg" aria-label="Zoom avant">+</button>
+                                            <button onClick={(e) => { e.stopPropagation(); setScale(1); setPosition({ x: 0, y: 0 }) }}
+                                                className="w-9 h-9 bg-white/15 hover:bg-white/25 text-white text-[10px] rounded-lg transition-all flex items-center justify-center" aria-label="Taille réelle">1:1</button>
+                                            <button onClick={(e) => { e.stopPropagation(); const s = Math.max(scale * 0.8, 0.5); setScale(s); if (s <= 1) setPosition({ x: 0, y: 0 }) }} disabled={scale <= 0.5}
+                                                className="w-9 h-9 bg-white/15 hover:bg-white/25 disabled:opacity-30 text-white rounded-lg transition-all flex items-center justify-center font-bold text-lg" aria-label="Zoom arrière">−</button>
+                                            <div className="text-white/50 text-[10px] text-center">{Math.round(scale * 100)}%</div>
+                                        </div>
+                                    </div>
+                                )}
+
+                                {/* Zone média principale */}
+                                <div
+                                    ref={lightboxContainerRef}
+                                    className="h-full w-full flex items-center justify-center overflow-hidden"
+                                    style={{ cursor: isCurrentImage && scale > 1 ? (isDragging ? 'grabbing' : 'grab') : 'default' }}
+                                    onClick={(e) => { if (e.target === e.currentTarget) closeLightbox() }}
+                                >
+                                    <div
+                                        className={`relative flex items-center justify-center h-full w-full ${isCurrentEmbedded ? (isCurrentInstagram ? 'pb-28 md:pb-36 pt-16 md:pt-20' : 'pb-40 md:pb-52 pt-16 md:pt-20') : 'pt-16 md:pt-20'}`}
+                                        onMouseDown={isCurrentImage ? handleMouseDown : undefined}
+                                        onTouchStart={isCurrentImage ? handleTouchStart : undefined}
+                                        onTouchMove={isCurrentImage ? handleTouchMove : undefined}
+                                        onTouchEnd={isCurrentImage ? handleTouchEnd : undefined}
+                                        onDoubleClick={isCurrentImage ? handleDoubleClick : undefined}
+                                        style={{ touchAction: isCurrentImage ? 'none' : 'auto' }}
+                                        onClick={(e) => { if (e.target === e.currentTarget) closeLightbox() }}
+                                    >
+                                        {!imageLoaded && currentMedia?.type !== 'instagram' && (
+                                            <div className="absolute inset-0 flex items-center justify-center z-10" aria-hidden="true">
+                                                <div className="w-12 h-12 border-4 border-white border-t-transparent rounded-full animate-spin" />
+                                            </div>
+                                        )}
+
+                                        {currentMedia?.type === 'image' && (
+                                            <img
+                                                ref={imageRef}
+                                                src={currentMedia.src}
+                                                alt={currentMedia.alt}
+                                                className={`max-w-full max-h-full object-contain select-none transition-opacity duration-200 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
+                                                style={{ transform: `scale(${scale}) translate(${position.x / scale}px, ${position.y / scale}px)`, transformOrigin: 'center center' }}
+                                                onLoad={() => setImageLoaded(true)}
+                                                draggable={false}
+                                            />
+                                        )}
+                                        {currentMedia?.type === 'video' && (
+                                            <video
+                                                src={currentMedia.src}
+                                                poster={currentMedia.poster || undefined}
+                                                controls
+                                                className={`max-w-full max-h-full object-contain transition-opacity duration-200 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
+                                                onLoadedData={() => setImageLoaded(true)}
+                                            />
+                                        )}
+                                        {isCurrentEmbedded && (
+                                            <iframe
+                                                src={currentMedia.embedSrc}
+                                                title={currentMedia.alt}
+                                                className={`${isCurrentInstagram ? 'w-[min(92vw,500px)] h-[min(78vh,780px)]' : 'w-[min(92vw,1100px)]'} rounded-lg bg-black transition-opacity duration-200 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
+                                                style={isCurrentInstagram
+                                                    ? { maxHeight: 'calc(100vh - 11rem)' }
+                                                    : { aspectRatio: currentEmbedAspectRatio, maxHeight: 'calc(100vh - 300px)' }
+                                                }
+                                                allow="autoplay; encrypted-media; picture-in-picture; web-share"
+                                                allowFullScreen
+                                                onLoad={() => setImageLoaded(true)}
+                                            />
                                         )}
                                     </div>
                                 </div>
-                                
-                                {/* Fermer - Coin droit */}
-                                <button 
-                                    onClick={closeGallery}
-                                    className="bg-black/50 backdrop-blur-sm hover:bg-black/70 transition-all duration-200 p-3 rounded-lg pointer-events-auto text-white/80 hover:text-white"
-                                    aria-label="Fermer"
-                                >
-                                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                                    </svg>
-                                </button>
-                            </div>
-                        </div>
 
-                        {/* Contrôles latéraux - Zoom à droite (masqué sur mobile) */}
-                        {isCurrentImage && (
-                        <div className="absolute right-6 top-1/2 -translate-y-1/2 z-30 pointer-events-auto hidden md:block">
-                            <div className="bg-black/80 backdrop-blur-sm rounded-xl p-3 flex flex-col gap-2">
-                                <button 
-                                    onClick={(e) => {
-                                        e.stopPropagation()
-                                        setScale(Math.min(scale * 1.3, 5))
-                                    }}
-                                    disabled={scale >= 5}
-                                    className="w-10 h-10 bg-white/20 hover:bg-white/30 disabled:bg-white/10 disabled:cursor-not-allowed text-white rounded-lg transition-all duration-200 flex items-center justify-center font-bold text-lg"
-                                    title="Zoom +"
-                                >
-                                    +
-                                </button>
-                                
-                                <button 
-                                    onClick={(e) => {
-                                        e.stopPropagation()
-                                        setScale(1)
-                                        setPosition({ x: 0, y: 0 })
-                                    }}
-                                    className="w-10 h-10 bg-white/20 hover:bg-white/30 text-white text-xs rounded-lg transition-all duration-200 flex items-center justify-center"
-                                    title="Reset 1:1"
-                                >
-                                    1:1
-                                </button>
-                                
-                                <button 
-                                    onClick={(e) => {
-                                        e.stopPropagation()
-                                        setScale(Math.max(scale * 0.8, 0.5))
-                                        if (scale * 0.8 <= 1) setPosition({ x: 0, y: 0 })
-                                    }}
-                                    disabled={scale <= 0.5}
-                                    className="w-10 h-10 bg-white/20 hover:bg-white/30 disabled:bg-white/10 disabled:cursor-not-allowed text-white rounded-lg transition-all duration-200 flex items-center justify-center font-bold text-lg"
-                                    title="Zoom -"
-                                >
-                                    −
-                                </button>
-                                
-                                <div className="text-white text-xs text-center py-1 min-w-10">
-                                    {Math.round(scale * 100)}%
-                                </div>
-                            </div>
-                        </div>
-                        )}
-
-                        {/* Conteneur principal de l'image avec zoom */}
-                        <div 
-                            ref={containerRef}
-                            className="h-full w-full flex items-center justify-center overflow-hidden cursor-move"
-                            style={{ cursor: isCurrentImage && scale > 1 ? (isDragging ? 'grabbing' : 'grab') : 'default' }}
-                            onClick={(e) => {
-                                // Si le clic est en dehors de l'image, fermer la galerie
-                                if (e.target === e.currentTarget) {
-                                    closeGallery()
-                                }
-                            }}
-                        >
-                            {/* Image principale avec zoom et drag */}
-                            <div 
-                                className={`relative flex items-center justify-center h-full w-full ${isCurrentEmbedded ? (isCurrentInstagram ? 'pb-28 md:pb-36 pt-6 md:pt-10' : 'pb-40 md:pb-52 pt-10 md:pt-14') : ''}`}
-                                onMouseDown={isCurrentImage ? handleMouseDown : undefined}
-                                onTouchStart={isCurrentImage ? handleTouchStart : undefined}
-                                onTouchMove={isCurrentImage ? handleTouchMove : undefined}
-                                onTouchEnd={isCurrentImage ? handleTouchEnd : undefined}
-                                onDoubleClick={isCurrentImage ? handleDoubleClick : undefined}
-                                style={{ touchAction: isCurrentImage ? 'none' : 'auto' }}
-                                onClick={(e) => {
-                                    // Si le clic est en dehors de l'image elle-même, fermer la galerie
-                                    if (e.target === e.currentTarget) {
-                                        closeGallery()
-                                    }
-                                }}
-                            >
-                                {!imageLoaded && currentMedia?.type !== 'instagram' && (
-                                    <div className="absolute inset-0 flex items-center justify-center z-10">
-                                        <div className="w-12 h-12 border-3 border-white border-t-transparent rounded-full animate-spin"></div>
-                                    </div>
+                                {/* Nav prev/next — desktop */}
+                                {mediaItems.length > 1 && (!isCurrentImage || scale <= 1.2) && (
+                                    <>
+                                        <button
+                                            onClick={(e) => { e.stopPropagation(); prevImage() }}
+                                            disabled={isTransitioning}
+                                            className="absolute left-4 md:left-6 top-1/2 z-20 -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white p-3 rounded-xl transition-all backdrop-blur-sm disabled:opacity-30 hidden md:flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                                            aria-label="Média précédent"
+                                        >
+                                            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
+                                        </button>
+                                        <button
+                                            onClick={(e) => { e.stopPropagation(); nextImage() }}
+                                            disabled={isTransitioning}
+                                            className="absolute right-4 md:right-20 top-1/2 z-20 -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white p-3 rounded-xl transition-all backdrop-blur-sm disabled:opacity-30 hidden md:flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                                            aria-label="Média suivant"
+                                        >
+                                            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+                                        </button>
+                                    </>
                                 )}
 
-                                {currentMedia?.type === 'image' && (
-                                    <img 
-                                        ref={imageRef}
-                                        src={currentMedia.src}
-                                        alt={currentMedia.alt || `${title} - Média ${currentImageIndex + 1}`}
-                                        className={`max-w-full max-h-full object-contain select-none transition-all duration-200 ease-out ${
-                                            imageLoaded ? 'opacity-100' : 'opacity-0'
-                                        }`}
-                                        style={{
-                                            transform: `scale(${scale}) translate(${position.x / scale}px, ${position.y / scale}px)`,
-                                            transformOrigin: 'center center'
-                                        }}
-                                        onLoad={() => setImageLoaded(true)}
-                                        onError={(e) => {
-                                            console.error('Error loading image:', currentMedia.src)
-                                            e.target.style.display = 'none'
-                                        }}
-                                        draggable={false}
-                                    />
-                                )}
-
-                                {currentMedia?.type === 'video' && (
-                                    <video
-                                        src={currentMedia.src}
-                                        poster={currentMedia.poster || undefined}
-                                        controls
-                                        className={`max-w-full max-h-full object-contain transition-all duration-200 ease-out ${
-                                            imageLoaded ? 'opacity-100' : 'opacity-0'
-                                        }`}
-                                        onLoadedData={() => setImageLoaded(true)}
-                                    />
-                                )}
-
-                                {(currentMedia?.type === 'youtube' || currentMedia?.type === 'instagram' || currentMedia?.type === 'embed') && (
-                                    <iframe
-                                        src={currentMedia.embedSrc}
-                                        title={currentMedia.alt || `${title} - Média ${currentImageIndex + 1}`}
-                                        className={`${isCurrentInstagram ? 'w-[min(92vw,500px)] h-[min(78vh,780px)]' : 'w-[min(92vw,1100px)]'} rounded-lg bg-black transition-all duration-200 ease-out ${
-                                            imageLoaded ? 'opacity-100' : 'opacity-0'
-                                        }`}
-                                        style={isCurrentInstagram
-                                            ? { maxHeight: 'calc(100vh - 11rem)' }
-                                            : {
-                                                aspectRatio: currentEmbedAspectRatio,
-                                                maxHeight: 'calc(100vh - 320px)'
-                                            }
-                                        }
-                                        scrolling={isCurrentInstagram ? 'yes' : 'no'}
-                                        allow="autoplay; encrypted-media; picture-in-picture; web-share"
-                                        allowFullScreen
-                                        onLoad={() => setImageLoaded(true)}
-                                    />
-                                )}
-                            </div>
-                        </div>
-
-                        {/* Boutons navigation latéraux - Repositionnés */}
-                        {mediaItems.length > 1 && (!isCurrentImage || scale <= 1.2) && (
-                            <>
-                                <button 
-                                    onClick={(e) => {
-                                        e.stopPropagation()
-                                        prevImage()
-                                    }}
-                                    disabled={isTransitioning}
-                                    className="fixed left-6 top-1/2 z-30 -translate-y-1/2 bg-black/80 hover:bg-black/90 text-white p-3 rounded-xl transition-all duration-200 backdrop-blur-sm disabled:opacity-30 disabled:cursor-not-allowed hidden md:flex items-center justify-center"
-                                    aria-label="Image précédente"
-                                >
-                                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                                    </svg>
-                                </button>
-                                <button 
-                                    onClick={(e) => {
-                                        e.stopPropagation()
-                                        nextImage()
-                                    }}
-                                    disabled={isTransitioning}
-                                    className="fixed right-24 top-1/2 z-30 -translate-y-1/2 bg-black/80 hover:bg-black/90 text-white p-3 rounded-xl transition-all duration-200 backdrop-blur-sm disabled:opacity-30 disabled:cursor-not-allowed hidden md:flex items-center justify-center"
-                                    aria-label="Image suivante"
-                                >
-                                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                                    </svg>
-                                </button>
-                            </>
-                        )}
-
-
-
-                        {/* Footer - Navigation et contrôles */}
-                        <div className="absolute bottom-0 left-0 right-0 z-30 pointer-events-none">
-                            <div className="bg-gradient-to-t from-black/90 via-black/50 to-transparent p-4 md:p-6">
-                                
-                                {/* Miniatures en bas - Petites et discrètes */}
-                                {mediaItems.length > 1 && (!isCurrentImage || scale <= 1.5) && (
-                                    <div className="flex justify-center mb-4 pointer-events-auto">
-                                        <div className="bg-black/40 backdrop-blur-sm rounded-lg px-3 py-2">
-                                            {/* Container fixe pour éviter les coupures */}
-                                            <div className="flex gap-2 items-center justify-center" style={{ minHeight: '54px' }}>
-                                                {mediaItems.map((item, index) => (
-                                                    (() => {
-                                                        const thumbSrc = getThumbnailSource(item)
-                                                        const fallbackLabel = item.type === 'video'
-                                                            ? 'Vidéo'
-                                                            : (item.type === 'youtube' ? 'YouTube' : (item.type === 'instagram' ? 'Reel' : 'Média'))
-
-                                                        return (
-                                                    <button
-                                                        key={`thumb-${index}`}
-                                                        onClick={(e) => {
-                                                            e.stopPropagation()
-                                                            if (!isTransitioning) goToImage(index)
-                                                        }}
-                                                        disabled={isTransitioning}
-                                                        className={`flex-shrink-0 rounded overflow-hidden transition-all duration-200 ${
-                                                            currentImageIndex === index 
-                                                                ? 'opacity-100 shadow-[0_0_0_2px_rgba(255,255,255,0.75)]' 
-                                                                : 'opacity-50 hover:opacity-80 shadow-[0_0_0_1px_rgba(255,255,255,0.18)]'
-                                                        } ${isTransitioning ? 'cursor-wait' : 'cursor-pointer'} p-0 m-0 leading-none appearance-none`}
-                                                        style={{ 
-                                                            width: '50px', 
-                                                            height: '50px',
-                                                            transform: currentImageIndex === index ? 'scale(1.05)' : 'scale(1)',
-                                                            backgroundImage: thumbSrc ? `url(${thumbSrc})` : 'none',
-                                                            backgroundSize: 'contain',
-                                                            backgroundPosition: 'center',
-                                                            backgroundRepeat: 'no-repeat',
-                                                            backgroundColor: thumbSrc ? 'transparent' : 'rgba(0,0,0,0.65)',
-                                                            backgroundClip: 'border-box'
-                                                        }}
-                                                    >
-                                                        {!thumbSrc && (
-                                                            <span className="w-full h-full flex items-center justify-center text-white text-[10px]">
-                                                                {fallbackLabel}
-                                                            </span>
-                                                        )}
-                                                        <span className="sr-only">Miniature {index + 1} - {item.alt || fallbackLabel}</span>
-                                                    </button>
-                                                        )
-                                                    })()
-                                                ))}
-                                            </div>
-                                            
-                                            {/* Description stable avec transition smooth */}
-                                            <div className="mt-2 text-center transition-all duration-300 ease-in-out" style={{ minHeight: currentDescription ? '20px' : '0px' }}>
-                                                {currentDescription && (
-                                                    <div className="text-white/40 text-xs max-w-sm mx-auto leading-relaxed transition-opacity duration-300 ease-in-out">
-                                                        {currentDescription}
+                                {/* Barre du bas */}
+                                <div className="absolute bottom-0 left-0 right-0 z-20 pointer-events-none">
+                                    <div className="bg-gradient-to-t from-black/90 via-black/50 to-transparent p-4 md:p-5">
+                                        {/* Miniatures */}
+                                        {mediaItems.length > 1 && (!isCurrentImage || scale <= 1.5) && (
+                                            <div className="flex justify-center mb-4 pointer-events-auto">
+                                                <div className="bg-black/40 backdrop-blur-sm rounded-lg px-3 py-2" role="group" aria-label="Miniatures de navigation">
+                                                    <div className="flex gap-2 items-center justify-center" style={{ minHeight: '54px' }}>
+                                                        {mediaItems.map((item, index) => {
+                                                            const thumbSrc = getThumbnailSource(item)
+                                                            const lbl = item.type === 'video' ? '▶' : item.type === 'youtube' ? 'YT' : item.type === 'instagram' ? 'IG' : ''
+                                                            return (
+                                                                <button
+                                                                    key={index}
+                                                                    onClick={(e) => { e.stopPropagation(); if (!isTransitioning) goToImage(index) }}
+                                                                    disabled={isTransitioning}
+                                                                    aria-label={`Aller au média ${index + 1}`}
+                                                                    aria-pressed={currentImageIndex === index}
+                                                                    className={`flex-shrink-0 rounded overflow-hidden transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white ${currentImageIndex === index ? 'opacity-100 shadow-[0_0_0_2px_rgba(255,255,255,0.75)]' : 'opacity-50 hover:opacity-80'}`}
+                                                                    style={{
+                                                                        width: '50px', height: '50px',
+                                                                        transform: currentImageIndex === index ? 'scale(1.05)' : 'scale(1)',
+                                                                        backgroundImage: thumbSrc ? `url(${thumbSrc})` : 'none',
+                                                                        backgroundSize: 'contain',
+                                                                        backgroundPosition: 'center',
+                                                                        backgroundRepeat: 'no-repeat',
+                                                                        backgroundColor: thumbSrc ? 'transparent' : 'rgba(0,0,0,0.65)',
+                                                                    }}
+                                                                >
+                                                                    {!thumbSrc && <span className="w-full h-full flex items-center justify-center text-white text-xs" aria-hidden="true">{lbl}</span>}
+                                                                </button>
+                                                            )
+                                                        })}
                                                     </div>
-                                                )}
+                                                    {currentDescription && (
+                                                        <p className="mt-2 text-center text-white/40 text-xs" aria-live="polite">{currentDescription}</p>
+                                                    )}
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                )}
-                                {/* Actions simplifiées */}
-                                <div className="flex flex-col gap-4 pointer-events-auto">
-                                    
-                                    {/* Navigation mobile seulement */}
-                                    {mediaItems.length > 1 && (!isCurrentImage || scale <= 1.2) && (
-                                        <div className="flex items-center justify-center gap-3 md:hidden">
-                                            <div className="bg-black/90 backdrop-blur-sm rounded-xl p-3 flex gap-3">
-                                                <button 
-                                                    onClick={(e) => {
-                                                        e.stopPropagation()
-                                                        prevImage()
-                                                    }}
-                                                    disabled={isTransitioning}
-                                                    className="bg-white/20 hover:bg-white/30 disabled:opacity-30 text-white px-4 py-2 rounded-lg transition-all duration-200 text-sm flex items-center gap-1"
-                                                >
-                                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                                                    </svg>
-                                                    Précédent
-                                                </button>
-                                                <button 
-                                                    onClick={(e) => {
-                                                        e.stopPropagation()
-                                                        nextImage()
-                                                    }}
-                                                    disabled={isTransitioning}
-                                                    className="bg-white/20 hover:bg-white/30 disabled:opacity-30 text-white px-4 py-2 rounded-lg transition-all duration-200 text-sm flex items-center gap-1"
-                                                >
-                                                    Suivant
-                                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                                                    </svg>
-                                                </button>
+                                        )}
+                                        {/* Nav mobile */}
+                                        {mediaItems.length > 1 && (!isCurrentImage || scale <= 1.2) && (
+                                            <div className="flex justify-center mb-3 pointer-events-auto md:hidden">
+                                                <div className="bg-black/90 backdrop-blur-sm rounded-xl p-3 flex gap-3">
+                                                    <button onClick={(e) => { e.stopPropagation(); prevImage() }} disabled={isTransitioning}
+                                                        className="bg-white/20 hover:bg-white/30 disabled:opacity-30 text-white px-4 py-2 rounded-lg text-sm flex items-center gap-1"
+                                                        aria-label="Média précédent">
+                                                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
+                                                        Précédent
+                                                    </button>
+                                                    <button onClick={(e) => { e.stopPropagation(); nextImage() }} disabled={isTransitioning}
+                                                        className="bg-white/20 hover:bg-white/30 disabled:opacity-30 text-white px-4 py-2 rounded-lg text-sm flex items-center gap-1"
+                                                        aria-label="Média suivant">
+                                                        Suivant
+                                                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+                                                    </button>
+                                                </div>
                                             </div>
-                                        </div>
-                                    )}
-
-                                    {/* Lien projet si disponible */}
-                                    {link && (
-                                        <div className="flex justify-center">
-                                            <a 
-                                                href={link} 
-                                                target="_blank" 
-                                                rel="noopener noreferrer"
-                                                className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-medium transition-all duration-200 inline-flex items-center gap-2 shadow-lg"
-                                                onClick={closeGallery}
-                                            >
-                                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                                                </svg>
-                                                <span className="hidden sm:inline">Voir le projet complet</span>
-                                                <span className="sm:hidden">Voir le projet</span>
-                                            </a>
-                                        </div>
-                                    )}
-
-                                    {/* Aide discrète */}
-                                    <div className="hidden lg:block text-center pointer-events-none">
-                                        <p className="text-white/30 text-xs">
-                                            Double-clic: Zoom • ← → Navigation • Molette: Zoom • Glisser: Déplacer • ESC: Fermer
+                                        )}
+                                        <p className="hidden lg:block text-center text-white/25 text-xs pointer-events-none">
+                                            Double-clic : Zoom · ← → : Navigation · Molette : Zoom · Glisser : Déplacer · ESC : Fermer
                                         </p>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
 
-                        {/* Zones de clic pour navigation mobile - cachées en mode zoom */}
-                        {mediaItems.length > 1 && (!isCurrentImage || scale <= 1.2) && (
+                                {/* Zones tap mobile */}
+                                {mediaItems.length > 1 && (!isCurrentImage || scale <= 1.2) && (
+                                    <>
+                                        <div className="absolute left-0 top-20 bottom-20 w-1/4 md:hidden z-10" onClick={(e) => { e.stopPropagation(); prevImage() }} aria-hidden="true" />
+                                        <div className="absolute right-0 top-20 bottom-20 w-1/4 md:hidden z-10" onClick={(e) => { e.stopPropagation(); nextImage() }} aria-hidden="true" />
+                                    </>
+                                )}
+                            </div>
+
+                        ) : (
+                            /* ══ VUE PROJET ═══════════════════════════════════════ */
                             <>
-                                <div 
-                                    className="absolute left-0 top-20 bottom-20 w-1/4 md:hidden z-20"
-                                    onClick={(e) => {
-                                        e.stopPropagation()
-                                        prevImage()
-                                    }}
-                                />
-                                <div 
-                                    className="absolute right-0 top-20 bottom-20 w-1/4 md:hidden z-20"
-                                    onClick={(e) => {
-                                        e.stopPropagation()
-                                        nextImage()
-                                    }}
-                                />
+                                {/* Header sticky */}
+                                <div className="flex items-center justify-between gap-4 px-4 md:px-6 py-3 md:py-4 border-b border-base-200 shrink-0 bg-base-100">
+                                    <h2 id={modalTitleId} className="font-bold text-lg md:text-xl !m-0 leading-snug">
+                                        {title}
+                                    </h2>
+                                    <button
+                                        ref={closeBtnRef}
+                                        onClick={closeModal}
+                                        className="btn btn-ghost btn-sm btn-circle shrink-0"
+                                        aria-label="Fermer le projet"
+                                    >
+                                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                        </svg>
+                                    </button>
+                                </div>
+
+                                {/* Corps scrollable */}
+                                <div className="flex-1 overflow-y-auto">
+                                    <div className="flex flex-col lg:flex-row lg:items-start">
+
+                                        {/* Sidebar gauche */}
+                                        <div className="lg:w-72 xl:w-80 lg:shrink-0 lg:sticky lg:top-0 flex flex-col lg:border-r border-base-200 lg:max-h-[calc(100vh-64px)] lg:overflow-y-auto">
+                                            {coverMedia?.src && (
+                                                <div className="w-full bg-base-200 overflow-hidden shrink-0" style={{ aspectRatio: '4/3' }}>
+                                                    {coverMedia.type === 'video' ? (
+                                                        <video src={coverMedia.src} className="w-full h-full object-cover" muted playsInline loop autoPlay />
+                                                    ) : (
+                                                        <img src={coverMedia.src} alt={`Illustration — ${title}`} className="w-full h-full object-cover" />
+                                                    )}
+                                                </div>
+                                            )}
+                                            <div className="p-5 flex flex-col gap-5 border-t lg:border-t-0 border-base-200 flex-1">
+                                                <div>
+                                                    <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-base-content/40 mb-3">
+                                                        Compétences mobilisées
+                                                    </p>
+                                                    <div className="flex flex-wrap gap-1.5">
+                                                        {skills.map(skill => (
+                                                            <Badge key={skill} label={skill}
+                                                                bgColor={utils.tagColors[skill]?.[0] ?? "bg-slate-200"}
+                                                                fgColor={utils.tagColors[skill]?.[1] ?? "text-slate-900"}
+                                                                filled={true}
+                                                            />
+                                                        ))}
+                                                    </div>
+                                                </div>
+                                                {link && (
+                                                    <a
+                                                        href={link}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="btn btn-primary btn-sm w-fit no-underline"
+                                                    >
+                                                        Voir le projet
+                                                        <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                                        </svg>
+                                                    </a>
+                                                )}
+                                            </div>
+                                        </div>
+
+                                        {/* Contenu principal */}
+                                        <div className="flex-1 flex flex-col divide-y divide-base-200 border-t lg:border-t-0">
+                                            <section className="px-6 md:px-8 xl:px-10 py-7 md:py-9">
+                                                <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-base-content/40 mb-4">
+                                                    Contexte &amp; objectifs
+                                                </p>
+                                                <p className="text-base md:text-[1.0625rem] leading-[1.8] text-base-content !m-0">
+                                                    {context}
+                                                </p>
+                                            </section>
+
+                                            <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-base-200">
+                                                <section className="px-6 md:px-8 xl:px-10 py-7">
+                                                    <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-base-content/40 mb-4">
+                                                        Missions
+                                                    </p>
+                                                    <ul className="space-y-2.5 !m-0 !p-0 list-none">
+                                                        {(missions || []).map((m, i) => (
+                                                            <li key={i} className="flex gap-2.5 text-sm leading-relaxed text-base-content">
+                                                                <span className="mt-[0.35em] w-1.5 h-1.5 rounded-full bg-base-content/30 shrink-0" aria-hidden="true" />
+                                                                {m}
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+                                                </section>
+                                                <section className="px-6 md:px-8 xl:px-10 py-7">
+                                                    <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-base-content/40 mb-4">
+                                                        Livrables
+                                                    </p>
+                                                    <ul className="space-y-2.5 !m-0 !p-0 list-none">
+                                                        {(outputs || []).map((o, i) => (
+                                                            <li key={i} className="flex gap-2.5 text-sm leading-relaxed text-base-content">
+                                                                <span className="mt-[0.35em] w-1.5 h-1.5 rounded-full bg-primary/60 shrink-0" aria-hidden="true" />
+                                                                {o}
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+                                                </section>
+                                            </div>
+
+                                            {bilan && (
+                                                <section className="px-6 md:px-8 xl:px-10 py-7">
+                                                    <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-base-content/40 mb-4">
+                                                        Bilan personnel
+                                                    </p>
+                                                    <blockquote className="border-l-2 border-primary pl-4 !m-0 text-base md:text-[1.0625rem] leading-[1.8] text-base-content/80 italic">
+                                                        {bilan}
+                                                    </blockquote>
+                                                </section>
+                                            )}
+
+                                            {mediaItems.length > 0 && (
+                                                <section className="px-6 md:px-8 xl:px-10 py-7">
+                                                    <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-base-content/40 mb-4">
+                                                        Galerie — {mediaItems.length} média{mediaItems.length > 1 ? 's' : ''}
+                                                    </p>
+                                                    <div className="grid grid-cols-3 sm:grid-cols-4 xl:grid-cols-5 gap-2">
+                                                        {mediaItems.map((item, index) => {
+                                                            const thumbSrc = getThumbnailSource(item)
+                                                            const typeLabel = item.type === 'youtube' ? 'YouTube' : item.type === 'instagram' ? 'Instagram' : item.type === 'video' ? 'Vidéo' : 'Média'
+                                                            return (
+                                                                <button
+                                                                    key={index}
+                                                                    onClick={() => openLightbox(index)}
+                                                                    className="aspect-square overflow-hidden rounded-xl bg-base-200 hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary transition-opacity relative group/thumb"
+                                                                    aria-label={item.alt || `${typeLabel} ${index + 1} — ${title}`}
+                                                                >
+                                                                    {thumbSrc ? (
+                                                                        <img src={thumbSrc} alt="" aria-hidden="true" className="w-full h-full object-cover" />
+                                                                    ) : (
+                                                                        <span className="w-full h-full flex items-center justify-center text-base-content/40 text-xs font-medium" aria-hidden="true">
+                                                                            {typeLabel}
+                                                                        </span>
+                                                                    )}
+                                                                    <div className="absolute inset-0 bg-black/0 group-hover/thumb:bg-black/25 transition-colors flex items-center justify-center" aria-hidden="true">
+                                                                        <svg className="w-5 h-5 text-white opacity-0 group-hover/thumb:opacity-100 transition-opacity drop-shadow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                                                        </svg>
+                                                                    </div>
+                                                                </button>
+                                                            )
+                                                        })}
+                                                    </div>
+                                                </section>
+                                            )}
+                                        </div>
+                                    </div>
+                                </div>
                             </>
                         )}
                     </div>
-                )}
-
-            </div>
-        </div>
+                </>,
+                document.body
+            )}
+        </>
     )
 }

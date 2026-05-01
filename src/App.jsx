@@ -24,7 +24,7 @@ export default function App() {
   return (
     <>
       <Nav cv={settings.cv}/>
-      <main className="prose prose-stone !max-w-none w-10/12 mx-auto">
+      <main className="prose prose-stone !max-w-none w-full max-w-[1200px] mx-auto px-4 sm:px-6 md:px-10 lg:px-14 xl:px-16">
       <Hero firstname={settings.firstname} lastname={settings.lastname} intro={settings.intro} intro_competences={settings.intro_competences}/>
         <Skills skills={settings.skills}/>
         <Projects projects={settings.projects} />
