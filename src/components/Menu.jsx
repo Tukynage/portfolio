@@ -4,7 +4,6 @@ import { getAssetURL } from "../utils/utils.js"
 import { ArrowDownTrayIcon } from '@heroicons/react/24/solid'
 
 function CVMenu(includeCV, cvPath) {
-    console.log(cvPath)
     if (includeCV) {
         let cv = getAssetURL("download",cvPath )
         return (
@@ -17,7 +16,6 @@ function CVMenu(includeCV, cvPath) {
 }
 
 export default function Menu({ ulClasses, liClasses, includeCV, cvPath, underline }) {
-    console.log("Menu / " + cvPath)
     return (
         <ul tabIndex={0} className={ulClasses}>
                         <li className={liClasses}>

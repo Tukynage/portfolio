@@ -53,7 +53,7 @@ export default function Nav({ cv }) {
             <div className="navbar bg-base-100 w-full shadow-md hidden lg:flex">
                 <div className="navbar-end w-full">
                     <Menu
-                        ulClasses="menu menu-horizontal px-1"
+                        ulClasses="menu menu-horizontal px-1 gap-1"
                         liClasses=""
                         includeCV={true}
                         cvPath={cv}

@@ -8,7 +8,7 @@ export default function Hero({firstname, lastname, intro, intro_competences}) {
       <div className="hero-content text-left w-full">
         <div className="w-full flex flex-col justify-start items-start">
           <div className="w-full prose prose-sm md:prose-xl lg:prose-2xl">
-            <h1 className="font-bold !my-0">{"Bonjour et bienvenue" + "\u00A0👋"} <br/>
+            <h1 className="font-bold !my-0">{"Salut" + "\u00A0👋"} <br/>
             {"je suis " + firstname + " " + lastname}</h1>
 
             <p className="!my-2 text-left">{intro}</p>

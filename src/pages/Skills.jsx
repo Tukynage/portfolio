@@ -12,8 +12,8 @@ export default function Skills({skills}) {
         <>
             <h2 id="skills" className="mb-11">Compétences</h2>
 
-            <div className="w-full">
-                <div className="skills-auto-layout">
+            <div className="max-w-7xl w-full mx-auto">
+                <div className="flex flex-wrap justify-center gap-8">
                     {
                         skills.map(skill =>
                             <Skill key={skill.title}

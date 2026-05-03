@@ -12,7 +12,7 @@ export default function Skill({ title, description, tools, level, icon }) {
 
     return (
         <div className='card bg-base-100 text-base-content shadow-md border border-base-300 h-full w-full max-w-[380px] mx-auto'>
-            <div className="card-body p-4 gap-3">
+            <div className="card-body p-4 gap-3 flex flex-col">
                 <div className="flex items-start justify-between gap-3">
                     <h3 className='card-title text-base leading-tight !m-0'>{title}</h3>
                     {icon && (
@@ -39,7 +39,7 @@ export default function Skill({ title, description, tools, level, icon }) {
                     ))}
                 </div>
 
-                <div className="mt-1">
+                <div className="mt-auto pt-1">
                     <div className="flex items-center justify-between text-xs text-base-content/70">
                         <span>Niveau d'autonomie</span>
                         <span className="font-semibold text-base-content">{levelLabel}</span>

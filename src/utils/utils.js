@@ -10,7 +10,8 @@ let tagColors = {
     "UI/UX" : ["bg-lime-200", "text-lime-800"],
     "Dev Web" : ["bg-green-200", "text-green-800"],
     "Entrepreneuriat" : ["bg-sky-200", "text-sky-800"],
-    "Gestion de projet" : ["bg-indigo-200", "text-indigo-800"]
+    "Gestion de projet" : ["bg-indigo-200", "text-indigo-800"],
+    "Photographie" : ["bg-violet-200", "text-violet-800"],
 }
 
 

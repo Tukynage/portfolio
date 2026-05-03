@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datalogy — Portfolio de Ruben Urban</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        * { font-family: 'Inter', ui-sans-serif, system-ui, sans-serif; }
+
+        .card-poster:hover { box-shadow: 0 0 0 2px #dc2626, 0 16px 48px -8px rgba(220,38,38,0.2); }
+        .card-site:hover   { box-shadow: 0 0 0 2px #ca8a04, 0 16px 48px -8px rgba(202,138,4,0.2); }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center bg-[#f5f0e8] px-6 py-16">
+
+    <!-- Header -->
+    <header class="text-center mb-14">
+        <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-green-800 mb-4 leading-none">
+            Datalogy
+        </h1>
+    </header>
+
+    <!-- Cards -->
+    <main class="w-full max-w-2xl grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+
+        <!-- Poster -->
+        <a
+            href="./datalogy/style/img/datalogy_URBAN.webp"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="card-poster group relative flex flex-col justify-between bg-white border-2 border-green-800/10 rounded-2xl p-7 sm:p-8 transition-all duration-300 ease-out hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-600/60"
+            aria-label="Découvrir le poster Datalogy"
+        >
+            <div class="mb-8">
+                <div class="w-10 h-10 rounded-xl bg-red-600/10 border border-red-600/20 flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110">
+                    <svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                    </svg>
+                </div>
+                <h2 class="text-lg font-semibold text-stone-800 mb-2 leading-snug">Découvrir le Poster</h2>
+                <p class="text-sm text-stone-400 leading-relaxed font-light">Visualisation synthétique du projet sous forme d'affiche.</p>
+            </div>
+            <div class="flex items-center gap-2 text-red-600/70 text-sm font-medium group-hover:text-red-600 transition-colors duration-200">
+                <span>Voir le poster</span>
+                <svg class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                </svg>
+            </div>
+        </a>
+
+        <!-- Site web -->
+        <a
+            href="./datalogy/index.html"
+            class="card-site group relative flex flex-col justify-between bg-green-800 border-2 border-green-700 rounded-2xl p-7 sm:p-8 transition-all duration-300 ease-out hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400/60"
+            aria-label="Explorer le site web Datalogy"
+        >
+            <div class="mb-8">
+                <div class="w-10 h-10 rounded-xl bg-yellow-400/15 border border-yellow-400/30 flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110">
+                    <svg class="w-5 h-5 text-yellow-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
+                    </svg>
+                </div>
+                <h2 class="text-lg font-semibold text-white mb-2 leading-snug">Explorer le Site Web</h2>
+                <p class="text-sm text-green-200/60 leading-relaxed font-light">Interface interactive complète du projet Datalogy.</p>
+            </div>
+            <div class="flex items-center gap-2 text-yellow-300/80 text-sm font-medium group-hover:text-yellow-300 transition-colors duration-200">
+                <span>Ouvrir le site</span>
+                <svg class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                </svg>
+            </div>
+        </a>
+
+    </main>
+
+    <!-- Back link -->
+    <footer class="mt-14">
+        <a
+            href="/"
+            class="flex items-center gap-2 text-stone-400 hover:text-stone-600 text-sm transition-colors duration-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-stone-400 rounded"
+        >
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+            </svg>
+            Retour au portfolio
+        </a>
+    </footer>
+
+</body>
+</html>

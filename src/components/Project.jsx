@@ -306,11 +306,11 @@ export default function Project({ title, picture, context, outputs, missions, sk
                 role="button"
                 tabIndex={0}
                 aria-haspopup="dialog"
-                className="card bg-base-100 shadow-md border border-base-200 h-full cursor-pointer group hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                className="card bg-base-100 shadow-md border border-base-200 h-full cursor-pointer group overflow-hidden hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
                 onClick={openModal}
                 onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal() } }}
             >
-                <figure className="aspect-video overflow-hidden rounded-t-2xl bg-base-200">
+                <figure className="aspect-video w-full m-0 p-0 overflow-hidden bg-gray-100 dark:bg-gray-800">
                     {coverMedia?.type === 'video' ? (
                         <video src={coverMedia.src} className="w-full h-full object-cover" muted playsInline loop autoPlay />
                     ) : (
@@ -600,53 +600,54 @@ export default function Project({ title, picture, context, outputs, missions, sk
 
                                 {/* Corps scrollable */}
                                 <div className="flex-1 overflow-y-auto">
-                                    <div className="flex flex-col lg:flex-row lg:items-start">
 
-                                        {/* Sidebar gauche */}
-                                        <div className="lg:w-72 xl:w-80 lg:shrink-0 lg:sticky lg:top-0 flex flex-col lg:border-r border-base-200 lg:max-h-[calc(100vh-64px)] lg:overflow-y-auto">
-                                            {coverMedia?.src && (
-                                                <div className="w-full bg-base-200 overflow-hidden shrink-0" style={{ aspectRatio: '4/3' }}>
-                                                    {coverMedia.type === 'video' ? (
-                                                        <video src={coverMedia.src} className="w-full h-full object-cover" muted playsInline loop autoPlay />
-                                                    ) : (
-                                                        <img src={coverMedia.src} alt={`Illustration — ${title}`} className="w-full h-full object-cover" />
-                                                    )}
-                                                </div>
+                                    {/* Bannière cover pleine largeur */}
+                                    {coverMedia?.src && (
+                                        <div className="w-full overflow-hidden shrink-0">
+                                            {coverMedia.type === 'video' ? (
+                                                <video src={coverMedia.src} className="w-full aspect-video object-cover" muted playsInline loop autoPlay />
+                                            ) : (
+                                                <img src={coverMedia.src} alt={`Illustration — ${title}`} className="w-full aspect-video max-h-[250px] md:max-h-[400px] object-cover object-center" />
                                             )}
-                                            <div className="p-5 flex flex-col gap-5 border-t lg:border-t-0 border-base-200 flex-1">
-                                                <div>
-                                                    <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-base-content/40 mb-3">
-                                                        Compétences mobilisées
-                                                    </p>
-                                                    <div className="flex flex-wrap gap-1.5">
-                                                        {skills.map(skill => (
-                                                            <Badge key={skill} label={skill}
-                                                                bgColor={utils.tagColors[skill]?.[0] ?? "bg-slate-200"}
-                                                                fgColor={utils.tagColors[skill]?.[1] ?? "text-slate-900"}
-                                                                filled={true}
-                                                            />
-                                                        ))}
-                                                    </div>
+                                        </div>
+                                    )}
+
+                                    {/* Grille principale : 1/3 infos + 2/3 contenu */}
+                                    <div className="flex flex-col md:flex-row gap-8 md:gap-12 mt-6 p-6 border-b border-base-200">
+
+                                        {/* Colonne gauche — Compétences + lien */}
+                                        <div className="w-full md:w-[250px] flex-shrink-0 flex flex-col gap-6">
+                                            <div>
+                                                <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-base-content/40 mb-3">
+                                                    Compétences mobilisées
+                                                </p>
+                                                <div className="flex flex-col gap-3 items-start">
+                                                    {skills.map(skill => (
+                                                        <Badge key={skill} label={skill}
+                                                            bgColor={utils.tagColors[skill]?.[0] ?? "bg-slate-200"}
+                                                            filled={false}
+                                                        />
+                                                    ))}
                                                 </div>
-                                                {link && (
-                                                    <a
-                                                        href={link}
-                                                        target="_blank"
-                                                        rel="noopener noreferrer"
-                                                        className="btn btn-primary btn-sm w-fit no-underline"
-                                                    >
-                                                        Voir le projet
-                                                        <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                                                        </svg>
-                                                    </a>
-                                                )}
                                             </div>
+                                            {link && (
+                                                <a
+                                                    href={link}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="btn btn-primary btn-sm w-fit no-underline"
+                                                >
+                                                    Voir le projet
+                                                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                                    </svg>
+                                                </a>
+                                            )}
                                         </div>
 
-                                        {/* Contenu principal */}
-                                        <div className="flex-1 flex flex-col divide-y divide-base-200 border-t lg:border-t-0">
-                                            <section className="px-6 md:px-8 xl:px-10 py-7 md:py-9">
+                                        {/* Colonne droite (2/3) — Contexte + Missions + Livrables */}
+                                        <div className="flex-1">
+                                            <section className="pb-7">
                                                 <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-base-content/40 mb-4">
                                                     Contexte &amp; objectifs
                                                 </p>
@@ -655,8 +656,8 @@ export default function Project({ title, picture, context, outputs, missions, sk
                                                 </p>
                                             </section>
 
-                                            <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-base-200">
-                                                <section className="px-6 md:px-8 xl:px-10 py-7">
+                                            <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-base-200 py-7">
+                                                <section className="pb-7 md:pb-0 md:pr-8">
                                                     <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-base-content/40 mb-4">
                                                         Missions
                                                     </p>
@@ -669,7 +670,7 @@ export default function Project({ title, picture, context, outputs, missions, sk
                                                         ))}
                                                     </ul>
                                                 </section>
-                                                <section className="px-6 md:px-8 xl:px-10 py-7">
+                                                <section className="pt-7 md:pt-0 md:pl-8">
                                                     <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-base-content/40 mb-4">
                                                         Livrables
                                                     </p>
@@ -683,54 +684,55 @@ export default function Project({ title, picture, context, outputs, missions, sk
                                                     </ul>
                                                 </section>
                                             </div>
-
-                                            {bilan && (
-                                                <section className="px-6 md:px-8 xl:px-10 py-7">
-                                                    <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-base-content/40 mb-4">
-                                                        Bilan personnel
-                                                    </p>
-                                                    <blockquote className="border-l-2 border-primary pl-4 !m-0 text-base md:text-[1.0625rem] leading-[1.8] text-base-content/80 italic">
-                                                        {bilan}
-                                                    </blockquote>
-                                                </section>
-                                            )}
-
-                                            {mediaItems.length > 0 && (
-                                                <section className="px-6 md:px-8 xl:px-10 py-7">
-                                                    <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-base-content/40 mb-4">
-                                                        Galerie — {mediaItems.length} média{mediaItems.length > 1 ? 's' : ''}
-                                                    </p>
-                                                    <div className="grid grid-cols-3 sm:grid-cols-4 xl:grid-cols-5 gap-2">
-                                                        {mediaItems.map((item, index) => {
-                                                            const thumbSrc = getThumbnailSource(item)
-                                                            const typeLabel = item.type === 'youtube' ? 'YouTube' : item.type === 'instagram' ? 'Instagram' : item.type === 'video' ? 'Vidéo' : 'Média'
-                                                            return (
-                                                                <button
-                                                                    key={index}
-                                                                    onClick={() => openLightbox(index)}
-                                                                    className="aspect-square overflow-hidden rounded-xl bg-base-200 hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary transition-opacity relative group/thumb"
-                                                                    aria-label={item.alt || `${typeLabel} ${index + 1} — ${title}`}
-                                                                >
-                                                                    {thumbSrc ? (
-                                                                        <img src={thumbSrc} alt="" aria-hidden="true" className="w-full h-full object-cover" />
-                                                                    ) : (
-                                                                        <span className="w-full h-full flex items-center justify-center text-base-content/40 text-xs font-medium" aria-hidden="true">
-                                                                            {typeLabel}
-                                                                        </span>
-                                                                    )}
-                                                                    <div className="absolute inset-0 bg-black/0 group-hover/thumb:bg-black/25 transition-colors flex items-center justify-center" aria-hidden="true">
-                                                                        <svg className="w-5 h-5 text-white opacity-0 group-hover/thumb:opacity-100 transition-opacity drop-shadow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                                                                        </svg>
-                                                                    </div>
-                                                                </button>
-                                                            )
-                                                        })}
-                                                    </div>
-                                                </section>
-                                            )}
                                         </div>
                                     </div>
+
+                                    {/* Bilan + Galerie — pleine largeur sous la grille */}
+                                    {bilan && (
+                                        <section className="px-6 md:px-8 xl:px-10 py-7 border-b border-base-200">
+                                            <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-base-content/40 mb-4">
+                                                Bilan personnel
+                                            </p>
+                                            <blockquote className="border-l-2 border-primary pl-4 !m-0 text-base md:text-[1.0625rem] leading-[1.8] text-base-content/80 italic">
+                                                {bilan}
+                                            </blockquote>
+                                        </section>
+                                    )}
+
+                                    {mediaItems.length > 0 && (
+                                        <section className="px-6 md:px-8 xl:px-10 py-7">
+                                            <p className="text-[10px] font-bold uppercase tracking-[0.15em] text-base-content/40 mb-4">
+                                                Galerie — {mediaItems.length} média{mediaItems.length > 1 ? 's' : ''}
+                                            </p>
+                                            <div className="grid grid-cols-3 sm:grid-cols-4 xl:grid-cols-5 gap-2">
+                                                {mediaItems.map((item, index) => {
+                                                    const thumbSrc = getThumbnailSource(item)
+                                                    const typeLabel = item.type === 'youtube' ? 'YouTube' : item.type === 'instagram' ? 'Instagram' : item.type === 'video' ? 'Vidéo' : 'Média'
+                                                    return (
+                                                        <button
+                                                            key={index}
+                                                            onClick={() => openLightbox(index)}
+                                                            className="aspect-square overflow-hidden rounded-xl bg-base-200 hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary transition-opacity relative group/thumb"
+                                                            aria-label={item.alt || `${typeLabel} ${index + 1} — ${title}`}
+                                                        >
+                                                            {thumbSrc ? (
+                                                                <img src={thumbSrc} alt="" aria-hidden="true" className="w-full h-full object-cover" />
+                                                            ) : (
+                                                                <span className="w-full h-full flex items-center justify-center text-base-content/40 text-xs font-medium" aria-hidden="true">
+                                                                    {typeLabel}
+                                                                </span>
+                                                            )}
+                                                            <div className="absolute inset-0 bg-black/0 group-hover/thumb:bg-black/25 transition-colors flex items-center justify-center" aria-hidden="true">
+                                                                <svg className="w-5 h-5 text-white opacity-0 group-hover/thumb:opacity-100 transition-opacity drop-shadow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                                                </svg>
+                                                            </div>
+                                                        </button>
+                                                    )
+                                                })}
+                                            </div>
+                                        </section>
+                                    )}
                                 </div>
                             </>
                         )}
