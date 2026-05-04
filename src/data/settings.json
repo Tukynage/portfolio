@@ -24,14 +24,14 @@
     ],
     "interests": [
         "L'automobile avec les sports mécaniques, le sim-racing sur mon G27, et une liste de voitures que je n'aurai probablement jamais les moyens d'acheter (la Honda S2000 en tête).",
-        "La photo et la vidéo — argentique sur mon Pentax MX, numérique dans l'alternance sur un GH5, et un jour un S5IIx",
-        "Toujours à l'affût des nouvelles technologies, de près ou de loin. J'aime suivre les innovations dans le domaine de la tech, que ce soit pour les intégrer dans mes projets ou simplement par curiosité.",
+        "La photo et la vidéo — argentique sur mon Pentax MX, numérique dans l'alternance sur un GH5, et un jour un S5IIx.",
+        "J'aime suivre les innovations dans le domaine de la tech, que ce soit pour les intégrer dans mes projets ou simplement par curiosité.",
         "Passionné de musique, audiophile convaincu, grand fan de Nujabes, et une playlist qui va de Boards of Canada à Flying Lotus, je cherche toujours à optimiser mon système Hi-Fi pour profiter au mieux de ma musique."
     ],
     "projects": [
         {
             "title": "Création d'un court-métrage en anglais",
-            "context": "Lors d'un cours d'anglais en première année de BUT MMI, nous devions réaliser une fin alternative d'un film ou une série d'un pays anglophone, nous avons décidé de réaliser une parodie de la série télévisée 'Pawn Stars'. Au sein de l'émission nous y avons créé une fausse publicité pour du parfum, la publicité dans l'émission a remporté le prix du public lors du festival étudiant MMI de l'IUT de Lannion'À l'West Fest' de 2024.",
+            "context": "Lors d'un cours d'anglais en première année de BUT MMI, nous devions réaliser une fin alternative d'un film ou d'une série d'un pays anglophone, nous avons décidé de réaliser une parodie de la série télévisée 'Pawn Stars'. Au sein de l'émission nous y avons créé une fausse publicité pour du parfum, la publicité dans l'émission a remporté le prix du public lors du festival étudiant MMI de l'IUT de Lannion 'À l'West Fest' de 2024.",
             "missions" : ["Écriture d'un script en anglais", "Organisation du tournage", "Tournage de la vidéo", "Montage sur Adobe Premiere Pro"],
             "outputs" :  ["La vidéo finale", "La publicité", "Le script"],
             "skills": [
@@ -68,7 +68,9 @@
                     "thumbnail": "/project_minia/ruth_itw.webp",
                     "alt": "Vidéo de l'interview du président de l'association Les Amis de Ruth"
                 }
-            ]
+            ],
+            "bilan": "Cette interview a été une expérience de tournage enrichissante, le fait de tourner sur un bateau, avec des conditions météo capricieuses et dans un environnement clos restreint, de pouvoir travailler avec un professionnel, dans des conditions réelles, qui a des vraies problématiques est clairement un vrai plus. Cela m'a permis d'appliquer dans un cas concret et réel ce que j'ai pu apprendre suite à mon interview sur la photographie argentique."
+
 
         },
         {
@@ -81,7 +83,8 @@
                 "Écriture multimédia"
             ],
             "link" : "https://www.youtube.com/watch?v=5mk3QZIak64",
-            "picture": "/project_minia/photo_arg_itw.webp"
+            "picture": "/project_minia/photo_arg_itw.webp",
+            "bilan": "Cette interview fut la première que j'ai pu réaliser, elle m'a permis de découvrir en profondeur le monde de la photographie argentique, j'ai pu monter en compétences sur la façon de réaliser un montage dynamique qui mélange plusieurs discours différents mais de réussir à les mêler afin de créer un message conducteur cohérent. De plus, le fait de devoir approfondir un sujet, le préparer, rechercher des personnes à interviewer les contacter, préparer les questions, préparer le tournage et enfin monter la vidéo, m'a permis de découvrir toutes les étapes de la réalisation d'une vidéo professionnelle réelle, et de me confronter à des problématiques réelles, ce qui m'a permis de progresser plus rapidement que si j'avais simplement réalisé une interview dans un cadre scolaire sans enjeu réel. Enfin, le fait que cette vidéo soit disponible sur YouTube et puisse être vue par n'importe qui, m'a permis de me confronter à un des personnes non préparée qu'il fallait brifer, ce qui est toujours enrichissant pour progresser et s'améliorer et gagner en confiance et compétences."
         },
         {
             "title": "Maquettage d'une application",
@@ -92,7 +95,9 @@
                 "UI/UX"
             ],
             "link" : "https://www.figma.com/design/r4RS1kZR4DTNrWnw1Ff8Oe/R3.09?node-id=1-5&t=YuMlwNR3Ii0SQe8I-1",
-            "picture": "/project_minia/app argor.webp"
+            "picture": "/project_minia/app_argor.webp",
+            "bilan": "L'analyse du sujet et de la concurrence a été notre principal défi, le public cible était difficile à cerner et le sujet peu familier. Malgré cela, c'est l'une des ressources les plus enrichissantes du semestre. Travailler en quasi-totale autonomie nous a permis de prendre nos propres directions. J'ai beaucoup progressé sur Figma, sur la conception de parcours utilisateur et sur le design orienté utilisateur."
+
         },
         {
            "title": "Datalogy — représenter des données graphiquement",
