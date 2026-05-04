@@ -66,3 +66,25 @@
   gap: clamp(0.75rem, 1.5vw, 1.25rem);
   width: 100%;
 }
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  /* fractalNoise 4 octaves → variation organique de taille de grain
+     feComponentTransfer linear slope=8 → seuil brutal, grains nets comme des cristaux */
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncR type='linear' slope='8' intercept='-3.5'/%3E%3CfeFuncG type='linear' slope='8' intercept='-3.5'/%3E%3CfeFuncB type='linear' slope='8' intercept='-3.5'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+  opacity: 0.18;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  z-index: 0;
+}
+
+#root {
+  position: relative;
+  z-index: 10;
+}

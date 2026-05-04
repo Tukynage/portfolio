@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 
 import Nav from './components/Nav.jsx'
 import Hero from './components/Hero.jsx'
@@ -14,16 +14,28 @@ import settings from "./data/settings.json"
 
 import { getAssetURL } from "./utils/utils.js"
 
+function getDefaultTheme() {
+  const hour = new Date().getHours()
+  return hour >= 8 && hour < 19 ? 'theme-tirage' : 'theme-negatif'
+}
+
 export default function App() {
+  const [theme, setTheme] = useState(getDefaultTheme)
 
   useEffect(() => {
     document.title = settings.title
   }, [])
 
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme)
+  }, [theme])
+
+  const toggleTheme = () =>
+    setTheme(t => t === 'theme-tirage' ? 'theme-negatif' : 'theme-tirage')
 
   return (
     <>
-      <Nav cv={settings.cv}/>
+      <Nav cv={settings.cv} theme={theme} toggleTheme={toggleTheme} />
       <main className="prose prose-stone !max-w-none w-full max-w-[1200px] mx-auto px-4 sm:px-6 md:px-10 lg:px-14 xl:px-20">
       <Hero firstname={settings.firstname} lastname={settings.lastname} intro={settings.intro} intro_competences={settings.intro_competences}/>
         <Skills skills={settings.skills}/>
