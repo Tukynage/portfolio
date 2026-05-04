@@ -5,7 +5,7 @@
     "portrait" : "avatar.webp",
     "intro": "Mon critère : que ça donne envie d'acheter. BUT MMI en alternance, à la recherche d'une école en master pour 2026.",
     "intro_competences": "Photographie produit · Montage vidéo · Création de contenu",
-    "biography": "Bonjour, je m'appelle Ruben, je suis en 3ème et dernière année de BUT MMI, une formation multimédia axée sur la communication, la création de contenus, la photo, la vidéo et le maquettage web. Je suis en alternance chez maPlatine.com, une boutique e-commerce spécialisée dans les platines vinyle et le matériel hifi moyen/haut de gamme. Je m'occupe des photos produit, des vidéos pour les réseaux sociaux, des fiches produits et de la refonte du site. Je suis exigeant avec moi-même, peut-être un peu trop, mais c'est ce qui fait que je rends quelque chose de qui est abouti et qui a du sens au final.",
+    "biography": "Bonjour, je m'appelle Ruben, je suis en 3ème et dernière année de BUT MMI, une formation multimédia axée sur la communication, la création de contenus, la photo, la vidéo et le maquettage web. Je suis en alternance chez maPlatine.com, une boutique e-commerce spécialisée dans les platines vinyle et le matériel hifi moyen/haut de gamme. Je m'occupe des photos produit, des vidéos pour les réseaux sociaux, des fiches produits et de la refonte du site. Je suis exigeant avec moi-même, peut-être un peu trop, mais c'est ce qui fait que je rends quelque chose qui est abouti et qui a du sens au final.",
 
     "cv" : "URBAN_Ruben-CV.pdf",
     "trainings": [
@@ -25,13 +25,13 @@
     "interests": [
         "L'automobile avec les sports mécaniques, le sim-racing sur mon G27, et une liste de voitures que je n'aurai probablement jamais les moyens d'acheter (la Honda S2000 en tête).",
         "La photo et la vidéo — argentique sur mon Pentax MX, numérique dans l'alternance sur un GH5, et un jour un S5IIx",
-        "Curieux de toutes les sortes concernant les nouvelles technologies, de près ou de loin",
-        "Passioné de musique, audiophile convaincu, grand fan de Nujabes, et une playlist qui va de Boards of Canada à Flying Lotus, je cherche toujours à optimiser mon système Hi-Fi pour profiter au mieux de ma musique."
+        "Toujours à l'affût des nouvelles technologies, de près ou de loin. J'aime suivre les innovations dans le domaine de la tech, que ce soit pour les intégrer dans mes projets ou simplement par curiosité.",
+        "Passionné de musique, audiophile convaincu, grand fan de Nujabes, et une playlist qui va de Boards of Canada à Flying Lotus, je cherche toujours à optimiser mon système Hi-Fi pour profiter au mieux de ma musique."
     ],
     "projects": [
         {
             "title": "Création d'un court-métrage en anglais",
-            "context": "Lors d'un cours d'anglais en première année de BUT MMI, nous devions réaliser une fin alternative d'une film ou une série d'un pays anglophone, nous avons décidé de réaliser une parodie de la série télévisée 'Pawn Stars'. Au sein de l'émission nous y avons créer une fausse publicité pour du parfum, la publicité dans l'émission a remporté le prix du public lors du festival étudiant MMI de l'IUT de Lannion'À l'West Fest' de 2024.",
+            "context": "Lors d'un cours d'anglais en première année de BUT MMI, nous devions réaliser une fin alternative d'un film ou une série d'un pays anglophone, nous avons décidé de réaliser une parodie de la série télévisée 'Pawn Stars'. Au sein de l'émission nous y avons créé une fausse publicité pour du parfum, la publicité dans l'émission a remporté le prix du public lors du festival étudiant MMI de l'IUT de Lannion'À l'West Fest' de 2024.",
             "missions" : ["Écriture d'un script en anglais", "Organisation du tournage", "Tournage de la vidéo", "Montage sur Adobe Premiere Pro"],
             "outputs" :  ["La vidéo finale", "La publicité", "Le script"],
             "skills": [
@@ -54,7 +54,7 @@
         {
             "title": "Interview d'un président d'association",
             "context": "Dans le cadre de Créa'IUT, et d'une collaboration avec l'association 'Les Amis de Ruth', nous avons réalisées une interview de son président afin de créer une vidéo qui présente l'association à des mécènes sponsors dans le but de récolter des fonds pour la préservation du voilier Ruth et du partage du patrimoine maritime.",
-            "missions" : ["Auditer l'association", "Prépartion des questions", "Préparation du matériel pour le tournage sur le voilier Ruth", "Montage de la vidéo"],
+            "missions" : ["Auditer l'association", "Préparation des questions", "Préparation du matériel pour le tournage sur le voilier Ruth", "Montage de la vidéo"],
             "outputs" :  ["Vidéo de l'interview montée"],
             "skills": [
                 "Communication",
@@ -96,7 +96,7 @@
         },
         {
            "title": "Datalogy — représenter des données graphiquement",
-            "context": "Choisir une donnée, la représenter de manière graphique et développer un site web pour la présenter de façon  interactive.",
+            "context": "Choisir une donnée, la représenter de manière graphique et développer un site web pour la présenter de façon interactive.",
             "missions" : ["Choisir et analyser une donnée", "Représenter la donnée graphiquement sous forme de poster", "Développer un site web interactif pour la présenter"],
             "outputs" : ["Poster de datavisualisation", "Maquette du site web", "Site web interactif"],
             "skills": [
@@ -313,7 +313,7 @@
         },
         {
             "title": "Web & outils",
-            "description": "Logiciels de conception et maquettage d'interfaces utilisateur",
+            "description": "Intégration web, gestion e-commerce, CMS",
             "tools": [
                 "HTML/CSS", 
                 "PrestaShop",
