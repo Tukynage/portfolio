@@ -1,30 +1,29 @@
 {
-    "title" : "Portfolio de Ruben URBAN",
+    "title": "Portfolio de Ruben URBAN",
     "lastname": "URBAN",
     "firstname": "Ruben",
-    "portrait" : "avatar.webp",
+    "portrait": "avatar.webp",
     "intro": "Mon critère : que ça donne envie d'acheter. BUT MMI en alternance, à la recherche d'une école en master pour 2026.",
     "intro_competences": "Photographie produit · Montage vidéo · Création de contenu",
     "biography": "Bonjour, je m'appelle Ruben, je suis en 3ème et dernière année de BUT MMI, une formation multimédia axée sur la communication, la création de contenus, la photo, la vidéo et le maquettage web. Je suis en alternance chez maPlatine.com, une boutique e-commerce spécialisée dans les platines vinyle et le matériel hifi moyen/haut de gamme. Je m'occupe des photos produit, des vidéos pour les réseaux sociaux, des fiches produits et de la refonte du site. Je suis exigeant avec moi-même, peut-être un peu trop, mais c'est ce qui fait que je rends quelque chose qui est abouti et qui a du sens au final.",
-
-    "cv" : "URBAN_Ruben-CV.pdf",
+    "cv": "URBAN_Ruben-CV.pdf",
     "trainings": [
         {
-            "name" : "BUT Métiers du Multimédia et de l'Internet, spécialité stratégie de communication numérique et design d'expérience. Stage de 2ème année et alternance en 3ème année chez maPlatine.com",
-            "school" : "à l'IUT de Lannion (22 300), Université de Rennes",
-            "start" : 2023,
-            "end" : 2026
+            "name": "BUT Métiers du Multimédia et de l'Internet, spécialité stratégie de communication numérique et design d'expérience. Stage de 2ème année et alternance en 3ème année chez maPlatine.com",
+            "school": "à l'IUT de Lannion (22 300), Université de Rennes",
+            "start": 2023,
+            "end": 2026
         },
         {
-            "name" : "Bac STI2D, spécialité Systèmes d'Information et Numérique (SIN)",
-            "school" : "au Lycée La Providence (Montauban de Bretagne, 35 360)",
-            "start" : 2020,
-            "end" : 2022
+            "name": "Bac STI2D, spécialité Systèmes d'Information et Numérique (SIN)",
+            "school": "au Lycée La Providence (Montauban de Bretagne, 35 360)",
+            "start": 2020,
+            "end": 2022
         }
     ],
     "interests": [
         "L'automobile avec les sports mécaniques, le sim-racing sur mon G27, et une liste de voitures que je n'aurai probablement jamais les moyens d'acheter (la Honda S2000 en tête).",
-        "La photo et la vidéo — argentique sur mon Pentax MX, numérique dans l'alternance sur un GH5, et un jour un S5IIx.",
+        "La photo et la vidéo, je pratique l'argentique sur mon Pentax MX, du numérique dans l'alternance sur un GH5, et un jour peut être un S5IIX.",
         "J'aime suivre les innovations dans le domaine de la tech, que ce soit pour les intégrer dans mes projets ou simplement par curiosité.",
         "Passionné de musique, audiophile convaincu, grand fan de Nujabes, et une playlist qui va de Boards of Canada à Flying Lotus, je cherche toujours à optimiser mon système Hi-Fi pour profiter au mieux de ma musique."
     ],
@@ -32,14 +31,23 @@
         {
             "title": "Création d'un court-métrage en anglais",
             "context": "Lors d'un cours d'anglais en première année de BUT MMI, nous devions réaliser une fin alternative d'un film ou d'une série d'un pays anglophone, nous avons décidé de réaliser une parodie de la série télévisée 'Pawn Stars'. Au sein de l'émission nous y avons créé une fausse publicité pour du parfum, la publicité dans l'émission a remporté le prix du public lors du festival étudiant MMI de l'IUT de Lannion 'À l'West Fest' de 2024.",
-            "missions" : ["Écriture d'un script en anglais", "Organisation du tournage", "Tournage de la vidéo", "Montage sur Adobe Premiere Pro"],
-            "outputs" :  ["La vidéo finale", "La publicité", "Le script"],
+            "missions": [
+                "Écriture d'un script en anglais",
+                "Organisation du tournage",
+                "Tournage de la vidéo",
+                "Montage sur Adobe Premiere Pro"
+            ],
+            "outputs": [
+                "La vidéo finale",
+                "La publicité",
+                "Le script"
+            ],
             "skills": [
                 "Anglais",
                 "Audiovisuel",
                 "Écriture multimédia"
             ],
-            "link" : "https://www.youtube.com/watch?v=kRBdGePdo5M",
+            "link": "https://www.youtube.com/watch?v=kRBdGePdo5M",
             "picture": "/project_minia/poor_stars.webp",
             "gallery": [
                 {
@@ -49,18 +57,24 @@
                 }
             ],
             "bilan": "C'était l'une des rares occasions où nous avions pu travailler avec très peu de contraintes, ce qui nous a permis de nous concentrer sur l'écriture et la réalisation, et de créer quelque chose qui nous ressemblait vraiment, nous sommes allés au bout de nos idées. De plus, le fait que la publicité créée pour l'émission ait remporté le prix du public lors du festival étudiant de l'IUT de Lannion, 'À l'West Fest', a été une belle reconnaissance pour notre travail et a ajouté une touche de fierté à ce projet déjà très amusant à réaliser."
-
         },
         {
             "title": "Interview d'un président d'association",
             "context": "Dans le cadre de Créa'IUT, et d'une collaboration avec l'association 'Les Amis de Ruth', nous avons réalisées une interview de son président afin de créer une vidéo qui présente l'association à des mécènes sponsors dans le but de récolter des fonds pour la préservation du voilier Ruth et du partage du patrimoine maritime.",
-            "missions" : ["Auditer l'association", "Préparation des questions", "Préparation du matériel pour le tournage sur le voilier Ruth", "Montage de la vidéo"],
-            "outputs" :  ["Vidéo de l'interview montée"],
+            "missions": [
+                "Auditer l'association",
+                "Préparation des questions",
+                "Préparation du matériel pour le tournage sur le voilier Ruth",
+                "Montage de la vidéo"
+            ],
+            "outputs": [
+                "Vidéo de l'interview montée"
+            ],
             "skills": [
                 "Communication",
                 "Audiovisuel"
             ],
-            "link" : "https://www.youtube.com/watch?v=XheeDIgE44s",
+            "link": "https://www.youtube.com/watch?v=XheeDIgE44s",
             "picture": "/project_minia/ruth_itw.webp",
             "gallery": [
                 {
@@ -70,66 +84,87 @@
                 }
             ],
             "bilan": "Cette interview a été une expérience de tournage enrichissante, le fait de tourner sur un bateau, avec des conditions météo capricieuses et dans un environnement clos restreint, de pouvoir travailler avec un professionnel, dans des conditions réelles, qui a des vraies problématiques est clairement un vrai plus. Cela m'a permis d'appliquer dans un cas concret et réel ce que j'ai pu apprendre suite à mon interview sur la photographie argentique."
-
-
         },
         {
             "title": "Interview sur la photographie argentique",
             "context": "Réalisation d'une interview sur la photographie argentique en présence de 3 profils de photographes argentiques différents.",
-            "missions" : ["Recherches sur le sujet", "Recherche de personnes à interviewer", "Écriture de questions adaptées"],
-            "outputs" :  ["Interview finale montée (5min)", "Dossier de production"],
+            "missions": [
+                "Recherches sur le sujet",
+                "Recherche de personnes à interviewer",
+                "Écriture de questions adaptées"
+            ],
+            "outputs": [
+                "Interview finale montée (5min)",
+                "Dossier de production"
+            ],
             "skills": [
                 "Audiovisuel",
                 "Écriture multimédia"
             ],
-            "link" : "https://www.youtube.com/watch?v=5mk3QZIak64",
+            "link": "https://www.youtube.com/watch?v=5mk3QZIak64",
             "picture": "/project_minia/photo_arg_itw.webp",
             "bilan": "Cette interview fut la première que j'ai pu réaliser, elle m'a permis de découvrir en profondeur le monde de la photographie argentique, j'ai pu monter en compétences sur la façon de réaliser un montage dynamique qui mélange plusieurs discours différents mais de réussir à les mêler afin de créer un message conducteur cohérent. De plus, le fait de devoir approfondir un sujet, le préparer, rechercher des personnes à interviewer les contacter, préparer les questions, préparer le tournage et enfin monter la vidéo, m'a permis de découvrir toutes les étapes de la réalisation d'une vidéo professionnelle réelle, et de me confronter à des problématiques réelles, ce qui m'a permis de progresser plus rapidement que si j'avais simplement réalisé une interview dans un cadre scolaire sans enjeu réel. Enfin, le fait que cette vidéo soit disponible sur YouTube et puisse être vue par n'importe qui, m'a permis de me confronter à un des personnes non préparée qu'il fallait brifer, ce qui est toujours enrichissant pour progresser et s'améliorer et gagner en confiance et compétences."
         },
         {
             "title": "Maquettage d'une application",
             "context": "Analyse UX/UI et maquettage d'une application mobile d'agrégateur de spectacles dans le Trégor.",
-            "missions" : ["Analyse de la demande", "Maquettage", "Prototypage"],
-            "outputs" :  ["Dossier d'instruction", "Prototype Figma"],
+            "missions": [
+                "Analyse de la demande",
+                "Maquettage",
+                "Prototypage"
+            ],
+            "outputs": [
+                "Dossier d'instruction",
+                "Prototype Figma"
+            ],
             "skills": [
                 "UI/UX"
             ],
-            "link" : "https://www.figma.com/design/r4RS1kZR4DTNrWnw1Ff8Oe/R3.09?node-id=1-5&t=YuMlwNR3Ii0SQe8I-1",
+            "link": "https://www.figma.com/design/r4RS1kZR4DTNrWnw1Ff8Oe/R3.09?node-id=1-5&t=YuMlwNR3Ii0SQe8I-1",
             "picture": "/project_minia/app_argor.webp",
             "bilan": "L'analyse du sujet et de la concurrence a été notre principal défi, le public cible était difficile à cerner et le sujet peu familier. Malgré cela, c'est l'une des ressources les plus enrichissantes du semestre. Travailler en quasi-totale autonomie nous a permis de prendre nos propres directions. J'ai beaucoup progressé sur Figma, sur la conception de parcours utilisateur et sur le design orienté utilisateur."
-
         },
         {
-           "title": "Datalogy — représenter des données graphiquement",
+            "title": "Datalogy — représenter des données graphiquement",
             "context": "Choisir une donnée, la représenter de manière graphique et développer un site web pour la présenter de façon interactive.",
-            "missions" : ["Choisir et analyser une donnée", "Représenter la donnée graphiquement sous forme de poster", "Développer un site web interactif pour la présenter"],
-            "outputs" : ["Poster de datavisualisation", "Maquette du site web", "Site web interactif"],
+            "missions": [
+                "Choisir et analyser une donnée",
+                "Représenter la donnée graphiquement sous forme de poster",
+                "Développer un site web interactif pour la présenter"
+            ],
+            "outputs": [
+                "Poster de datavisualisation",
+                "Maquette du site web",
+                "Site web interactif"
+            ],
+            "bilan": "Ce projet m'a permis d'apprendre à représenter une donnée complexe de façon graphique et interactive. Nous avons utilisé des frites et du ketchup comme support visuel pour rendre une statistique abstraite immédiatement lisible et mémorable. Ce que j'ai le plus apprécié : trouver un angle créatif et décalé pour traiter un sujet sérieux, et concevoir le quiz interactif du site qui permet de s'approprier les données autrement.",
             "skills": [
                 "Graphisme",
                 "Dev Web"
             ],
-            "link" : "/web/datalogy_redirect.html",
+            "link": "/web/datalogy_redirect.html",
             "picture": "/project_minia/datalogy.webp"
         },
-                {
-                "title": "Photographie produit Hi-Fi",
-    "context": "Réalisation et traitement des photographies produits pour maPlatine.com. Les photos sont utilisées sur les fiches produit du site, les réseaux sociaux, les newsletters et les articles de blog.",
-    "missions": [
-        "Mise en place du produit et du studio de prise de vue",
-        "Réalisation des prises de vue",
-        "Retouche et édition sur Lightroom Classic",
-        "Publication sur PrestaShop et intégration dans les supports de communication"
-    ],
-    "outputs": [
-        "Photos produit pour les fiches du site e-commerce",
-        "Visuels pour les réseaux sociaux, newsletters et articles de blog"
-    ],
-    "skills": [
-        "Photographie",
-        "Édition graphique"
-    ],
-    "picture": "/project_minia/pp.webp",
-    "gallery": [
+        {
+            "title": "Photographie produit Hi-Fi",
+            "context": "Réalisation et traitement des photographies produits pour maPlatine.com. Les photos sont utilisées sur les fiches produit du site, les réseaux sociaux, les newsletters et les articles de blog.",
+            "missions": [
+                "Mise en place du produit et du studio de prise de vue",
+                "Réalisation des prises de vue",
+                "Retouche et édition sur Lightroom Classic",
+                "Publication sur PrestaShop et intégration dans les supports de communication"
+            ],
+            "outputs": [
+                "Photos produit pour les fiches du site e-commerce",
+                "Visuels pour les réseaux sociaux, newsletters et articles de blog"
+            ],
+            "bilan": "Ce travail continu me permet de développer mes compétences en photographie dans un environnement contrôlé. J'aime pouvoir prendre le temps de donner à un produit son heure de gloire et de le rendre le plus attrayant possible. C'est un travail qui demande de la rigueur et de la patience, comme éviter la poussière, les traces de doigts et les reflets permet de réduire considérablement le temps de retouche en post-production. Les photos ont une vraie durée de vie : elles seront utilisées sur le site et la communication de maPlatine.com tout au long du cycle de vie du produit. La qualité du rendu a donc un impact direct sur les ventes.",
+            "skills": [
+                "Photographie",
+                "Édition graphique"
+            ],
+            "picture": "/project_minia/pp.webp",
+            "gallery": [
                 "pp/Clearaudio-Compass-silver-10.webp",
                 "pp/Clearaudio-Compass-silver-32.webp",
                 "pp/EAT-E-Glo_Petit_2-silver-13.webp",
@@ -145,37 +180,39 @@
                 "pp/dmpa6_white.webp"
             ],
             "imageDescriptions": [
-                "Photo produit Clearaudio Compass",
-                "Photo produit Clearaudio Compass",
-                "Photo produit EAT E-Glo Petit 2",
-                "Photo produit EAT E-Glo Petit 2",
-                "Photo produit AudioQuest Blizzard XTRM",
-                "Photo produit Audio Research D80",
-                "Photo produit Aurorasound HFSA-02",
-                "Photo produit Pro-Ject Debut Reference 10",
-                "Photo produit Pro-Ject Debut Reference 10",
-                "Photo produit Pro-Ject Debut Reference 10",
-                "Photo produit Pro-Ject Debut Reference 10",
-                "Photo produit Stylus Pro-Ject Pick It MM EVO",
-                "Photo produit Eversolo DMP-A6 Master Edition Gen 2"
+                "Photo d'une platine vinyle Clearaudio Compass en finition argent",
+                "Photo d'une cellule Clearaudio N1 montée sur une platine Clearaudio Compass en finition argent",
+                "Vue de dessus d'un préamplificateur phono E.A.T E-Glo Petit 2",
+                "Vue de face d'un préamplificateur phono E.A.T E-Glo Petit 2",
+                "Connectiques d'un câble d'allimentation AudioQuest Blizzard XTRM en C19",
+                "Vue en contre-plongée d'un amplificateur de puissance Audio Research D-80",
+                "Photo d'un amplificateur intégré Aurorasound HFSA-02",
+                "Vue large d'une platine vinyle Pro-Ject Debut Reference 10",
+                "Cellule Pro-Ject Pick It Pro Balanced montée sur une platine vinyle Pro-Ject Debut Reference 10",
+                "Cellule Pro-Ject Pick It Pro Balanced en action sur une platine vinyle Pro-Ject Debut Reference 10",
+                "Photo du contrepoids d'une platine vinyle Pro-Ject Debut Reference 10",
+                "Photo d'un stylus Pro-Ject Pick It MM EVO",
+                "Photo d'un streamer Eversolo DMP-A6 Master Edition Gen 2 en finition blanche"
             ]
         },
         {
-                "title": "Conception des visuels de la page d'accueil",
-    "context": "Création des visuels produits intégrés à la visionneuse de la homepage de maPlatine.com. Un nouveau visuel est mis en ligne deux fois par semaine pour mettre en avant les nouveautés et produits phares du catalogue.",
-    "missions": [
-        "Sélection des produits à mettre en avant",
-        "Réalisation et retouche des visuels produits",
-        "Optimisation et export pour l'intégration web"
-    ],
-    "outputs": [
-        "Visuels prêts à intégrer sur la homepage",
-        "Déclinaisons adaptées aux différents produits"
-    ],
-    "skills": [
-        "Graphisme",
-        "UI/UX"
-    ],
+            "title": "Conception des visuels de la page d'accueil",
+            "context": "Création des visuels produits intégrés à la visionneuse de la homepage de maPlatine.com. Un nouveau visuel est mis en ligne deux fois par semaine pour mettre en avant les nouveautés et produits phares du catalogue.",
+            "missions": [
+                "Sélection des produits à mettre en avant",
+                "Réalisation et retouche des visuels produits",
+                "Optimisation et export pour l'intégration web"
+            ],
+            "outputs": [
+                "Visuels prêts à intégrer sur la homepage",
+                "Déclinaisons adaptées aux différents produits"
+            ],
+            "bilan" : "Ces visionneuses ont été un challenge car elles sont la vitrine du site pendant plusieurs jours. Elles se doivent donc d'être parfaites et de mettre au mieux en valeur le produit mis en avant. La plus grande difficulté est de s'adapter aux contraintes de chaque produit : certains n'ont pas d'avis sur le site, pas d'award de la presse spécialisée ou pas de photo de qualité, il faut donc adapter la mise en page à chaque nouvelle visionneuse. Il faut également maintenir la cohérence graphique pour que chaque visuel reste dans la charte de maPlatine.com."
+             ,
+            "skills": [
+                "Graphisme",
+                "UI/UX"
+            ],
             "picture": "/project_minia/visio.webp",
             "gallery": [
                 "visio/VF_DMP-A6_Master_Edition_Gen_2.webp",
@@ -185,107 +222,105 @@
                 "visio/VF-Sprint4.webp"
             ],
             "imageDescriptions": [
-                "Visionneuse du Eversolo DMP-A6 Master Edition Gen 2",
-                "Visionneuse du E.A.T E-Glo Petit 2",
-                "Visionneuse du Eversolo T8",
-                "Visionneuse du Revival Audio Sprint 3",
-                "Visionneuse du Revival Audio Sprint 4"
+                "Visionneuse du streamer Eversolo DMP-A6 Master Edition Gen 2",
+                "Visionneuse du préamplificateur phono E.A.T E-Glo Petit 2",
+                "Visionneuse du streamer drive Eversolo T8",
+                "Visionneuse des enceintes bibliothèques Revival Audio Sprint 3",
+                "Visionneuse des enceintes colonnes Revival Audio Sprint 4"
             ]
         },
-            {
-                "title": "Réalisation de vidéos de présentation produit",
-    "context": "Création de vidéos YouTube présentant des produits Hi-Fi majeurs du catalogue, sélectionnés pour leur qualité technique, leur rapport qualité-prix ou leur caractère innovant. Deux vidéos réalisées à ce jour sur la REGA Planar 3 RS et la Pro-Ject Flatten It, une troisième sur le EAT E-Glo Petit 2 en cours de montage.",
-    "missions": [
-        "Sélection et analyse du produit à présenter",
-        "Planification et réalisation du tournage",
-        "Montage, étalonnage et export de la vidéo finale"
+        {
+            "title": "Réalisation de vidéos de présentation produit",
+            "context": "Création de vidéos YouTube présentant des produits Hi-Fi majeurs du catalogue, sélectionnés pour leur qualité technique, leur rapport qualité-prix ou leur caractère innovant. Deux vidéos réalisées à ce jour sur la REGA Planar 3 RS et la Pro-Ject Flatten It, une troisième sur le EAT E-Glo Petit 2 en cours de montage.",
+            "missions": [
+                "Sélection et analyse du produit à présenter",
+                "Planification et réalisation du tournage",
+                "Montage, étalonnage et export de la vidéo finale"
+            ],
+            "outputs": [
+                "Vidéo YouTube de 4 à 6 minutes",
+                "Version courte optimisée pour les réseaux sociaux"
+            ],
+            "skills": [
+                "Audiovisuel"
+            ],
+            "picture": "/project_minia/minia_yt.webp",
+            "gallery": [
+                {
+                    "src": "https://www.youtube.com/watch?v=C_z8VrOvIvE",
+                    "thumbnail": "minia/yt_pj_flatten_it.webp",
+                    "alt": "Miniature YouTube Pro-Ject Flatten It"
+                },
+                {
+                    "src": "https://www.youtube.com/watch?v=Nv8yY2qkd48",
+                    "thumbnail": "minia/yt_p3rs.webp",
+                    "alt": "Miniature YouTube REGA Planar 3 RS"
+                }
+            ],
+            "imageDescriptions": [
+                "Vidéo de présentation de l'aplanisseur de vinyles Pro-Ject Flatten It",
+                "Vidéo de présentation de la platine vinyle REGA Planar 3 RS"
+            ],
+            "bilan": "Ces vidéos complètent les fiches produit en apportant une dimension technique et visuelle qu'une fiche texte ne peut pas offrir. Chaque vidéo cible une audience qui s'informe activement avant d'acheter — le taux de vues sur une niche aussi précise que la Hi-Fi vinyle est significatif. J'ai repris et fait évoluer le format existant en apportant mon propre cadrage, mes plans de coupe et ma direction de montage. Une troisième vidéo est en cours de montage."
+        },
+        {
+            "title": "Réalisation de vidéos courtes pour les réseaux sociaux",
+            "context": "Création de vidéos au format vertical destinées à être diffusées sur les réseaux sociaux de maPlatine.com, principalement des unboxings de produits Hi-Fi pour mettre en avant les nouveautés du catalogue.",
+            "missions": [
+                "Planification et préparation du tournage",
+                "Réalisation du tournage en format vertical",
+                "Montage et export optimisé pour les réseaux sociaux"
+            ],
+            "outputs": [
+                "Vidéo courte prête à être diffusée sur les réseaux sociaux"
+            ],
+            "bilan": "Ces unboxings, ont permis de compléter le contenu des fiches produit en rajoutant une section vidéo mise en avant sur celle-ci, ce qui permet de donner une seconde vie à un post Instagram qui n'aurait été qu'une photo du produit. De plus, cela a permis de créer du contenu dynamique et engageant pour les réseaux sociaux, ce qui a contribué à augmenter la visibilité des produits et de la marque sur les réseaux sociaux.",
+            "skills": [
+                "Audiovisuel"
+            ],
+            "picture": "/project_minia/video_unbox.webp",
+            "gallery": [
+                {
+                    "src": "https://www.instagram.com/reel/DLSorzXseW6/",
+                    "thumbnail": "minia/atalante_3.webp",
+                    "alt": "Miniature Reel unboxing Revival Audio Atalante 3"
+                },
+                {
+                    "src": "https://www.instagram.com/reel/DMItQdRhSyl/",
+                    "thumbnail": "minia/tesi_3.webp",
+                    "alt": "Miniature Reel unboxing Indiana Line TESI 3"
+                },
+                {
+                    "src": "https://www.instagram.com/reel/DPzFCwkDKBF/",
+                    "thumbnail": "minia/33_303.webp",
+                    "alt": "Miniature Reel présentation Quad 33 et Quad 303"
+                },
+                {
+                    "src": "https://www.instagram.com/reel/DQYuvzpgjHm/",
+                    "thumbnail": "minia/mission_778x.webp",
+                    "alt": "Miniature Reel unboxing Mission 778X"
+                },
+                {
+                    "src": "https://www.instagram.com/reel/DQuR42ZAjoZ/",
+                    "thumbnail": "minia/brio_mkvii.webp",
+                    "alt": "Miniature Reel unboxing REGA Brio MKVII"
+                },
+                {
+                    "src": "https://www.instagram.com/reel/DTveUSOivnc/",
+                    "thumbnail": "minia/p3rs.webp",
+                    "alt": "Miniature Reel unboxing REGA Planar 3 RS"
+                }
+            ],
+            "imageDescriptions": [
+                "Vidéo unboxing des enceintes bibliothèques Revival Audio Sprint 3",
+                "Vidéo unboxing des enceintes bibliothèques Indiana Line TESI 3",
+                "Vidéo de mise en avant de la nouvelle génération du préamplificateur Quad 33 et de l'amplificateur de puissance Quad 303",
+                "Vidéo unboxing de l'amplificateur intégré Mission 778X",
+                "Vidéo unboxing de l'amplificateur intégré REGA Brio MKVII",
+                "Vidéo unboxing de la platine vinyle REGA Planar 3 RS"
+            ]
+        }
     ],
-    "outputs": [
-        "Vidéo YouTube de 4 à 6 minutes",
-        "Version courte optimisée pour les réseaux sociaux"
-    ],
-    "skills": [
-        "Audiovisuel"
-    ],
-                "picture": "/project_minia/minia_yt.webp",
-                "gallery": [
-                    {
-                        "src": "https://www.youtube.com/watch?v=C_z8VrOvIvE",
-                        "thumbnail": "minia/yt_pj_flatten_it.webp",
-                        "alt": "Miniature YouTube Pro-Ject Flatten It"
-                    },
-                    {
-                        "src": "https://www.youtube.com/watch?v=Nv8yY2qkd48",
-                        "thumbnail": "minia/yt_p3rs.webp",
-                        "alt": "Miniature YouTube REGA Planar 3 RS"
-                    }
-                ],
-"imageDescriptions": [
-    "Vidéo de présentation de l'aplanisseur de vinyles Pro-Ject Flatten It",
-    "Vidéo de présentation de la platine vinyle REGA Planar 3 RS"
-]
-            },
-            {
-                "title": "Réalisation de vidéos courtes pour les réseaux sociaux",
-"context": "Création de vidéos au format vertical destinées à être diffusées sur les réseaux sociaux de maPlatine.com, principalement des unboxings de produits Hi-Fi pour mettre en avant les nouveautés du catalogue.",
-"missions": [
-    "Planification et préparation du tournage",
-    "Réalisation du tournage en format vertical",
-    "Montage et export optimisé pour les réseaux sociaux"
-],
-"outputs": [
-    "Vidéo courte prête à être diffusée sur les réseaux sociaux"
-],
-"bilan": "Ces unboxings, ont permis de compléter le contenu des fiches produit en rajoutant une section vidéo mise en avant sur celle-ci, ce qui permet de donner une seconde vie à un post Instagram qui n'aurait été qu'une photo du produit. De plus, cela a permis de créer du contenu dynamique et engageant pour les réseaux sociaux, ce qui a contribué à augmenter la visibilité des produits et de la marque sur les réseaux sociaux.",
-"skills": [
-    "Audiovisuel"
-],
-                "picture": "/project_minia/video_unbox.webp",
-                "gallery": [
-                    {
-                        "src": "https://www.instagram.com/reel/DLSorzXseW6/",
-                        "thumbnail": "minia/atalante_3.webp",
-                        "alt": "Miniature Reel unboxing Revival Audio Atalante 3"
-                    },
-                    {
-                        "src": "https://www.instagram.com/reel/DMItQdRhSyl/",
-                        "thumbnail": "minia/tesi_3.webp",
-                        "alt": "Miniature Reel unboxing Indiana Line TESI 3"
-                    },
-                    {
-                        "src": "https://www.instagram.com/reel/DPzFCwkDKBF/",
-                        "thumbnail": "minia/33_303.webp",
-                        "alt": "Miniature Reel présentation Quad 33 et Quad 303"
-                    },
-                    {
-                        "src": "https://www.instagram.com/reel/DQYuvzpgjHm/",
-                        "thumbnail": "minia/mission_778x.webp",
-                        "alt": "Miniature Reel unboxing Mission 778X"
-                    },
-                    {
-                        "src": "https://www.instagram.com/reel/DQuR42ZAjoZ/",
-                        "thumbnail": "minia/brio_mkvii.webp",
-                        "alt": "Miniature Reel unboxing REGA Brio MKVII"
-                    },
-                    {
-                        "src": "https://www.instagram.com/reel/DTveUSOivnc/",
-                        "thumbnail": "minia/p3rs.webp",
-                        "alt": "Miniature Reel unboxing REGA Planar 3 RS"
-                    }
-                ],
-                "imageDescriptions": [
-                    "Vidéo unboxing des enceintes bibliothèques Revival Audio Sprint 3",
-                    "Vidéo unboxing des enceintes bibliothèques Indiana Line TESI 3",
-                    "Vidéo de mise en avant de la nouvelle génération du préamplificateur Quad 33 et de l'amplificateur de puissance Quad 303",
-                    "Vidéo unboxing de l'amplificateur intégré Mission 778X",
-                    "Vidéo unboxing de l'amplificateur intégré REGA Brio MKVII",
-                    "Vidéo unboxing de la platine vinyle REGA Planar 3 RS"
-                ]
-            }
-
-        
-    ],
-    
     "skills": [
         {
             "title": "Vidéo et montage",
@@ -320,7 +355,7 @@
             "title": "Web & outils",
             "description": "Intégration web, gestion e-commerce, CMS",
             "tools": [
-                "HTML/CSS", 
+                "HTML/CSS",
                 "PrestaShop",
                 "WordPress"
             ],
@@ -328,14 +363,20 @@
         }
     ],
     "contacts": [
-        {"name" : "LinkedIn", 
-        "url" : "https://www.linkedin.com/in/ruben-urban/",
-        "icon" : "linkedin.svg"},
-        {"name" : "Mail : ruben.urban@protonmail.com", 
-        "url" : "mailto:ruben.urban@protonmail.com",
-        "icon" : "mail.svg"},
-        {"name" : "Téléphone : +33 6 66 09 87 76", 
-        "url" : "tel:+33666098776",
-        "icon" : "phone.svg"}
+        {
+            "name": "LinkedIn",
+            "url": "https://www.linkedin.com/in/ruben-urban/",
+            "icon": "linkedin.svg"
+        },
+        {
+            "name": "Mail : ruben.urban@protonmail.com",
+            "url": "mailto:ruben.urban@protonmail.com",
+            "icon": "mail.svg"
+        },
+        {
+            "name": "Téléphone : +33 6 66 09 87 76",
+            "url": "tel:+33666098776",
+            "icon": "phone.svg"
+        }
     ]
 }
