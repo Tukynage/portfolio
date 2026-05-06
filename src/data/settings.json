@@ -60,7 +60,7 @@
         },
         {
             "title": "Interview d'un président d'association",
-            "context": "Dans le cadre de Créa'IUT, et d'une collaboration avec l'association 'Les Amis de Ruth', nous avons réalisées une interview de son président afin de créer une vidéo qui présente l'association à des mécènes sponsors dans le but de récolter des fonds pour la préservation du voilier Ruth et du partage du patrimoine maritime.",
+            "context": "Dans le cadre du dispositif Créa'IUT, et d'une collaboration avec l'association 'Les Amis de Ruth', nous avons réalisé une interview de son président afin de créer une vidéo qui présente l'association à des mécènes sponsors dans le but de récolter des fonds pour la préservation du voilier Ruth et du partage du patrimoine maritime.",
             "missions": [
                 "Auditer l'association",
                 "Préparation des questions",
@@ -68,7 +68,7 @@
                 "Montage de la vidéo"
             ],
             "outputs": [
-                "Vidéo de l'interview montée"
+                "Vidéo de l'interview montée au format paysage (2 min)"
             ],
             "skills": [
                 "Communication",
@@ -87,15 +87,21 @@
         },
         {
             "title": "Interview sur la photographie argentique",
-            "context": "Réalisation d'une interview sur la photographie argentique en présence de 3 profils de photographes argentiques différents.",
+            "context": "En 2ème année de BUT MMI, nous devions réaliser en équipe de 2 personnes une interview sur un sujet de notre choix, nous avons décidé de nous concentrer sur la photographie, et plus particulièrement sur la photographie argentique. Le but de l'exercice était de préparer et tourner une interview de qualité en duo, puis, une fois le tournage complet terminé, chaque personne du groupe devait monter une vidéo de l'interview en solo, avec les rushes du tournage, et sans pouvoir communiquer avec l'autre personne du groupe pour le montage, afin de créer deux vidéos différentes à partir du même tournage, et de pouvoir comparer les choix de montage et de narration de chacun."
+             ,
             "missions": [
                 "Recherches sur le sujet",
                 "Recherche de personnes à interviewer",
-                "Écriture de questions adaptées"
+                "Écriture de questions adaptées",
+                "Choix et préparation du matériel de tournage",
+                "Choix du lieu de tournage et préparation de celui-ci",
+                "Tournage de l'interview",
+                "Montage de la vidéo"
             ],
             "outputs": [
                 "Interview finale montée (5min)",
-                "Dossier de production"
+                "Note d'intention et analyse du projet",
+                "Fichier Adobe Premiere Pro du projet de montage"
             ],
             "skills": [
                 "Audiovisuel",
@@ -103,13 +109,25 @@
             ],
             "link": "https://www.youtube.com/watch?v=5mk3QZIak64",
             "picture": "/project_minia/photo_arg_itw.webp",
-            "bilan": "Cette interview fut la première que j'ai pu réaliser, elle m'a permis de découvrir en profondeur le monde de la photographie argentique, j'ai pu monter en compétences sur la façon de réaliser un montage dynamique qui mélange plusieurs discours différents mais de réussir à les mêler afin de créer un message conducteur cohérent. De plus, le fait de devoir approfondir un sujet, le préparer, rechercher des personnes à interviewer les contacter, préparer les questions, préparer le tournage et enfin monter la vidéo, m'a permis de découvrir toutes les étapes de la réalisation d'une vidéo professionnelle réelle, et de me confronter à des problématiques réelles, ce qui m'a permis de progresser plus rapidement que si j'avais simplement réalisé une interview dans un cadre scolaire sans enjeu réel. Enfin, le fait que cette vidéo soit disponible sur YouTube et puisse être vue par n'importe qui, m'a permis de me confronter à un des personnes non préparée qu'il fallait brifer, ce qui est toujours enrichissant pour progresser et s'améliorer et gagner en confiance et compétences."
+            "bilan": "Cette interview fut la première que j'ai pu réaliser, elle m'a permis de découvrir en profondeur le monde de la photographie argentique, j'ai pu monter en compétences sur la façon de réaliser un montage dynamique qui mélange plusieurs discours différents mais de réussir à les mêler afin de créer un message conducteur cohérent. De plus, le fait de devoir approfondir un sujet, le préparer, rechercher des personnes à interviewer les contacter, préparer les questions, préparer le tournage et enfin monter la vidéo, m'a permis de découvrir toutes les étapes de la réalisation d'une vidéo professionnelle réelle, et de me confronter à des problématiques réelles, ce qui m'a permis de progresser plus rapidement que si j'avais simplement réalisé une interview dans un cadre scolaire sans enjeu réel. Enfin, le fait que cette vidéo soit disponible sur YouTube et puisse être vue par n'importe qui, m'a permis de me confronter à des personnes non préparées qu'il fallait brifer, ce qui est toujours enrichissant pour progresser et s'améliorer et gagner en confiance et compétences.",
+            "gallery": [
+                {
+                    "src": "https://www.youtube.com/watch?v=5mk3QZIak64",
+                    "thumbnail": "/project_minia/photo_arg_itw.webp",
+                    "alt": "Interview de 4 min sur la photographie argentique"
+                }
+            ]
         },
         {
             "title": "Maquettage d'une application",
             "context": "Analyse UX/UI et maquettage d'une application mobile d'agrégateur de spectacles dans le Trégor.",
             "missions": [
                 "Analyse de la demande",
+                "L'analyse de l'existant et de la concurrence",
+                "Planche univers",
+                "Charte graphique",
+                "Les parcours utilisateurs",
+                "Wireframes",
                 "Maquettage",
                 "Prototypage"
             ],
@@ -125,11 +143,11 @@
             "bilan": "L'analyse du sujet et de la concurrence a été notre principal défi, le public cible était difficile à cerner et le sujet peu familier. Malgré cela, c'est l'une des ressources les plus enrichissantes du semestre. Travailler en quasi-totale autonomie nous a permis de prendre nos propres directions. J'ai beaucoup progressé sur Figma, sur la conception de parcours utilisateur et sur le design orienté utilisateur."
         },
         {
-            "title": "Datalogy — représenter des données graphiquement",
+            "title": "Datalogy - représenter des données graphiquement",
             "context": "Choisir une donnée, la représenter de manière graphique et développer un site web pour la présenter de façon interactive.",
             "missions": [
-                "Choisir et analyser une donnée",
-                "Représenter la donnée graphiquement sous forme de poster",
+                "Choisir et analyser des données",
+                "Représenter les données graphiquement sous forme de poster",
                 "Développer un site web interactif pour la présenter"
             ],
             "outputs": [
@@ -137,13 +155,49 @@
                 "Maquette du site web",
                 "Site web interactif"
             ],
-            "bilan": "Ce projet m'a permis d'apprendre à représenter une donnée complexe de façon graphique et interactive. Nous avons utilisé des frites et du ketchup comme support visuel pour rendre une statistique abstraite immédiatement lisible et mémorable. Ce que j'ai le plus apprécié : trouver un angle créatif et décalé pour traiter un sujet sérieux, et concevoir le quiz interactif du site qui permet de s'approprier les données autrement.",
+            "bilan": "Ce projet m'a permis d'apprendre à représenter des données complexes de façon graphique et interactive. Nous avons utilisé des frites et du ketchup comme support visuel pour rendre une statistique abstraite immédiatement lisible et mémorable. Ce que j'ai le plus apprécié : trouver un angle créatif et décalé pour traiter un sujet sérieux, et concevoir le quiz interactif du site qui permet de s'approprier les données autrement.",
             "skills": [
                 "Graphisme",
-                "Dev Web"
+                "Dev Web",
+                "Photographie"
             ],
             "link": "/web/datalogy_redirect.html",
             "picture": "/project_minia/datalogy.webp"
+        },
+        {
+            "title": "Interview pour le festival Pies Pala Pop #4 (2025)",
+            "context": "Dans le cadre de mon stage chez maPlatine.com, j'ai eu l'opportunité de réaliser une interview d'Antoine, le programmateur du festival Pies Pala Pop #4 (édition de juin 2025) afin de promouvoir l'évènement sur le site et les réseaux de communication de maPlatine.com. En effet, maPlatine.com est partenaire du festival et participe à la tombola. L'objectif de cette interview est de mettre en avant les artistes de cette édition et d'annoncer les nouveautés de cette édition.",
+            "missions": [
+                "Préparation du tournage de l'interview",
+                "Contacter les artistes cités dans la vidéo pour obtenir les droits d'utilisation de leurs images et musiques",
+                "Montage d'une version courte pour Instagram et Facebook",
+                "Montage d'une version complète pour YouTube",
+                "Chapitrage de la vidéo complète pour faciliter la navigation"
+            ],  
+            "outputs": [
+                "Vidéo de l'interview montée au format portrait pour Instagram (2 min)",
+                "Vidéo de l'interview complète au format paysage pour YouTube"
+            ],
+            "skills": [
+                "Audiovisuel",
+                "Communication"
+            ],
+            "link": "https://www.instagram.com/reel/DJbvnpysZoz/",
+            "picture": "/project_minia/itw_ppp_2025.webp",
+            "bilan": "Cette interview a été ma première réalisation au format portrait, ce qui a nécessité d'adapter mon approche du cadrage et du montage. J'ai géré l'intégralité de la partie audiovisuelle en autonomie, de la préparation du tournage jusqu'au montage des deux versions. La principale difficulté était d'intégrer proprement les extraits musicaux et vidéos des artistes cités dans la version Instagram, tout en respectant les droits d'utilisation obtenus directement auprès d'eux. Le montage s'est construit une fois l'interview terminée en m'adaptant à la façon dont Antoine formulait ses phrases pour trouver le bon rythme, la bonne longueur et le bon équilibre pour transmettre toutes les informations importantes.",
+            "gallery": [
+                {
+                    "src": "https://www.instagram.com/reel/DJbvnpysZoz/",
+                    "thumbnail": "minia/ppp_cover.webp",
+                    "alt": "Vidéo de l'interview du groupe The Limiñanas pour le festival Pies Pala Pop 2025"
+                },
+                {
+                    "src": "https://www.youtube.com/watch?v=d6ayay-YIjg",
+                    "thumbnail": "minia/ppp_yt.webp",
+                    "alt": "Vidéo complète de l'interview du groupe The Limiñanas pour le festival Pies Pala Pop 2025"
+                }
+
+            ]
         },
         {
             "title": "Photographie produit Hi-Fi",
@@ -184,7 +238,7 @@
                 "Photo d'une cellule Clearaudio N1 montée sur une platine Clearaudio Compass en finition argent",
                 "Vue de dessus d'un préamplificateur phono E.A.T E-Glo Petit 2",
                 "Vue de face d'un préamplificateur phono E.A.T E-Glo Petit 2",
-                "Connectiques d'un câble d'allimentation AudioQuest Blizzard XTRM en C19",
+                "Connectiques d'un câble d'alimentation AudioQuest Blizzard XTRM en C19",
                 "Vue en contre-plongée d'un amplificateur de puissance Audio Research D-80",
                 "Photo d'un amplificateur intégré Aurorasound HFSA-02",
                 "Vue large d'une platine vinyle Pro-Ject Debut Reference 10",
@@ -261,7 +315,7 @@
                 "Vidéo de présentation de l'aplanisseur de vinyles Pro-Ject Flatten It",
                 "Vidéo de présentation de la platine vinyle REGA Planar 3 RS"
             ],
-            "bilan": "Ces vidéos complètent les fiches produit en apportant une dimension technique et visuelle qu'une fiche texte ne peut pas offrir. Chaque vidéo cible une audience qui s'informe activement avant d'acheter — le taux de vues sur une niche aussi précise que la Hi-Fi vinyle est significatif. J'ai repris et fait évoluer le format existant en apportant mon propre cadrage, mes plans de coupe et ma direction de montage. Une troisième vidéo est en cours de montage."
+            "bilan": "Ces vidéos complètent les fiches produit en apportant une dimension technique et visuelle qu'une fiche texte ne peut pas offrir. Chaque vidéo cible une audience qui s'informe activement avant d'acheter. J'ai repris et fait évoluer le format existant en apportant mon propre cadrage, mes plans de coupe et ma direction de montage. Une troisième vidéo est en cours de montage."
         },
         {
             "title": "Réalisation de vidéos courtes pour les réseaux sociaux",
