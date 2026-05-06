@@ -11,8 +11,8 @@ export default function Badge({ label, bgColor = 'bg-slate-200', fgColor = 'text
                 type="button"
                 onClick={onClick}
                 className={clsx(base, 'px-2.5 py-1 border cursor-pointer select-none', active
-                    ? [bgColor, fgColor, 'border-transparent shadow-sm']
-                    : 'bg-transparent border-base-300 dark:border-slate-600 text-base-content/65 dark:text-slate-400 hover:border-base-content/40 dark:hover:border-slate-500 hover:text-base-content dark:hover:text-slate-200'
+                    ? 'bg-base-content text-base-100 border-base-content shadow-sm'
+                    : 'bg-transparent border-base-content/20 text-base-content/70 hover:border-base-content/50 hover:text-base-content'
                 )}
             >
                 {label}
@@ -29,7 +29,7 @@ export default function Badge({ label, bgColor = 'bg-slate-200', fgColor = 'text
     }
 
     return (
-        <span className={clsx(base, 'px-2.5 py-1 bg-base-200 dark:bg-slate-700/70 text-base-content/75 dark:text-slate-300')}>
+        <span className={clsx(base, 'px-2.5 py-1 bg-base-content/10 text-base-content border border-base-content/5')}>
             <i className={clsx('w-1.5 h-1.5 rounded-full shrink-0', bgColor)} />
             {label}
         </span>
