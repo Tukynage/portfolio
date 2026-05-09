@@ -78,7 +78,7 @@ function getThumbnailSource(item) {
     return ''
 }
 
-export default function Project({ title, picture, context, outputs, missions, skills, link, bilan = '', gallery = [], imageDescriptions = [] }) {
+export default function Project({ title, picture, context, outputs, missions, skills = [], link, bilan = '', gallery = [], imageDescriptions = [] }) {
     const uid = useId()
     const modalTitleId = `${uid}-title`
 

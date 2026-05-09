@@ -87,8 +87,7 @@
         },
         {
             "title": "Interview sur la photographie argentique",
-            "context": "En 2ème année de BUT MMI, nous devions réaliser en équipe de 2 personnes une interview sur un sujet de notre choix, nous avons décidé de nous concentrer sur la photographie, et plus particulièrement sur la photographie argentique. Le but de l'exercice était de préparer et tourner une interview de qualité en duo, puis, une fois le tournage complet terminé, chaque personne du groupe devait monter une vidéo de l'interview en solo, avec les rushes du tournage, et sans pouvoir communiquer avec l'autre personne du groupe pour le montage, afin de créer deux vidéos différentes à partir du même tournage, et de pouvoir comparer les choix de montage et de narration de chacun."
-             ,
+            "context": "En 2ème année de BUT MMI, nous devions réaliser en équipe de 2 personnes une interview sur un sujet de notre choix, nous avons décidé de nous concentrer sur la photographie, et plus particulièrement sur la photographie argentique. Le but de l'exercice était de préparer et tourner une interview de qualité en duo, puis, une fois le tournage complet terminé, chaque personne du groupe devait monter une vidéo de l'interview en solo, avec les rushes du tournage, et sans pouvoir communiquer avec l'autre personne du groupe pour le montage, afin de créer deux vidéos différentes à partir du même tournage, et de pouvoir comparer les choix de montage et de narration de chacun.",
             "missions": [
                 "Recherches sur le sujet",
                 "Recherche de personnes à interviewer",
@@ -173,7 +172,7 @@
                 "Montage d'une version courte pour Instagram et Facebook",
                 "Montage d'une version complète pour YouTube",
                 "Chapitrage de la vidéo complète pour faciliter la navigation"
-            ],  
+            ],
             "outputs": [
                 "Vidéo de l'interview montée au format portrait pour Instagram (2 min)",
                 "Vidéo de l'interview complète au format paysage pour YouTube"
@@ -196,7 +195,6 @@
                     "thumbnail": "minia/ppp_yt.webp",
                     "alt": "Vidéo complète de l'interview du groupe The Limiñanas pour le festival Pies Pala Pop 2025"
                 }
-
             ]
         },
         {
@@ -261,8 +259,7 @@
                 "Visuels prêts à intégrer sur la homepage",
                 "Déclinaisons adaptées aux différents produits"
             ],
-            "bilan" : "Ces visionneuses ont été un challenge car elles sont la vitrine du site pendant plusieurs jours. Elles se doivent donc d'être parfaites et de mettre au mieux en valeur le produit mis en avant. La plus grande difficulté est de s'adapter aux contraintes de chaque produit : certains n'ont pas d'avis sur le site, pas d'award de la presse spécialisée ou pas de photo de qualité, il faut donc adapter la mise en page à chaque nouvelle visionneuse. Il faut également maintenir la cohérence graphique pour que chaque visuel reste dans la charte de maPlatine.com."
-             ,
+            "bilan": "Ces visionneuses ont été un challenge car elles sont la vitrine du site pendant plusieurs jours. Elles se doivent donc d'être parfaites et de mettre au mieux en valeur le produit mis en avant. La plus grande difficulté est de s'adapter aux contraintes de chaque produit : certains n'ont pas d'avis sur le site, pas d'award de la presse spécialisée ou pas de photo de qualité, il faut donc adapter la mise en page à chaque nouvelle visionneuse. Il faut également maintenir la cohérence graphique pour que chaque visuel reste dans la charte de maPlatine.com.",
             "skills": [
                 "Graphisme",
                 "UI/UX"
@@ -372,6 +369,37 @@
                 "Vidéo unboxing de l'amplificateur intégré Mission 778X",
                 "Vidéo unboxing de l'amplificateur intégré REGA Brio MKVII",
                 "Vidéo unboxing de la platine vinyle REGA Planar 3 RS"
+            ]
+        },
+        {
+            "title": "Refonte graphique d'un site e-commerce",
+            "context": "Refonte complète du site e-commerce maPlatine.com, en collaboration avec ma tutrice et une consultante en webmarketing. L'objectif est de moderniser l'expérience utilisateur et d'améliorer la cohérence visuelle du site. La refonte est pensée mobile first, le site actuel reposant sur une charte graphique vieille de dix ans, peu adaptée aux usages mobiles.",
+            "missions": [
+                "Participation aux ateliers d'analyse et de cadrage",
+                "Conception de la maquette haute-fidélité de la homepage",
+                "Maquettage wireframe des pages produit, catégorie et autres pages clés",
+                "Coordination avec le développeur PrestaShop pour l'intégration"
+            ],
+            "outputs": [
+                "Maquette et prototype interactif de la homepage",
+                "Maquettes wireframe des Aide, FAQ, page profil",
+                "Prototype interactif de la barre de navigation (mobile et desktop)"
+            ],
+            "skills": [
+                "UI/UX",
+                "Design graphique"
+            ],
+            "picture": "/project_minia/refonte_mpl.webp",
+            "bilan": "Les maquettes ont été livrées et le projet est actuellement en cours de développement. C'est le projet le plus important de mon alternance, si tout se réalise, ce site sera en ligne pendant plusieurs années. C'est la première fois que je travaille sur une refonte aussi complète, avec des contraintes réelles de budget, de technique et de stratégie.",
+            "gallery": [
+                {
+                    "src": "nav_bar.webp",
+                    "alt": "Prototype interactif de la nouvelle barre de navigation pour desktop."
+                },
+                {
+                    "src": "nav_mobile.webp",
+                    "alt": "Prototype interactif de la nouvelle barre de navigation pour mobile."
+                }
             ]
         }
     ],
