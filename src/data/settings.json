@@ -52,7 +52,7 @@
             "gallery": [
                 {
                     "src": "https://www.youtube.com/watch?v=kRBdGePdo5M",
-                    "thumbnail": "poor_stars.webp",
+                    "thumbnail": "/project_minia/poor_stars.webp",
                     "alt": "Vidéo complète de la parodie de Pawn Stars, intitulée Poor Stars"
                 }
             ],
@@ -394,11 +394,11 @@
             "gallery": [
                 {
                     "src": "nav_bar.webp",
-                    "alt": "Prototype interactif de la nouvelle barre de navigation pour desktop."
+                    "alt": "Prototype interactif de la barre de navigation desktop"
                 },
                 {
                     "src": "nav_mobile.webp",
-                    "alt": "Prototype interactif de la nouvelle barre de navigation pour mobile."
+                    "alt": "Prototype interactif de la barre de navigation mobile"
                 }
             ]
         }
