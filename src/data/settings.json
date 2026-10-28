@@ -3,9 +3,9 @@
     "lastname": "URBAN",
     "firstname": "Ruben",
     "portrait": "avatar.webp",
-    "intro": "BUT MMI en alternance, à la recherche d'une école en master pour 2026.",
-    "intro_competences": "Photographie produit · Montage vidéo · Création de contenu",
-    "biography": "Bonjour, je m'appelle Ruben, je suis en 3ème et dernière année de BUT MMI, une formation multimédia axée sur la communication, la création de contenus, la photo, la vidéo et le maquettage web. Je suis en alternance chez maPlatine.com, une boutique e-commerce spécialisée dans les platines vinyle et le matériel hifi moyen/haut de gamme. Je m'occupe des photos produit, des vidéos pour les réseaux sociaux, des fiches produits et de la refonte du site. Je suis exigeant avec moi-même, peut-être un peu trop, mais c'est ce qui fait que je rends quelque chose qui est abouti et qui a du sens au final.",
+    "intro": "Étudiant à l'ESD de Nantes en M1 Vidéo, je suis à la reecherche d'une alternance pour l'année 2026-2027.",
+    "intro_competences": "Photographie · Montage vidéo · Création de contenu",
+    "biography": "Bonjour, je m'appelle Ruben et je suis actuellement en M1 Vidéo à l'ESD Nantes, après un BUT Métiers du Multimédia et de l'Internet à l'IUT de Lannion. Mon parcours m'a permis d'explorer différents domaines du numérique, notamment la photographie, la vidéo, le web et la création de contenus pour les réseaux sociaux. Après une expérience en stage puis en alternance chez maPlatine.com, je souhaite aujourd'hui approfondir mes compétences en production audiovisuelle et continuer à explorer différentes approches créatives.",
     "cv": "URBAN_Ruben-CV.pdf",
     "trainings": [
         {
@@ -401,6 +401,29 @@
                     "alt": "Prototype interactif de la barre de navigation mobile"
                 }
             ]
+        },
+        {
+            "title": "l'IA au service des pompiers",
+            "context": "Dans le cadre d'un projet de 3ème année de BUT MMI en collaboration avec Orange Labs Lannion, nous avons réalisé une courte vidéo imaginant la place de l'IA dans les métiers « deskless » (de terrain). L'objectif de ce projet était d'analyser les contraintes rencontrées dans le quotidien de ces professionnels, et d'imaginer comment l'intelligence artificielle pourrait améliorer leurs conditions de travail.",
+            "missions": [
+                "Analyse UX des métiers de terrain",
+                "Recherche de solutions intégrant l'intelligence artificielle",
+                "Réalisation d'un storyboard axé sur le métier de pompier (choisi par Orange Labs)",
+                "Conception et réalisation de la vidéo"
+            ],
+            "outputs": [
+                "Dossier de recherche et d'analyse métier",
+                "Storyboard détaillé",
+                "Court-métrage vidéo final"
+            ],
+            "skills": [
+                "UI/UX",
+                "Audiovisuel",
+                "Écriture multimédia"
+            ],
+            "link": "https://youtu.be/UlI834ikmGs",
+            "picture": "/project_minia/pompiers_deskless.webp",
+            "bilan": "Ce projet a été particulièrement enrichissant. Travailler sur un cas concret avec Orange Labs nous a permis d'allier intelligemment recherche UX et production audiovisuelle. Notre défi majeur était d'imaginer des solutions pour les « pompiers du futur » et de concevoir un univers fictif crédible mettant en avant des technologies actuelles ou fictives. N'ayant pas pu tourner avec de vrais pompiers, nous avons dû adapter notre scénario tout en gardant un concept pertinents et une vidéo coherente.\n\nCe que j'ai préféré dans ce projet, c'est l'approche UX appliquée à l'analyse métier, mais aussi la découverte de nouvelles techniques de tournage, utilisation de drones, omniprésence de la caméra embarquée à la première personne, etc. La scène d'ouverture a d'ailleurs été un excellent exercice de sound design et de mixage audio spatialisé. Elle nécessitait de simuler plusieurs sources sonores dans une pièce et de les faire varier selon l'angle de la caméra. Je suis particulièrement satisfait du résultat technique de cette introduction."
         }
     ],
     "skills": [
