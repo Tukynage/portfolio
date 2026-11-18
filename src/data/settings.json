@@ -3,11 +3,17 @@
     "lastname": "URBAN",
     "firstname": "Ruben",
     "portrait": "avatar.webp",
-    "intro": "Étudiant à l'ESD de Nantes en M1 Vidéo, je suis à la recherche d'une alternance pour l'année 2026-2027.",
+    "intro": "Étudiant à l'ESP de Nantes en M1 Vidéo, je suis à la recherche d'une alternance pour l'année 2026-2027.",
     "intro_competences": "Photographie · Montage vidéo · Création de contenu",
-    "biography": "Bonjour, je m'appelle Ruben et je suis actuellement en M1 Vidéo à l'ESD Nantes, après un BUT Métiers du Multimédia et de l'Internet à l'IUT de Lannion. Mon parcours m'a permis d'explorer différents domaines du numérique, notamment la photographie, la vidéo, le web et la création de contenus pour les réseaux sociaux. Après une expérience en stage puis en alternance chez maPlatine.com, je souhaite aujourd'hui approfondir mes compétences en production audiovisuelle et continuer à explorer différentes approches créatives.",
+    "biography": "Bonjour, je m'appelle Ruben et je suis actuellement en M1 Vidéo à l'ESP Nantes, après un BUT Métiers du Multimédia et de l'Internet à l'IUT de Lannion. Mon parcours m'a permis d'explorer différents domaines du numérique, notamment la photographie, la vidéo, le web et la création de contenus pour les réseaux sociaux. Après une expérience en stage puis en alternance chez maPlatine.com, je souhaite aujourd'hui approfondir mes compétences en production audiovisuelle.",
     "cv": "URBAN_Ruben-CV.pdf",
     "trainings": [
+        {
+            "name": "Mastère Vidéo & Digital Contents",
+            "school": "à l'ESP de Nantes (44)",
+            "start": 2026,
+            "end": 2028
+        },
         {
             "name": "BUT Métiers du Multimédia et de l'Internet, spécialité stratégie de communication numérique et design d'expérience. Stage de 2ème année et alternance en 3ème année chez maPlatine.com",
             "school": "à l'IUT de Lannion (22 300), Université de Rennes",
@@ -22,10 +28,10 @@
         }
     ],
     "interests": [
-        "L'automobile avec les sports mécaniques, le sim-racing sur mon G27, et une liste de voitures que je n'aurai probablement jamais les moyens d'acheter (la Honda S2000 en tête).",
-        "La photo et la vidéo, je pratique l'argentique sur mon Pentax MX, du numérique dans l'alternance sur un GH5.",
+        "L'automobile avec les sports mécaniques, le sim-racing.",
+        "La photo et la vidéo, je pratique la photographie argentique sur mon Pentax MX !",
         "J'aime suivre les innovations dans le domaine de la tech, que ce soit pour les intégrer dans mes projets ou simplement par curiosité.",
-        "Passionné de musique, audiophile convaincu, grand fan de Nujabes, et une playlist qui va de Boards of Canada à Flying Lotus, je cherche toujours à optimiser mon système Hi-Fi pour profiter au mieux de ma musique."
+        "Passionné de musique, audiophile convaincu."
     ],
     "projects": [
         {
